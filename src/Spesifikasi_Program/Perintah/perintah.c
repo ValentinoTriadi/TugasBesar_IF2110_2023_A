@@ -1,15 +1,16 @@
-#include "../../ADT/WordMachine/wordmachine.c"
+// #include "../../ADT/WordMachine/wordmachine.c"
 #include "../Balasan/balasan.c"
 #include "../DrafKicauan/draf.c"
 #include "../Kicauan/kicau.c"
 #include "../PermintaanPertemanan/permintaanPertemanan.c"
 #include "../Profil/profil.c"
+#include "../Pengguna/pengguna.c"
 #include "../SimpanMuat/simpanMuat.c"
 #include "../Teman/teman.c"
 #include "../Utas/utas.c"
+#include "../../ADT/WordMachine/wordmachine.h"
 
 #include <stdio.h>
-// #include "../../ADT/WordMachine/wordmachine.h"
 
 
 // #define HURUF(w,i) (w).TabWord[(i)]
@@ -96,6 +97,9 @@ void bacaPerintah(Word* cmd){
         } else if (HURUF(cmd[0],6) == 'b') {
             // LIHAT_PROFIL [NAMA] 
             lihatProfil(cmd[1]);
+        } else if (HURUF(cmd[0],1) == 'O'){
+            // LOAD
+            load(cmd[1]);
         }
         
     } else if (HURUF(cmd[0],0) == 'K'){
