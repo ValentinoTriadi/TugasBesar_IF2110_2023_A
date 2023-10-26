@@ -3,6 +3,9 @@
 #include <time.h>
  
 #define MAX_LEN 5000
+
+extern Word currentWord;
+
 void delay(int number_of_seconds)
 {
     // Converting time into milli_seconds
@@ -14,14 +17,16 @@ void delay(int number_of_seconds)
     // looping till required time is not achieved
     while (clock() < start_time + milli_seconds);
 }
+
 void print_image(FILE *fascii)
 {
     char read_string[MAX_LEN];
     while(fgets(read_string,sizeof(read_string),fascii) != NULL)
     printf("%s",read_string);
     printf("\n");
-    delay(1);
+
 }
+
 void inisialisasi(){
     char *filename;
     FILE *fascii;
@@ -42,11 +47,16 @@ void inisialisasi(){
         fascii = NULL;
         fascii = fopen(filename,"r");
         if(fascii  == NULL){
-            fprintf(stderr,"error opening %s\n",filename);
+            printf("error opening %s\n",filename);
         } else {
             system("cls || clear");
             print_image(fascii);
             fclose(fascii);
         }
+        delay(1);
     }
+    printf("Silahkan masukan folder konfigurasi untuk dimuat: ");
+    STARTWORD();
+    // load(currentWord);
+    printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }

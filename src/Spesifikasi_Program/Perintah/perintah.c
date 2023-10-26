@@ -1,4 +1,13 @@
 #include "../../ADT/WordMachine/wordmachine.c"
+#include "../Balasan/balasan.c"
+#include "../DrafKicauan/draf.c"
+#include "../Kicauan/kicau.c"
+#include "../PermintaanPertemanan/permintaanPertemanan.c"
+#include "../Profil/profil.c"
+#include "../SimpanMuat/simpanMuat.c"
+#include "../Teman/teman.c"
+#include "../Utas/utas.c"
+
 #include <stdio.h>
 // #include "../../ADT/WordMachine/wordmachine.h"
 
@@ -15,139 +24,139 @@ void printPerintah(Word cmd){
 }
 
 void bacaPerintah(Word* cmd){
-    printPerintah(cmd[0]);
-    if (cmd[1].Length != 0) printPerintah(cmd[1]);
-    if (cmd[2].Length != 0) printPerintah(cmd[2]);
-    printf("\n");
-    if (cmd[1].Length != 0) printf("%d\n", wordToInt(cmd[1]));
-    if (cmd[2].Length != 0) printf("%d\n", wordToInt(cmd[2]));
+    // printPerintah(cmd[0]);
+    // if (cmd[1].Length != 0) printPerintah(cmd[1]);
+    // if (cmd[2].Length != 0) printPerintah(cmd[2]);
+    // printf("\n");
+    // if (cmd[1].Length != 0) printf("%d\n", wordToInt(cmd[1]));
+    // if (cmd[2].Length != 0) printf("%d\n", wordToInt(cmd[2]));
     if (HURUF(cmd[0],0) == 'A'){
         // ATUR_JENIS_AKUN
-        //. aturJenisAkun();
+        aturJenisAkun();
 
     } else if (HURUF(cmd[0],0) == 'B'){
         if (HURUF(cmd[0],1) == 'U'){
             // BUAT_DRAF
-            //. buatDraf();
+            buatDraf();
         } else if (HURUF(cmd[0],1) == 'A'){
             if (HURUF(cmd[0],2) == 'T'){
                 // BATAL_TAMBAH_TEMAN 
-                //. batalTambahTeman();   
+                batalTambahTeman();   
             } else if (HURUF(cmd[0],2) == 'L'){
                 if (HURUF(cmd[0],5) == 'A'){
                     // BALASAN [IDKICAU]
-                    //. balasan(wordToInt(cmd[1]));
+                    balasan(wordToInt(cmd[1]));
                 } else if (cmd[0].Length == 5) {
                     // BALAS [IDKICAU] [IDBALASAN]
-                    //. balas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+                    balas(wordToInt(cmd[1]), wordToInt(cmd[2]));
                 }
             }
         }
 
     } else if (HURUF(cmd[0],0) == 'C'){
         // CETAK_UTAS [IDKICAU]
-        //. cetakUtas(wordToInt(cmd[1]));
+        cetakUtas(wordToInt(cmd[1]));
         
     } else if (HURUF(cmd[0],0) == 'D'){
         if (cmd[0].Length == 6){
             // DAFTAR
-            //. Daftar();
+            daftar();
         } else {
             if (HURUF(cmd[0],7) == 'P'){
                 // DAFTAR_PERMINTAAN_PERTEMANAN 
-                //. daftarPermintaanPertemanan();
+                daftarPermintaanPertemanan();
             } else if (HURUF(cmd[0],7) == 'T'){
                 // DAFTAR_TEMAN
-                //. daftarTeman();
+                daftarTeman();
             }
         }
         
     } else if (HURUF(cmd[0],0) == 'G'){
         // GANTI_PROFIL
-        //. gantiProfile();
+        gantiProfil();
         
     } else if (HURUF(cmd[0],0) == 'H'){
         if (HURUF(cmd[0],6) == 'B'){
             // HAPUS_BALASAN [IDKICAU] [IDBALASAN]
-            //. hapusBalasan(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            hapusBalasan(wordToInt(cmd[1]), wordToInt(cmd[2]));
 
         } else if (HURUF(cmd[0],6) == 'T') {
             // HAPUS_TEMAN
-            //. hapusTeman();
+            hapusTeman();
 
         } else if (HURUF(cmd[0],6) == 'U') {
             // HAPUS_UTAS [IDUTAS] [INDEX]
-            //. hapusUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            hapusUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
         }
         
     } else if (HURUF(cmd[0],0) == 'L'){
         if (HURUF(cmd[0],6) == 'D') {
             // LIHAT_DRAF
-            //. lihatDraf();
+            lihatDraf();
         } else if (HURUF(cmd[0],6) == 'b') {
-            // LIHAT_PROFILE 
-            //. lihatProfile(cmd[1]);
+            // LIHAT_PROFIL [NAMA] 
+            lihatProfil(cmd[1]);
         }
         
     } else if (HURUF(cmd[0],0) == 'K'){
         if (HURUF(cmd[0],1) == 'E') {
             // KELUAR
-            //. keluar();
+            keluar();
         } else if (HURUF(cmd[0],2) == 'I'){
             if (cmd[0].Length == 5){
                 // KICAU
-                //. kicau();
+                kicau();
             } else if (cmd[0].Length == 7){
                 // KICAUAN
-                //. kicauan();
+                kicauan();
             }
         }
         
     } else if (HURUF(cmd[0],0) == 'M'){
         if (HURUF(cmd[0],1) == 'A') {
             // MASUK
-            //. masuk();
+            masuk();
         } else if (HURUF(cmd[0],1) == 'U') {
             // MUAT
-            //. muat();
+            muat();
         }
         
     } else if (HURUF(cmd[0],0) == 'S'){
         if (HURUF(cmd[0],1) == 'A') {
             // SAMBUNG_UTAS [IDUTAS] [INDEX]
-            //. sambungUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            sambungUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
         } else if (HURUF(cmd[0],1) == 'E') {
-            // SETUJUI_PERMINTAAN
-            //. setujuiPermintaan();
+            // SETUJUI_PERTEMANAN
+            setujuiPertemanan();
         } else if (HURUF(cmd[0],1) == 'I') {
             // SIMPAN
-            //. simpan();
+            simpan();
         } else if (HURUF(cmd[0],1) == 'U') {
             // SUKA_KICAUAN [IDKICAU]
-            //. sukaKicauan(wordToInt(cmd[1]));
+            sukaKicauan(wordToInt(cmd[1]));
         }
         
     } else if (HURUF(cmd[0],0) == 'T'){
         if (HURUF(cmd[0],1) == 'A') {
             // TAMBAH_TEMAN
-            //. tambahTeman();
+            tambahTeman();
         } else if (HURUF(cmd[0],1) == 'U') {
             // TUTUP_PROGRAM
-            //. TutupProgram();
+            // TutupProgram();
             endProgram = true;
         }
         
     } else if (HURUF(cmd[0],0) == 'U'){
         if (HURUF(cmd[0],1) == 'T') {
             // UTAS [IDKICAU]
-            //. utas(wordToInt(cmd[1]));
+            utas(wordToInt(cmd[1]));
         } else if (HURUF(cmd[0],1) == 'B') {
             if (HURUF(cmd[0],5) == 'F') {
                 // UBAH_FOTO_PROFILE
-                //. ubahFotoProfile();
+                ubahFotoProfile();
             } else if (HURUF(cmd[0],5) == 'K') {
                 // UBAH_KICAUAN [IDKICAU]
-                //. ubahKicauan(wordToInt(cmd[1]));
+                ubahKicauan(wordToInt(cmd[1]));
             }
         }
     }

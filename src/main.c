@@ -9,6 +9,8 @@ int main(){
     // Kamus
     Word listPerintah[3];
     Word initial_word;
+    FILE *fascii;
+    char * filename;
     int i;
 
     // Inisiasi status program
@@ -29,6 +31,19 @@ int main(){
             ADVWORD();
         }
         bacaPerintah(listPerintah);
+        if (!endProgram){
+            filename = "Spesifikasi_Program/Inisialisasi/img1.txt";
+            fascii = NULL;
+            fascii = fopen(filename,"r");
+            if(fascii == NULL){
+                printf("error opening %s\n",filename);
+            } else {
+                system("cls || clear");
+                print_image(fascii);
+                fclose(fascii);
+            }
+        }
+
     }
 
     return 0;
