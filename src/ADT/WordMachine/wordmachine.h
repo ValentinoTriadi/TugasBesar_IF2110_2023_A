@@ -8,6 +8,7 @@
 
 #define NMax 50
 #define BLANK ' '
+#define HURUF(w,i) (w).TabWord[(i)]
 
 typedef struct
 {
@@ -44,5 +45,9 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+int wordToInt(Word x);
+/* Mengembalikan Word angka dalam bentuk integer */
+
 
 #endif

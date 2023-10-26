@@ -35,8 +35,13 @@ void ADV()
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
        EOP = (currentChar == MARK);
-       if (EOP)
-       {
-              fclose(pita);
-       }
+       // if (EOP)
+       // {
+       //        fclose(pita);
+       // }
+}
+
+// Tambahan Primitif
+int charToInt(char x){
+    return (x-48);
 }

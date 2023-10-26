@@ -26,4 +26,7 @@ void ADV();
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 
+int charToInt(char x);
+/* Mengembalikan Char angka dalam bentuk integer */
+
 #endif

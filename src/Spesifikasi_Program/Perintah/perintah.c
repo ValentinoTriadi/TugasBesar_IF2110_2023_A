@@ -3,7 +3,7 @@
 // #include "../../ADT/WordMachine/wordmachine.h"
 
 
-#define HURUF(w,i) (w).TabWord[(i)]
+// #define HURUF(w,i) (w).TabWord[(i)]
 
 extern boolean endProgram;
 
@@ -14,21 +14,13 @@ void printPerintah(Word cmd){
     printf("\n");
 }
 
-int charToInt(char x){
-    return (x-48);
-}
-int wordToInt(Word x){
-    int result = charToInt(HURUF(x,0));
-    for (int i = 1; i<x.Length; i++){
-        result = result*10 + charToInt(HURUF(x,i));
-    }
-    return result;
-}
-
 void bacaPerintah(Word* cmd){
     printPerintah(cmd[0]);
     if (cmd[1].Length != 0) printPerintah(cmd[1]);
     if (cmd[2].Length != 0) printPerintah(cmd[2]);
+    printf("\n");
+    if (cmd[1].Length != 0) printf("%d\n", wordToInt(cmd[1]));
+    if (cmd[2].Length != 0) printf("%d\n", wordToInt(cmd[2]));
     if (HURUF(cmd[0],0) == 'A'){
         // ATUR_JENIS_AKUN
         //. aturJenisAkun();
