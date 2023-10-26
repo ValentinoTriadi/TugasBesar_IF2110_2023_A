@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../../ADT/WordMachine/wordmachine.c"
  
 #define MAX_LEN 5000
 
