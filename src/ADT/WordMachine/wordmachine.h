@@ -6,7 +6,7 @@
 
 #include "../CharMachine/charmachine.h"
 
-#define NMax 50
+#define NMax 500
 #define BLANK ' '
 #define HURUF(w,i) (w).TabWord[(i)]
 
