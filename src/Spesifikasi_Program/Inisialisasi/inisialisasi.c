@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../../ADT/WordMachine/wordmachine.h"
+#include "../../ADT/pcolor/pcolor.h"
  
 #define MAX_LEN 5000
 
@@ -23,7 +24,7 @@ void print_image(FILE *fascii)
 {
     char read_string[MAX_LEN];
     while(fgets(read_string,sizeof(read_string),fascii) != NULL)
-    printf("%s",read_string);
+    printf("%s%s",CYAN,read_string);
     printf("\n");
 
 }
@@ -56,7 +57,7 @@ void inisialisasi(){
         }
         delay(1);
     }
-    printf("Silahkan masukan folder konfigurasi untuk dimuat: ");
+    printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);
     STARTWORD();
     // load(currentWord);
     printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
