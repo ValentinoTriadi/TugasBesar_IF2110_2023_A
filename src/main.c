@@ -32,7 +32,7 @@ int main(){
         i = 0;
         listPerintah[1] = initial_word;
         listPerintah[2] = initial_word;
-        printf(">> ");
+        printf("%s>> ", NORMAL);
         STARTWORD();
         while (!EndWord){
             listPerintah[i] = currentWord;
