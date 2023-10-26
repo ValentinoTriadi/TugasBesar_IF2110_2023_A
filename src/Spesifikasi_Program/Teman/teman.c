@@ -1,0 +1,2 @@
+void daftarTeman(){}
+void hapusTeman(){}
