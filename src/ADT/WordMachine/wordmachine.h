@@ -49,5 +49,8 @@ void CopyWord();
 int wordToInt(Word x);
 /* Mengembalikan Word angka dalam bentuk integer */
 
+boolean isEqualWord(Word w1, Word w2);
+
+
 
 #endif
