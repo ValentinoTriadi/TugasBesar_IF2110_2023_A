@@ -5,21 +5,21 @@
 #include <stdio.h>
 
 /* ********* Prototype ********* */
-boolean IsEmpty(PrioQueueReq Q)
+boolean IsEmptyPrio(PrioQueueReq Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 {
     return (Head(Q) == Nil) && (Tail(Q) == Nil);
 }
-boolean IsFull(PrioQueueReq Q)
+boolean IsFullPrio(PrioQueueReq Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
-    return MaxEl(Q) == NBElmt(Q);
+    return MaxEl(Q) == NBElmtPrio(Q);
 }
-int NBElmt(PrioQueueReq Q)
+int NBElmtPrio(PrioQueueReq Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 {
-    if (IsEmpty(Q))
+    if (IsEmptyPrio(Q))
     {
         return 0;
     }
@@ -37,7 +37,7 @@ int NBElmt(PrioQueueReq Q)
 }
 
 /* *** Kreator *** */
-void MakeEmpty(PrioQueueReq *Q, int Max)
+void MakeEmptyPrio(PrioQueueReq *Q, int Max)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -58,7 +58,7 @@ void MakeEmpty(PrioQueueReq *Q, int Max)
 }
 
 /* *** Destruktor *** */
-void DeAlokasi(PrioQueueReq *Q)
+void DeAlokasiPrio(PrioQueueReq *Q)
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
@@ -70,7 +70,7 @@ void DeAlokasi(PrioQueueReq *Q)
 }
 
 /* *** Primitif Add/Delete *** */
-void Enqueue(PrioQueueReq *Q, infotype X)
+void EnqueuePrio(PrioQueueReq *Q, infotype X)
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan Jumlah Teman */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
@@ -80,7 +80,7 @@ void Enqueue(PrioQueueReq *Q, infotype X)
     infotype temp;
 
     // Jika queue kosong
-    if (IsEmpty(*Q))
+    if (IsEmptyPrio(*Q))
     {
         Head(*Q) = 0;
         Tail(*Q) = 0;
@@ -105,14 +105,14 @@ void Enqueue(PrioQueueReq *Q, infotype X)
         }
     }
 }
-void Dequeue(PrioQueueReq *Q, infotype *X)
+void DequeuePrio(PrioQueueReq *Q, infotype *X)
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 {
     //Check jika hanya ada satu element
-    if (NBElmt(*Q) == 1)
+    if (NBElmtPrio(*Q) == 1)
     {
         *X = InfoHead(*Q);
         Head(*Q) = Nil;
@@ -143,7 +143,7 @@ void PrintPrioQueueTeman(PrioQueueReq Q)
      int i = Head(Q);
     
     // Check if the queue is empty
-    if (IsEmpty(Q)) {
+    if (IsEmptyPrio(Q)) {
         printf("Queue Kosong.\n");
         return;
     }
