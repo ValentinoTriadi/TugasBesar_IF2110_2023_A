@@ -10,6 +10,11 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
+void STARTFILE(char* filename){
+       pita = fopen(filename, "r");
+       ADV();
+}
+
 void START()
 {
        /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -44,4 +49,12 @@ void ADV()
 // Tambahan Primitif
 int charToInt(char x){
     return (x-48);
+}
+
+int countChar(char* l, int len, char x){
+	int count = 0;
+	for (int i = 0; i < len; i++){
+		if (l[i] == x) count++;
+	}
+    return count;
 }

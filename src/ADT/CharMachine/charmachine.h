@@ -7,6 +7,8 @@
 #include "../boolean.h"
 
 #define MARK ';'
+#define MARKLINE '\n'
+#define MARKFILE '\0'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
@@ -18,6 +20,8 @@ void START();
    F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
+void STARTFILE();
+/* Membaca pita dari sebuah file */
 
 void ADV();
 /* Pita dimajukan satu karakter.
@@ -28,5 +32,9 @@ void ADV();
 
 int charToInt(char x);
 /* Mengembalikan Char angka dalam bentuk integer */
+
+int countChar(char* l, int len, char x);
+/* Mengembalikan jumlah char yang muncul dalam sebuah string */
+
 
 #endif
