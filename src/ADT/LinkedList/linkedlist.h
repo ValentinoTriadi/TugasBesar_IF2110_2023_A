@@ -1,26 +1,9 @@
-/* File : listlinier.h */
-/* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
-/* ElType adalah integer */
-
 #include "boolean.h"
-
-#ifndef kicauan_H
-#define kicauan_H
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
-
-typedef struct {
-    int id;           
-    char text[281];   
-    int like;         
-    char author[50];  
-    time_t datetime;  
-} Kicauan;
+#ifndef linkedlist_H
+#define linkedlist_H
 
 
 typedef int ElType;
