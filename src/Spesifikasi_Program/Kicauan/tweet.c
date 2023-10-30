@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "kicauan.h"
+#include <string.h>
 #include <time.h>
+#include "tweet.h"
 
 
 Kicauan createKicauan(char* text, char* author) 
@@ -19,7 +20,7 @@ Kicauan createKicauan(char* text, char* author)
 }
 
 
-void printKicauan(Kicauan kicauan) {
+void kicau(Kicauan kicauan) {
     printf("| ID = %d\n", kicauan.id);
     printf("| %s\n", kicauan.author);
 

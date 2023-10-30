@@ -5,8 +5,8 @@
 
 #include "boolean.h"
 
-#ifndef kicauan_H
-#define kicauan_H
+#ifndef tweet_H
+#define tweet_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,7 +46,7 @@ typedef Address List;
 
 Kicauan createKicauan(char* text, char* author);
 
-void printKicauan(Kicauan kicauan);
+void kicau(Kicauan kicauan);
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
