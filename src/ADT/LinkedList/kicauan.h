@@ -5,11 +5,24 @@
 
 #include "boolean.h"
 
-#ifndef linkedlist_H
-#define linkedlist_H
+#ifndef kicauan_H
+#define kicauan_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 
-/* Definisi Node : */
+typedef struct {
+    int id;           
+    char text[281];   
+    int like;         
+    char author[50];  
+    time_t datetime;  
+} Kicauan;
+
+
 typedef int ElType;
 typedef struct node* Address;
 typedef struct node {
@@ -31,7 +44,9 @@ typedef Address List;
 #define IDX_UNDEF (-1)
 #define FIRST(l) (l)
 
+Kicauan createKicauan(char* text, char* author);
 
+void printKicauan(Kicauan kicauan);
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
