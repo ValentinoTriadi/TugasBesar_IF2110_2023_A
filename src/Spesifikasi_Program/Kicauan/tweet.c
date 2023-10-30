@@ -48,7 +48,6 @@ Address newNode(ElType val)
 }
 
 
-
 void CreateList(List *l)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
