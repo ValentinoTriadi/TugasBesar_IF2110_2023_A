@@ -18,7 +18,7 @@ typedef struct {
     int id;           
     char text[281];   
     int like;         
-    char author[50];  
+    char author[21];  
     time_t datetime;  
 } Kicauan;
 
