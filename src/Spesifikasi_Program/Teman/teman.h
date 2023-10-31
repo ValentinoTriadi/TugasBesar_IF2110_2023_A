@@ -10,6 +10,8 @@ typedef struct Teman
     Matrix saveReq;
 } Teman;
 
+#define matReq(T) ((T).saveReq);
+
 void createTeman(Teman *teman);
 
 void daftarTeman(Graf graph,Word currentUser);

@@ -6,21 +6,18 @@
 #include "..\..\ADT\WordMachine\wordmachine.c"
 
 int main() {
-    // Initialize your Teman object
     Teman teman;
     createTeman(&teman);
 
-    // Define users
+
     Word currentUser = {"asep", 4};
     Word friend1 = {"ujang", 5};
     Word friend2 = {"marcelo", 7};
 
-    // Add users to the graph
     addVertex(&(teman.dataTeman), currentUser);
     addVertex(&(teman.dataTeman), friend1);
     addVertex(&(teman.dataTeman), friend2);
 
-    // Add edges to represent friendships
     addEdge(&(teman.dataTeman), currentUser, friend1);
     addEdge(&(teman.dataTeman), currentUser, friend2);
 
