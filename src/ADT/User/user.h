@@ -22,7 +22,7 @@ void signIn() ;
 
 void signOut() ;
 
-void exit();
+void exitProgram();
 
 
 #endif
