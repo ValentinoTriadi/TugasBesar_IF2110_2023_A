@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include "graf.h"
 
-
 void CreateGraph(Graf *g)
 {
     NeffGraf(*g) = 0;
-    int i,j;
+    int i, j;
     for (i = 0; i < 20; i++)
     {
         for (j = 0; j < 20; j++)
@@ -20,8 +19,22 @@ void addVertex(Graf *graph, Word vertex)
 {
     if (NeffGraf(*graph) < 20)
     {
+        int idx, i;
         Vertex(*graph, NeffGraf(*graph)).nama = vertex;
+
+        
         NeffGraf(*graph)++;
+        // check index
+        for (i = 0; i < NeffGraf(*graph); i++)
+        {
+            if (isEqualWord(Vertex(*graph, i).nama, vertex))
+            {
+                idx = i;
+                break;
+            }
+        }
+        printf("%d",idx);
+        MakeEmptyPrio(&Vertex(*graph,idx).friendReq,20);
     }
     else
     {
@@ -49,77 +62,68 @@ void addEdge(Graf *graph, Word vertex1, Word vertex2)
             Edge(*graph, index1, index2) = 1;
             Edge(*graph, index2, index1) = 1;
         }
-        //Jika vertex sudah saling terhubung
+        // Jika vertex sudah saling terhubung
         else
         {
             printf("Vertex sudah terhubung.\n");
         }
     }
-    //Vertex tidak valid
+    // Vertex tidak valid
     else
     {
         printf("Salah satu vertex tidak valid.\n");
     }
 }
 
-void removeEdge(Graf *graph, Word vertex1, Word vertex2) {
+void removeEdge(Graf *graph, Word vertex1, Word vertex2)
+{
     int index1 = -1, index2 = -1;
-    for (int i = 0; i < NeffGraf(*graph); i++) {
+    for (int i = 0; i < NeffGraf(*graph); i++)
+    {
         if (isEqualWord(Vertex(*graph, i).nama, vertex1))
             index1 = i;
         if (isEqualWord(Vertex(*graph, i).nama, vertex2))
             index2 = i;
     }
-    if (index1 != -1 && index2 != -1) {
-        if (Edge(*graph, index1, index2) == 1 && Edge(*graph, index2, index1) == 1) {
+    if (index1 != -1 && index2 != -1)
+    {
+        if (Edge(*graph, index1, index2) == 1 && Edge(*graph, index2, index1) == 1)
+        {
             Edge(*graph, index1, index2) = 0;
             Edge(*graph, index2, index1) = 0;
             printf("%s dan %s tidak lagi berteman.\n", vertex1.TabWord, vertex2.TabWord);
-        } else {
+        }
+        else
+        {
             printf("%s dan %s tidak sedang berteman.\n", vertex1.TabWord, vertex2.TabWord);
         }
-    } else {
+    }
+    else
+    {
         printf("Vertex tidak valid.\n");
     }
 }
 
-
-// Word getNameById(Graf graph, int idx) {
-//     if (idx >= 0 && idx < NeffGraf(graph)) {
-//         return Vertex(graph, idx).nama;
-//     } else {
-//         printf("ID tidak valid\n");
-//         Word notValid = {"", 0}; 
-//         return notValid;
-//     }
-// }
-
-// int getIdByName(Graf graph, Word vertex) {
-//     for (int i = 0; i < NeffGraf(graph); i++) {
-//         if (isEqualWord(Vertex(graph, i).nama, vertex)) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-int countEdges(Graf *graph, Word vertex) {
+int countEdges(Graf *graph, Word vertex)
+{
     int index = -1;
-    for (int i = 0; i < NeffGraf(*graph); i++) {
+    for (int i = 0; i < NeffGraf(*graph); i++)
+    {
         if (isEqualWord(Vertex(*graph, i).nama, vertex))
             index = i;
     }
-    if (index != -1) {
+    if (index != -1)
+    {
         int count = 0;
-        for (int j = 0; j < NeffGraf(*graph); j++) {
+        for (int j = 0; j < NeffGraf(*graph); j++)
+        {
             if (Edge(*graph, index, j) == 1)
                 count++;
         }
         return count;
-    } else {
+    }
+    else
+    {
         return -1; // Jika tidak ada namanya dalam daftar
     }
 }
-
-
-
-
