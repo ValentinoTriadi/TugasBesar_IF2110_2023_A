@@ -6,7 +6,7 @@ extern Word currentWord;
 
 void createTeman(Teman *teman)
 {
-    MakeEmptyPrio(&(teman->dataTeman.vertex->friendReq), 20);
+    MakeEmptyPrio(&teman->dataTeman.vertex->friendReq, 20);
     CreateGraph(&(teman->dataTeman));
     createMatrix(20, 3, &(teman->saveReq));
 }
@@ -64,9 +64,6 @@ void hapusTeman(Graf *graph, Word currentUser)
     ADVWORD();
     Word userToDelete = currentWord;
 
-
-
-
     // check index dari currentuser
     for (i = 0; i < NeffGraf(*graph); i++)
     {
@@ -111,13 +108,13 @@ void hapusTeman(Graf *graph, Word currentUser)
     }
 }
 
-void tambahTeman(Graf *graph, Word currentUser, Teman *teman)
+void sentReq(Word currentUser, Teman *teman)
 {
-    int i,j;
+    int i, j;
     int currentUserIndex = -1;
     int newFriendIdx = -1;
 
-    //Check apakah bisa mengirim req pertemanan
+    // Check apakah bisa mengirim req pertemanan
     boolean flag = false;
 
     printf("Masukkan nama pengguna:\n");
@@ -126,79 +123,177 @@ void tambahTeman(Graf *graph, Word currentUser, Teman *teman)
     ADVWORD();
 
     // check index dari currentuser
-    for (i = 0; i < NeffGraf(*graph); i++)
+    for (i = 0; i < NeffGraf(teman->dataTeman); i++)
     {
-        if (isEqualWord(Vertex(*graph, i).nama, currentUser))
+        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
         {
             currentUserIndex = i;
             break;
         }
     }
 
-    // check index dari currentWord (teman yang akan ditambah)
-    for (i = 0; i < NeffGraf(*graph); i++)
+    // check apakah ada request pertemanan
+    if (IsEmptyPrio(Vertex(teman->dataTeman, i).friendReq))
     {
-        if (isEqualWord(Vertex(*graph, i).nama, currentWord))
+        // check index dari currentWord (teman yang akan ditambah)
+        for (i = 0; i < NeffGraf(teman->dataTeman); i++)
         {
-            newFriendIdx = i;
-            break;
-        }
-    }
-
-    if (newFriendIdx != -1)
-    {
-        // check matrix sudah berteman atau belum
-        for (i = 0; i < NeffGraf(*graph); i++)
-        {
-            if (Edge(*graph,currentUserIndex,newFriendIdx) == 0)
+            if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentWord))
             {
-                flag = true;
+                newFriendIdx = i;
                 break;
             }
         }
 
-        //Check di matrix reqSave apakah sudah meminta request pertemanan
-        if(flag == true){
-            for(i = 0; i < teman->saveReq.rowEff;i++){
-                if((ELMTMTRX(teman->saveReq,i,0)  == currentUserIndex && ELMTMTRX(teman->saveReq,i,1) == newFriendIdx) || 
-                ((ELMTMTRX(teman->saveReq,i,0)  == newFriendIdx && ELMTMTRX(teman->saveReq,i,1) == currentUserIndex)))
+        if (newFriendIdx != -1)
+        {
+            // check matrix sudah berteman atau belum
+            for (i = 0; i < NeffGraf(teman->dataTeman); i++)
+            {
+                if (Edge(teman->dataTeman, currentUserIndex, newFriendIdx) == 0)
                 {
-                    flag = false;
-                    break;
-                }
-            }
-        }
-
-        if (flag == true){
-            //add ke prioqueue
-            infotype newFriend;
-            newFriend.jumlahTeman = countEdges(graph,currentWord);
-            newFriend.nama = currentWord;
-            EnqueuePrio(&Vertex(*graph,newFriendIdx).friendReq,newFriend);
-
-            //add ke savereq
-            //cari matrix yang available
-            int idxAvail;
-            for(i =0 ;i  < teman->saveReq.rowEff;i++){
-                if(ELMTMTRX(teman->saveReq,i,0) == 0 && ELMTMTRX(teman->saveReq,i,1) == 0){
-                    idxAvail = i;
+                    flag = true;
                     break;
                 }
             }
 
-            //masukan data ke matrix save req
-            ELMTMTRX(teman->saveReq,i,0) = currentUserIndex;
-            ELMTMTRX(teman->saveReq,i,1) = newFriendIdx;
-            ELMTMTRX(teman->saveReq,i,2) = newFriend.jumlahTeman;
-        }
+            // Check di matrix reqSave apakah sudah meminta request pertemanan
+            if (flag == true)
+            {
+                for (i = 0; i < teman->saveReq.rowEff; i++)
+                {
+                    if ((ELMTMTRX(teman->saveReq, i, 0) == currentUserIndex && ELMTMTRX(teman->saveReq, i, 1) == newFriendIdx) ||
+                        ((ELMTMTRX(teman->saveReq, i, 0) == newFriendIdx && ELMTMTRX(teman->saveReq, i, 1) == currentUserIndex)))
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
 
+            if (flag == true)
+            {
+                // add ke prioqueue
+                infotype newFriend;
+                newFriend.jumlahTeman = countEdges(&teman->dataTeman, currentWord);
+                newFriend.nama.Length = currentWord.Length;
+                SalinWord(currentWord, &newFriend.nama);
+
+                EnqueuePrio(&Vertex(teman->dataTeman, newFriendIdx).friendReq, newFriend);
+
+                // add ke savereq
+                // cari matrix yang available
+                int idxAvail;
+                for (i = 0; i < teman->saveReq.rowEff; i++)
+                {
+                    if (ELMTMTRX(teman->saveReq, i, 0) == 0 && ELMTMTRX(teman->saveReq, i, 1) == 0)
+                    {
+                        idxAvail = i;
+                        break;
+                    }
+                }
+
+                // masukan data ke matrix save req
+                ELMTMTRX(teman->saveReq, i, 0) = currentUserIndex;
+                ELMTMTRX(teman->saveReq, i, 1) = newFriendIdx;
+                ELMTMTRX(teman->saveReq, i, 2) = newFriend.jumlahTeman;
+
+                printf("Permintaan pertemanan kepada %s telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.", currentWord);
+            }
+            else
+            {
+                printf("Anda sudah mengirimkan permintaan pertemanan kepada %s. Silakan tunggu hingga permintaan Anda disetujui.", currentWord);
+            }
+        }
+        else
+        {
+            printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+        }
     }
     else
     {
-        printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+        printf("Terdapat permintaan pertemanan yang belum Anda setujui. Silakan kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.");
+    }
+}
+
+void tambahTeman(Teman *teman,Word currentUser){
+    int idx, i;
+    // check index dari currentuser
+    for (i = 0; i < NeffGraf(teman->dataTeman); i++)
+    {
+        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
+        {
+            idx = i;
+            break;
+        }
     }
 
-    // cek Prioqueue
+    
+}
 
-    // add ke matrix savereq
+void printRequest(PrioQueueReq Q, Word user)
+{
+    int i = Head(Q);
+
+    if (IsEmptyPrio(Q))
+    {
+        printf("Tidak ada permintaan pertemanan untuk Anda.\n");
+        return;
+    }
+
+    printf("Terdapat %d permintaan pertemanan untuk Anda.\n\n", NBElmtPrio(Q));
+
+    do
+    {
+        printf("| %s\n", Nama(Elmt(Q, i)).TabWord);
+        printf("| Jumlah teman: %d\n\n", JumlahTeman(Elmt(Q, i)));
+        i = (i + 1) % MaxEl(Q);
+    } while (i != (Tail(Q) + 1) % MaxEl(Q));
+}
+
+void printReqMatrix(Matrix saveReq)
+{
+    int i, j;
+    printf("SaveReq Matrix:\n");
+    for (i = 0; i < saveReq.rowEff; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (ELMTMTRX(saveReq, i, j) == 0 && ELMTMTRX(saveReq, j, i) == 0)
+            {
+                break;
+            }
+            printf("%d ", ELMTMTRX(saveReq, i, j));
+        }
+        printf("\n");
+    }
+}
+
+void acceptRequest(Teman *teman, Word currentUser)
+{
+
+    int idx, i;
+    // check index dari currentuser
+    for (i = 0; i < NeffGraf(teman->dataTeman); i++)
+    {
+        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
+        {
+            idx = i;
+            break;
+        }
+    }
+    if (!IsEmptyPrio(Vertex(teman->dataTeman, idx).friendReq))
+    {
+        printf("Permintaan pertemanan teratas dari %s", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+        printf("| %s\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+        printf("| Jumlah teman: %d\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).jumlahTeman);
+
+        printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) ");
+        STARTWORD();
+
+        Word Ya = {"YA", 2};
+        if (isEqualWord(currentWord, Ya)){
+            //
+        }
+    }
 }
