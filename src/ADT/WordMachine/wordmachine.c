@@ -70,3 +70,11 @@ boolean isEqualWord(Word w1, Word w2) {
     }
     return true;
 }
+
+void printWord(Word word) {
+   int i;
+   for (i = 0; i < word.Length; i++) {
+      printf("%c", word.TabWord[i]);
+   }
+}
+

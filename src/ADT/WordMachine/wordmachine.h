@@ -50,7 +50,8 @@ int wordToInt(Word x);
 /* Mengembalikan Word angka dalam bentuk integer */
 
 boolean isEqualWord(Word w1, Word w2);
+/* Mengembalikan true jika w1 dan w2 adalah kata yang sama */
 
-
-
+void printWord(Word word);
+/* Mencetak Word ke layar */
 #endif
