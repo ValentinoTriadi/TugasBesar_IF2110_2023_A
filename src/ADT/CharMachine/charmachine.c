@@ -58,3 +58,8 @@ int countChar(char* l, int len, char x){
 	}
     return count;
 }
+
+// int main(){
+//        printf("Hello World!\n");
+//        return 0;
+// }

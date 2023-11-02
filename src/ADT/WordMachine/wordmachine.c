@@ -169,12 +169,10 @@ boolean isEqualWord(Word w1, Word w2) {
     return true;
 }
 
-void SalinWord(Word source, Word *destination) {
-    int i;
-    for (i = 0; i < source.Length && i < NMax; i++) {
-        destination->TabWord[i] = source.TabWord[i];
-    }
-    destination->Length = i;
-
-    destination->TabWord[i] = '\0';
+void printWord(Word word) {
+   int i;
+   for (i = 0; i < word.Length; i++) {
+      printf("%c", word.TabWord[i]);
+   }
 }
+
