@@ -11,33 +11,67 @@
 
 typedef struct
 {
-    char bio[256];
-    char no_hp[20];
-    char weton[10];
-    char jenis_akun[10];     // "publik" atau "privat"
-    char foto_profil[5][5];  // Matriks 5x5
-    char warna_profil[5][5]; // Warna matriks 5x5
+    Word bio;
+    Word no_hp;
+    Word weton;
+    Word jenis_akun;     // "publik" atau "privat"
+    Matrix foto_profil;  // Matriks 5x5
+    Matrix warna_profil; // Warna matriks 5x5
 } Profil;
 
-boolean isValidWeton(const char *weton)
+boolean isEqualWord(Word w1, Word w2)
 {
-    // List dari weton yang valid
-    char *validWeton[] = {"pahing", "kliwon", "wage", "pon", "legi"};
+    return strEqualsIgnoreCase(w1, w2);
+}
+
+Word MakeWord(char *str)
+{
+    Word w;
+    w.Length = strlen(str);
+    for (int i = 0; i < w.Length; i++)
+    {
+        w.TabWord[i] = str[i];
+    }
+    return w;
+}
+
+boolean strEqualsIgnoreCase(Word w1, Word w2)
+{
+    if (w1.Length != w2.Length)
+        return false;
+
+    for (int i = 0; i < w1.Length; i++)
+    {
+        char c1 = w1.TabWord[i];
+        char c2 = w2.TabWord[i];
+        if (c1 != c2 && c1 + 32 != c2 && c1 - 32 != c2)
+            return false;
+    }
+    return true;
+}
+
+boolean isValidWeton(Word weton)
+{
+    Word validWeton[5] = {
+        {.TabWord = "pahing", .Length = 6},
+        {.TabWord = "kliwon", .Length = 6},
+        {.TabWord = "wage", .Length = 4},
+        {.TabWord = "pon", .Length = 3},
+        {.TabWord = "legi", .Length = 4}};
+
     for (int i = 0; i < 5; i++)
     {
-        // Mengecek kesamaan string tanpa memperhatikan huruf besar/kecil
-        if (strcasecmp(weton, validWeton[i]) == 0)
+        if (strEqualsIgnoreCase(weton, validWeton[i]))
             return true;
     }
     return false;
 }
 
-boolean isValidNoHP(const char *no_hp)
+boolean isValidNoHP(Word no_hp)
 {
-    for (int i = 0; i < strlen(no_hp); i++)
+    for (int i = 0; i < no_hp.Length; i++)
     {
-        // Memeriksa apakah setiap karakter merupakan digit
-        if (!isdigit(no_hp[i]))
+        if (!isdigit(no_hp.TabWord[i]))
             return false;
     }
     return true;
@@ -45,40 +79,46 @@ boolean isValidNoHP(const char *no_hp)
 
 void initProfil(Profil *profil)
 {
-    // Menginisialisasi profil dengan nilai default
-    strcpy(profil->bio, "");
-    strcpy(profil->no_hp, "");
-    strcpy(profil->weton, "");
-    strcpy(profil->jenis_akun, "publik");
+    Word publik = {.TabWord = "publik", .Length = 6};
+    profil->bio.Length = 0;
+    profil->no_hp.Length = 0;
+    profil->weton.Length = 0;
+    profil->jenis_akun = publik;
+    // Inisialisasi Matrix foto_profil dan warna_profil dengan default
+}
 
-    // Mengatur foto profil dengan simbol dan warna default
-    for (int i = 0; i < 5; i++)
+// Fungsi untuk menyalin Word
+void CopyWord(Word *dest, Word src)
+{
+    dest->Length = src.Length;
+    for (int i = 0; i < src.Length; i++)
     {
-        for (int j = 0; j < 5; j++)
-        {
-            profil->foto_profil[i][j] = DEFAULT_SYMBOL;
-            profil->warna_profil[i][j] = DEFAULT_COLOR;
-        }
+        dest->TabWord[i] = src.TabWord[i];
     }
 }
 
 void ubahProfil(Profil *profil)
 {
-    char temp[256];
-    // Mengubah bio profil
-    printf("Masukkan Bio Akun:\n");
-    gets(temp);
-    if (strcmp(temp, ";") != 0)
-        strcpy(profil->bio, temp);
+    Word temp;
 
-    // Meminta pengguna untuk menginput no. HP sampai mendapatkan input yang valid
+    printf("Masukkan Bio Akun:\n");
+    STARTWORD(); // membaca kata
+    CopyWord(&temp, currentWord);
+
+    if (!isEqualWord(temp, MakeWord(";")))
+    {
+        CopyWord(&profil->bio, temp);
+    }
+
     do
     {
         printf("Masukkan No HP:\n");
-        gets(temp);
-        if (isValidNoHP(temp) || strcmp(temp, ";") == 0)
+        STARTWORD();
+        CopyWord(&temp, currentWord);
+
+        if (isValidNoHP(temp) || isEqualWord(temp, MakeWord(";")))
         {
-            strcpy(profil->no_hp, temp);
+            CopyWord(&profil->no_hp, temp);
             break;
         }
         else
@@ -87,19 +127,20 @@ void ubahProfil(Profil *profil)
         }
     } while (true);
 
-    // Meminta pengguna untuk menginput weton sampai mendapatkan input yang valid
     do
     {
         printf("Masukkan Weton:\n");
-        gets(temp);
-        if (isValidWeton(temp) || strcmp(temp, ";") == 0)
+        STARTWORD();
+        CopyWord(&temp, currentWord);
+
+        if (isValidWeton(temp) || isEqualWord(temp, MakeWord(";")))
         {
-            strcpy(profil->weton, temp);
+            CopyWord(&profil->weton, temp);
             break;
         }
         else
         {
-            printf("Weton anda tidak valid.\n");
+            printf("Weton Anda tidak valid.\n");
         }
     } while (true);
 
@@ -108,28 +149,45 @@ void ubahProfil(Profil *profil)
 
 void ubahJenisAkun(Profil *profil)
 {
-    // Mengubah jenis akun dari publik ke privat atau sebaliknya
-    char pilihan[10];
-    printf("Saat ini, akun Anda adalah akun %s.\n", profil->jenis_akun);
-    printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", (strcmp(profil->jenis_akun, "publik") == 0) ? "Privat" : "Publik");
-    gets(pilihan);
-    if (strcasecmp(pilihan, "YA") == 0)
+    Word pilihan;
+    Word publik = MakeWord("publik");
+    Word privat = MakeWord("privat");
+    Word ya = MakeWord("YA");
+
+    printf("Saat ini, akun Anda adalah akun ");
+    for (int i = 0; i < profil->jenis_akun.Length; i++)
     {
-        if (strcmp(profil->jenis_akun, "publik") == 0)
+        printf("%c", profil->jenis_akun.TabWord[i]);
+    }
+    printf(".\n");
+
+    printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", isEqualWord(profil->jenis_akun, publik) ? "Privat" : "Publik");
+
+    STARTWORD();
+    CopyWord(&pilihan, currentWord);
+
+    if (isEqualWord(pilihan, ya))
+    {
+        if (isEqualWord(profil->jenis_akun, publik))
         {
-            strcpy(profil->jenis_akun, "privat");
+            CopyWord(&profil->jenis_akun, privat);
         }
         else
         {
-            strcpy(profil->jenis_akun, "publik");
+            CopyWord(&profil->jenis_akun, publik);
         }
-        printf("Akun anda sudah diubah menjadi akun %s.\n", profil->jenis_akun);
+
+        printf("Akun Anda sudah diubah menjadi akun ");
+        for (int i = 0; i < profil->jenis_akun.Length; i++)
+        {
+            printf("%c", profil->jenis_akun.TabWord[i]);
+        }
+        printf(".\n");
     }
 }
 
 void ubahFotoProfil(Profil *profil)
 {
-    // Mengubah foto profil dengan meminta input dari pengguna
     printf("Masukkan foto profil yang baru\n");
     for (int i = 0; i < 5; i++)
     {
@@ -137,21 +195,36 @@ void ubahFotoProfil(Profil *profil)
         {
             char color, symbol;
             scanf(" %c %c", &color, &symbol);
-            profil->warna_profil[i][j] = color;
-            profil->foto_profil[i][j] = symbol;
+            profil->warna_profil.mem[i][j] = color; // Mengganti .elmt dengan .Mem
+            profil->foto_profil.mem[i][j] = symbol; // Mengganti .elmt dengan .Mem
         }
     }
-    printf("Foto profil anda sudah berhasil diganti!\n");
+    printf("Foto profil Anda sudah berhasil diganti!\n");
 }
 
 void tampilkanFotoProfil(const Profil *profil)
 {
-    // Menampilkan foto profil pengguna ke layar
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
         {
-            printf("%c%c ", profil->warna_profil[i][j], profil->foto_profil[i][j]);
+            char color = profil->warna_profil.mem[i][j];
+            switch (color)
+            {
+            case 'R':
+                print_red(profil->foto_profil.mem[i][j]);
+                break;
+            case 'G':
+                print_green(profil->foto_profil.mem[i][j]);
+                break;
+            case 'B':
+                print_blue(profil->foto_profil.mem[i][j]);
+                break;
+            // Anda bisa menambahkan lebih banyak warna jika dibutuhkan
+            default:
+                printf("%c", profil->foto_profil.mem[i][j]);
+                break;
+            }
         }
         printf("\n");
     }
@@ -159,7 +232,6 @@ void tampilkanFotoProfil(const Profil *profil)
 
 int main()
 {
-    // Kode demo untuk menjalankan fungsi di atas
     Profil user;
     initProfil(&user);
 
