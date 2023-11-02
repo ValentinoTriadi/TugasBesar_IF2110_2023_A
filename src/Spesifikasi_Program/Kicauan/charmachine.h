@@ -5,8 +5,9 @@
 #define __CHAR_MACHINE_H__
 
 #include "boolean.h"
-
 #define MARK ';'
+
+
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;

@@ -4,11 +4,11 @@
 #ifndef __WORDMACHINE_H__
 #define __WORDMACHINE_H__
 
+#include "boolean.h"
 #include "charmachine.h"
 
-#define NMax 500
+#define NMax 50
 #define BLANK ' '
-#define HURUF(w,i) (w).TabWord[(i)]
 
 typedef struct
 {
@@ -50,7 +50,6 @@ int wordToInt(Word x);
 /* Mengembalikan Word angka dalam bentuk integer */
 
 boolean isEqualWord(Word w1, Word w2);
-
 
 
 #endif
