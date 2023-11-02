@@ -3,7 +3,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 
 /* Ukuran maksimum baris dan kolom */
@@ -14,11 +14,11 @@
 #define COL_EFFMTRX(M) (M).colEff
 #define ELMTMTRX(M, i, j) (M).mem[(i)][(j)]
 
-typedef int IdxType; /* Index baris, kolom */
-typedef char ElType;
+typedef int IdxTypeMTRX; /* Index baris, kolom */
+typedef char ElTypeMTRX;
 typedef struct
 {
-   ElType mem[ROW_CAPMTRX][COL_CAPMTRX];
+   ElTypeMTRX mem[ROW_CAPMTRX][COL_CAPMTRX];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -38,13 +38,13 @@ boolean isMatrixIdxValid(int i, int j);
 /* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-IdxType getLastIdxRow(Matrix m);
+IdxTypeMTRX getLastIdxRow(Matrix m);
 /* Mengirimkan Index baris terbesar m */
-IdxType getLastIdxCol(Matrix m);
+IdxTypeMTRX getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, IdxType i, IdxType j);
+boolean isIdxEff(Matrix m, IdxTypeMTRX i, IdxTypeMTRX j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, IdxType i);
+ElTypeMTRX getElmtDiagonal(Matrix m, IdxTypeMTRX i);
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Assignment  Matrix ********** */
@@ -86,9 +86,9 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2);
 Matrix multiplyMatrixWithMod(Matrix m1,Matrix m2,int mod);
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan (m1 * m2)%mod, artinya setiap elemen matrix hasil perkalian m1 * m2 dilakukan modulo terhadap mod */
-Matrix multiplyByConst(Matrix m, ElType x);
+Matrix multiplyByConst(Matrix m, ElTypeMTRX x);
 /* Mengirim hasil perkalian setiap elemen m dengan x */
-void pMultiplyByConst(Matrix *m, ElType k);
+void pMultiplyByConst(Matrix *m, ElTypeMTRX k);
 /* I.S. m terdefinisi, k terdefinisi */
 /* F.S. Mengalikan setiap elemen m dengan k */
 

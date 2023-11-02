@@ -117,7 +117,6 @@ void bacaPerintah(Word* cmd){
     if (isEqualWordStr(cmd[0], "MUAT")){
         printf("%s\n",cmd[0].TabWord);
     }
-    delays(4);
 }
 // void bacaPerintah(Word* cmd){
 //     // printPerintah(cmd[0]);

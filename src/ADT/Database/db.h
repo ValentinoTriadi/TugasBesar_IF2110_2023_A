@@ -19,27 +19,24 @@
 
 
 extern Profil CurrentUser;
-extern PENGGUNA DaftarPengguna;
+extern userlist DaftarPengguna;
 extern LISTKICAU DaftarKicau;
 extern Teman DataTeman;
 
 // DB Pengguna dengan list statik
-typedef struct pengguna {
-    Profil p[20];
-} PENGGUNA;
 
 // DB Kicau dengan linked list
 typedef Kicauan ELMTKICAU;
 typedef struct nodekicau* Addresskicau;
 typedef struct nodekicau {
     ELMTKICAU info;
-    Addresskicau next
+    Addresskicau next;
 } NODEKICAU;
 
 typedef Addresskicau LISTKICAU;
 
 #define INFOKICAU(p) (p)->info
 #define NEXTKICAU(p) (p)->next
-#define IDX_UNDEF (-1)
+// #define IDX_UNDEF (-1)
 #define FIRSTKICAU(l) (l)
 

@@ -1,7 +1,7 @@
 #include "db.h"
 
 Profil CurrentUser;
-PENGGUNA DaftarPengguna;
+userlist DaftarPengguna;
 LISTKICAU DaftarKicau;
 Teman DataTeman;
 

@@ -1,10 +1,10 @@
 #include "user.h"
 
+extern Profil currentUser;
+extern userlist daftarUser;
 
 
 void signUp(){
-    Profil currentUser;
-    userlist daftarUser;
     Word username, password;
     printf("Masukkan nama:\n");
     STARTWORD();

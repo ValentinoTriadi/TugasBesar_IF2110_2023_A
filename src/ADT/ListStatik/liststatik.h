@@ -13,16 +13,16 @@
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
-#define IDX_UNDEF -1
+// #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
-#define MARK -9999
+#define MARKLISTSTATIK -9999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType;  /* type elemen List */
+typedef int ElTypeLISTSTATIK;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   ElTypeLISTSTATIK contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
 } ListStatik;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
@@ -30,7 +30,7 @@ typedef struct {
 /* Maka cara akses: 
    ELMT(l,i) untuk mengakses elemen ke-i */
 /* Definisi : 
-   List kosong: semua elemen bernilai MARK
+   List kosong: semua elemen bernilai MARKLISTSTATIK
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
@@ -41,41 +41,41 @@ typedef struct {
 void CreateListStatik(ListStatik *l);
 /* I.S. l sembarang */
 /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
-/* Proses: Inisialisasi semua elemen List l dengan MARK */
+/* Proses: Inisialisasi semua elemen List l dengan MARKLISTSTATIK */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int listLength(ListStatik l);
+int listStatikLength(ListStatik l);
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */  
 
 /* *** Selektor INDEKS *** */
-IdxType getFirstIdx(ListStatik l);
+IdxType getFirstIdxLISTSTATIK(ListStatik l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
-IdxType getLastIdx(ListStatik l);
+IdxType getLastIdxLISTSTATIK(ListStatik l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListStatik l, IdxType i);
+boolean isIdxValidLISTSTATIK(ListStatik l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListStatik l, IdxType i);
+boolean isIdxEffLISTSTATIK(ListStatik l, IdxType i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
 /* yaitu antara 0..length(l)-1 */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
-boolean isEmpty(ListStatik l);
+boolean isEmptyLISTSTATIK(ListStatik l);
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
 /* *** Test List penuh *** */
-boolean isFull(ListStatik l);
+boolean isFullLISTSTATIK(ListStatik l);
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi List dari pembacaan *** */
-void readList(ListStatik *l);
+void readListStatik(ListStatik *l);
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
 /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
@@ -85,7 +85,7 @@ void readList(ListStatik *l);
 /* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
-void printList(ListStatik l);
+void printListStatik(ListStatik l);
 /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
@@ -96,7 +96,7 @@ void printList(ListStatik l);
 
 /* ********** OPERATOR ARITMATIKA ********** */
 /* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListStatik plusMinusList(ListStatik l1, ListStatik l2, boolean plus);
+ListStatik plusMinusListStatik(ListStatik l1, ListStatik l2, boolean plus);
 /* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
 /* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
        indeks yang sama dijumlahkan */
@@ -105,58 +105,59 @@ ListStatik plusMinusList(ListStatik l1, ListStatik l2, boolean plus);
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan List: *** */
-boolean isListEqual(ListStatik l1, ListStatik l2);
+boolean isListStatikEqual(ListStatik l1, ListStatik l2);
 /* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
    elemennya sama */
 
-/* ********** SEARCHING ********** */
-/* ***  Perhatian : List boleh kosong!! *** */
-int indexOf(ListStatik l, ElType val);
-/* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
-/* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
-/* Skema Searching yang digunakan bebas */
+// /* ********** SEARCHING ********** */
+// /* ***  Perhatian : List boleh kosong!! *** */
+// int indexOfLISTSTATIK(ListStatik l, ElTypeLISTSTATIK val){
+//     /* Search apakah ada elemen List l yang bernilai val */
+//     /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
+//     /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
+//     /* Skema Searching yang digunakan bebas */
 
-/* ********** NILAI EKSTREM ********** */
-void extremeValues(ListStatik l, ElType *max, ElType *min);
-/* I.S. List l tidak kosong */
-/* F.S. Max berisi nilai terbesar dalam l;
-        Min berisi nilai terkecil dalam l */
+// /* ********** NILAI EKSTREM ********** */
+// void extremeValues(ListStatik l, ElTypeLISTSTATIK *max, ElTypeLISTSTATIK *min){
+//     /* I.S. List l tidak kosong */
+//     /* F.S. Max berisi nilai terbesar dalam l;
+//             Min berisi nilai terkecil dalam l */
+//     //  ElTypeLISTSTATIK maxval, minval;
 
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertFirst(ListStatik *l, ElType val);
+void insertFirstLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val);
 /* Proses: Menambahkan val sebagai elemen pertama List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen pertama l yang baru */
 /* *** Menambahkan elemen pada index tertentu *** */
-void insertAt(ListStatik *l, ElType val, IdxType idx);
+void insertAtLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val, IdxType idx);
 /* Proses: Menambahkan val sebagai elemen pada index idx List */
 /* I.S. List l tidak kosong dan tidak penuh, idx merupakan index yang valid di l */
 /* F.S. val adalah elemen yang disisipkan pada index idx l */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListStatik *l, ElType val);
+void insertLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 
 /* ********** MENGHAPUS ELEMEN ********** */
 /* *** Menghapus elemen pertama *** */
-void deleteFirst(ListStatik *l, ElType *val);
+void deleteFirstLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val);
 /* Proses : Menghapus elemen pertama List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen pertama l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 /* *** Menghapus elemen pada index tertentu *** */
-void deleteAt(ListStatik *l, ElType *val, IdxType idx);
+void deleteAtLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val, IdxType idx);
 /* Proses : Menghapus elemen pada index idx List */
 /* I.S. List tidak kosong, idx adalah index yang valid di l */
 /* F.S. val adalah nilai elemen pada index idx l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 /* *** Menghapus elemen terakhir *** */
-void deleteLast(ListStatik *l, ElType *val);
+void deleteLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val);
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -164,7 +165,7 @@ void deleteLast(ListStatik *l, ElType *val);
 /*      List l mungkin menjadi kosong */
 
 /* ********** SORTING ********** */
-void sortList(ListStatik *l, boolean asc);
+// void sortListStatik(ListStatik *l, boolean asc);
 /* I.S. l boleh kosong */
 /* F.S. Jika asc = true, l terurut membesar */
 /*      Jika asc = false, l terurut mengecil */

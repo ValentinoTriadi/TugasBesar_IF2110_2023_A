@@ -49,9 +49,9 @@ void addEdge(Graf *graph, Word vertex1, Word vertex2)
     // Check apakah sudah ada edge
     for (i = 0; i < NeffGraf(*graph); i++)
     {
-        if (isEqualWord(Vertex(*graph, i).nama, vertex1))
+        if (isEqualWordWord(Vertex(*graph, i).nama, vertex1))
             index1 = i;
-        if (isEqualWord(Vertex(*graph, i).nama, vertex2))
+        if (isEqualWordWord(Vertex(*graph, i).nama, vertex2))
             index2 = i;
     }
     if (index1 != -1 && index2 != -1)
@@ -80,9 +80,9 @@ void removeEdge(Graf *graph, Word vertex1, Word vertex2)
     int index1 = -1, index2 = -1;
     for (int i = 0; i < NeffGraf(*graph); i++)
     {
-        if (isEqualWord(Vertex(*graph, i).nama, vertex1))
+        if (isEqualWordWord(Vertex(*graph, i).nama, vertex1))
             index1 = i;
-        if (isEqualWord(Vertex(*graph, i).nama, vertex2))
+        if (isEqualWordWord(Vertex(*graph, i).nama, vertex2))
             index2 = i;
     }
     if (index1 != -1 && index2 != -1)
@@ -109,7 +109,7 @@ int countEdges(Graf *graph, Word vertex)
     int index = -1;
     for (int i = 0; i < NeffGraf(*graph); i++)
     {
-        if (isEqualWord(Vertex(*graph, i).nama, vertex))
+        if (isEqualWordWord(Vertex(*graph, i).nama, vertex))
             index = i;
     }
     if (index != -1)

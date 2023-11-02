@@ -232,7 +232,7 @@ boolean isEqualWordWord(Word s1, Word s2){
 Word StrToWord(char *str)
 {
     Word w;
-    w.Length = strlen(str);
+    w.Length = Strlen(str);
     for (int i = 0; i < w.Length; i++)
     {
         w.TabWord[i] = str[i];
