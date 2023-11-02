@@ -78,6 +78,11 @@ void CopySentence();
 int wordToInt(Word x);
 /* Mengembalikan Word angka dalam bentuk integer */
 
+boolean isEqualWord(Word w1, Word w2);
+
+
+boolean isEqualWord(Word w1, Word w2);
+
 void splitSentence(Word Sentence, Word * l, int len);
 /* Mengembalikan array of Word dengan pemisah BLANK */
 
