@@ -91,7 +91,7 @@ void CopySentence(){
 
 void STARTSENTENCEWITHNL(char* filename){
     STARTFILE(filename);
-    if (currentChar == MARKFILE){
+    if (currentChar == MARK){
         EndSentence = true;
         CLOSEFILE();       
     } else {
@@ -100,7 +100,7 @@ void STARTSENTENCEWITHNL(char* filename){
     }
 }
 void ADVSENTENCEWITHNL(){
-    if(currentChar == MARKFILE){
+    if(currentChar == MARK){
         EndSentence = true;
     } else{
         CopySentenceWithNL();
@@ -108,7 +108,7 @@ void ADVSENTENCEWITHNL(){
 }
 void CopySentenceWithNL(){
     currentSentence.Length = 0;
-    while (currentChar != MARKFILE){
+    while (currentChar != MARK){
         if (currentSentence.Length < NMax){
             currentSentence.TabWord[currentSentence.Length] = currentChar;
             currentSentence.Length++;

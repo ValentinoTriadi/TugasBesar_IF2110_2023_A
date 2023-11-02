@@ -13,9 +13,10 @@ void delay(int number_of_half_seconds){
 }
 
 void print_image(char* filename){
+    system("cls || clear");
     STARTSENTENCEWITHNL(filename);
     Word s = currentSentence;
-    printWord(s);
+    printf("%s%s\n",CYAN, s.TabWord);
     // while(fgets(read_string,sizeof(read_string),fascii) != NULL)
     // printf("%s%s",CYAN,read_string);
     // printf("\n");
@@ -25,7 +26,7 @@ void inisialisasi(){
     char *filename;
     FILE *fascii;
     system("cls || clear");
-    printf("HALO\n");
+    // printf("HALO\n");
     for (int i = 0; i < 5; i++){
         if (i == 0) {
             filename = "./ADT/Inisialisasi/img5.txt";
@@ -44,7 +45,7 @@ void inisialisasi(){
             // printf("error opening %s\n",filename);
         // } else {
             // system("cls || clear");
-            print_image(filename);
+        print_image(filename);
             // fclose(fascii);
         // }
         delay(1);

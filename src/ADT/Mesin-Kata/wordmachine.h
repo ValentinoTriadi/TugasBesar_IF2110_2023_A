@@ -7,7 +7,7 @@
 #include "../Mesin-Char/charmachine.h"
 
 
-#define NMax 280
+#define NMax 4999
 #define BLANK ' '
 #define NEWLINE '\n'
 #define HURUF(w,i) (w).TabWord[(i)]

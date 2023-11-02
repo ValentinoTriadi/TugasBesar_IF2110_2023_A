@@ -9,6 +9,7 @@ boolean EOP;
 
 static FILE *pita;
 static int retval;
+static char* pitastr;
 
 void STARTFILE(char* filename){
        pita = fopen(filename, "r");
@@ -42,7 +43,7 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOP = (currentChar == MARK);
+       // EOP = (currentChar == MARK);
        // if (EOP)
        // {
        //        fclose(pita);

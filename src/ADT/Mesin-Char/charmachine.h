@@ -5,10 +5,11 @@
 #define __CHAR_MACHINE_H__
 
 #include "../boolean.h"
+#include <stdio.h>
 
 #define MARK ';'
 #define MARKLINE '\n'
-#define MARKFILE '\0'
+#define MARKFILE EOF
 
 
 /* State Mesin */
