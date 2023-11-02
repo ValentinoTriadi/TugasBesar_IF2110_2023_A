@@ -81,6 +81,17 @@ int wordToInt(Word x);
 boolean isEqualWord(Word w1, Word w2);
 /* Mengembalikan true jika w1 dan w2 adalah kata yang sama */
 
+void SalinWord(Word source, Word *destination);
 
 
+boolean isEqualWord(Word w1, Word w2);
+
+void splitSentence(Word Sentence, Word * l, int len);
+/* Mengembalikan array of Word dengan pemisah BLANK */
+
+Word toLowerCase(Word Sentence);
+/* Mengembalikan Word dengan lower case */
+
+void printWord(Word s);void printWord(Word word);
+/* Mencetak Word ke layar */
 #endif
