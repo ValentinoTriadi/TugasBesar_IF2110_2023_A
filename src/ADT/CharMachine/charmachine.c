@@ -41,7 +41,7 @@ void ADV()
        // }
 }
 
-// Tambahan Primitif
-int charToInt(char x){
-    return (x-48);
+int charToInt(char x)
+{
+    return (x - 48);
 }
