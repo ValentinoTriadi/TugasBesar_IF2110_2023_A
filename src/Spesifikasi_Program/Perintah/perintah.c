@@ -8,7 +8,7 @@
 #include "../SimpanMuat/simpanMuat.c"
 #include "../Teman/teman.c"
 #include "../Utas/utas.c"
-#include "../../ADT/WordMachine/wordmachine.h"
+#include "../../ADT/wordmachine.h"
 
 #include <stdio.h>
 

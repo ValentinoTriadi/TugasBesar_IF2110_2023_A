@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../../ADT/WordMachine/wordmachine.h"
-#include "../../ADT/pcolor/pcolor.h"
+#include "../../ADT/wordmachine.h"
+#include "../../ADT/pcolor.h"
  
 #define MAX_LEN 5000
 
@@ -20,7 +20,6 @@ void print_image(FILE *fascii)
     while(fgets(read_string,sizeof(read_string),fascii) != NULL)
     printf("%s%s",CYAN,read_string);
     printf("\n");
-
 }
 
 void inisialisasi(){

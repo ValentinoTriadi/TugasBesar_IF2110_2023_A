@@ -1,4 +1,5 @@
-#include "../../ADT/WordMachine/wordmachine.h"
+#include "../../ADT/wordmachine.h"
+
 
 void gantiProfil(){}
 void lihatProfil(Word nama){}

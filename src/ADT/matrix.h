@@ -3,23 +3,9 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "../boolean.h"
+#include "boolean.h"
+#include "db.h"
 
-/* Ukuran maksimum baris dan kolom */
-#define ROW_CAPMTRX 100
-#define COL_CAPMTRX 100
-
-typedef int IdxType; /* Index baris, kolom */
-typedef int ElType;
-typedef struct
-{
-   ElType mem[ROW_CAPMTRX][COL_CAPMTRX];
-   int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
-   int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
-} Matrix;
-/* rowEff >= 1 dan colEff >= 1 */
-/* Indeks matriks yang digunakan: [0..ROW_CAPMTRX-1][0..COL_CAPMTRX-1] */
-/* Memori matriks yang dipakai selalu di "ujung kiri atas" */
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk Matrix *** */
@@ -27,11 +13,6 @@ void createMatrix(int nRows, int nCols, Matrix *m);
 /* Membentuk sebuah Matrix "kosong" yang siap diisi berukuran nRow x nCol di "ujung kiri" memori */
 /* I.S. nRow dan nCol adalah valid untuk memori matriks yang dibuat */
 /* F.S. Matriks m sesuai dengan definisi di atas terbentuk */
-
-/* *** Selektor *** */
-#define ROW_EFFMTRX(M) (M).rowEff
-#define COL_EFFMTRX(M) (M).colEff
-#define ELMTMTRX(M, i, j) (M).mem[(i)][(j)]
 
 /* *** Selektor "Dunia Matrix" *** */
 boolean isMatrixIdxValid(int i, int j);
