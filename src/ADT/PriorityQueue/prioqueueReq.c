@@ -5,21 +5,21 @@
 #include <stdio.h>
 
 /* ********* Prototype ********* */
-boolean IsEmpty(PrioQueueReq Q)
+boolean IsEmptyPrio(PrioQueueReq Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 {
     return (Head(Q) == Nil) && (Tail(Q) == Nil);
 }
-boolean IsFull(PrioQueueReq Q)
+boolean IsFullPrio(PrioQueueReq Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
-    return MaxEl(Q) == NBElmt(Q);
+    return MaxEl(Q) == NBElmtPrio(Q);
 }
-int NBElmt(PrioQueueReq Q)
+int NBElmtPrio(PrioQueueReq Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 {
-    if (IsEmpty(Q))
+    if (IsEmptyPrio(Q))
     {
         return 0;
     }
@@ -37,7 +37,7 @@ int NBElmt(PrioQueueReq Q)
 }
 
 /* *** Kreator *** */
-void MakeEmpty(PrioQueueReq *Q, int Max)
+void MakeEmptyPrio(PrioQueueReq *Q, int Max)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -58,7 +58,7 @@ void MakeEmpty(PrioQueueReq *Q, int Max)
 }
 
 /* *** Destruktor *** */
-void DeAlokasi(PrioQueueReq *Q)
+void DeAlokasiPrio(PrioQueueReq *Q)
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
@@ -70,7 +70,7 @@ void DeAlokasi(PrioQueueReq *Q)
 }
 
 /* *** Primitif Add/Delete *** */
-void Enqueue(PrioQueueReq *Q, infotype X)
+void EnqueuePrio(PrioQueueReq *Q, infotype X)
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan Jumlah Teman */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
@@ -78,41 +78,61 @@ void Enqueue(PrioQueueReq *Q, infotype X)
 {
     int i, j;
     infotype temp;
-
     // Jika queue kosong
-    if (IsEmpty(*Q))
+    if (IsEmptyPrio(*Q))
     {
         Head(*Q) = 0;
         Tail(*Q) = 0;
-        InfoTail(*Q) = X;
+        Elmt(*Q, Tail(*Q)).jumlahTeman = X.jumlahTeman;
+        Elmt(*Q, Tail(*Q)).nama = X.nama;
     }
     else
     {
-        Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
+        if (Tail(*Q) == MaxEl(*Q) - 1)
+        {
+            Tail(*Q) = 0;
+        }
+        else
+        {
+            Tail(*Q) = Tail(*Q) + 1;
+        }
         InfoTail(*Q) = X;
 
         i = Tail(*Q);
-        j = (i - 1 + MaxEl(*Q)) % MaxEl(*Q);
+        if (i == 0)
+        {
+            j = MaxEl(*Q) - 1;
+        }
+        else
+        {
+            j = i - 1;
+        }
 
-        // compare dan swap sampai elemen benar
-        while (i != Head(*Q) && JumlahTeman(Elmt(*Q, i)) < JumlahTeman(Elmt(*Q, j)))
+        while (i != Head(*Q) && X.jumlahTeman < Elmt(*Q, j).jumlahTeman)
         {
             temp = Elmt(*Q, i);
             Elmt(*Q, i) = Elmt(*Q, j);
             Elmt(*Q, j) = temp;
             i = j;
-            j = (i == 0) ? (MaxEl(*Q) - 1) : (i - 1);
+            if (i == 0)
+            {
+                j = MaxEl(*Q) - 1;
+            }
+            else
+            {
+                j = i - 1;
+            }
         }
     }
 }
-void Dequeue(PrioQueueReq *Q, infotype *X)
+void DequeuePrio(PrioQueueReq *Q, infotype *X)
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 {
-    //Check jika hanya ada satu element
-    if (NBElmt(*Q) == 1)
+    // Check jika hanya ada satu element
+    if (NBElmtPrio(*Q) == 1)
     {
         *X = InfoHead(*Q);
         Head(*Q) = Nil;
@@ -122,7 +142,7 @@ void Dequeue(PrioQueueReq *Q, infotype *X)
     {
         *X = InfoHead(*Q);
 
-        //Update Head
+        // Update Head
         if (Head(*Q) == MaxEl(*Q) - 1)
         {
             Head(*Q) = 0;
@@ -140,17 +160,19 @@ void PrintPrioQueueTeman(PrioQueueReq Q)
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar */
 {
-     int i = Head(Q);
-    
+    int i = Head(Q);
+
     // Check if the queue is empty
-    if (IsEmpty(Q)) {
+    if (IsEmptyPrio(Q))
+    {
         printf("Queue Kosong.\n");
         return;
     }
 
     printf("List Teman:\n");
 
-    do {
+    do
+    {
         printf("Nama: %s, Jumlah Teman: %d\n", Nama(Elmt(Q, i)), JumlahTeman(Elmt(Q, i)));
         i = (i + 1) % MaxEl(Q);
     } while (i != (Tail(Q) + 1) % MaxEl(Q));

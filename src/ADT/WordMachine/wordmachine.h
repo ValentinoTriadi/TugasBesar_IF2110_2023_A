@@ -80,6 +80,8 @@ int wordToInt(Word x);
 
 boolean isEqualWord(Word w1, Word w2);
 
+void SalinWord(Word source, Word *destination);
+
 
 boolean isEqualWord(Word w1, Word w2);
 

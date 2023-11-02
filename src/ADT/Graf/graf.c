@@ -1,26 +1,40 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "graf.h"
 
-
-void CreateGraph(Teman *g)
+void CreateGraph(Graf *g)
 {
-    JumlahTeman(*g) = 0;
-    int i,j;
+    NeffGraf(*g) = 0;
+    int i, j;
     for (i = 0; i < 20; i++)
     {
         for (j = 0; j < 20; j++)
         {
-            HubunganTeman(*g, i, j) = 0;
+            Edge(*g, i, j) = 0;
         }
     }
 }
 
-void addName(Teman *graph, Word friendName)
+void addVertex(Graf *graph, Word vertex)
 {
-    if (JumlahTeman(*graph) < 20)
+    if (NeffGraf(*graph) < 20)
     {
-        NamaTeman(*graph, JumlahTeman(*graph)) = friendName;
-        JumlahTeman(*graph)++;
+        int idx, i;
+        Vertex(*graph, NeffGraf(*graph)).nama = vertex;
+
+        
+        NeffGraf(*graph)++;
+        // check index
+        for (i = 0; i < NeffGraf(*graph); i++)
+        {
+            if (isEqualWord(Vertex(*graph, i).nama, vertex))
+            {
+                idx = i;
+                break;
+            }
+        }
+        printf("%d",idx);
+        MakeEmptyPrio(&Vertex(*graph,idx).friendReq,20);
     }
     else
     {
@@ -28,100 +42,88 @@ void addName(Teman *graph, Word friendName)
     }
 }
 
-void addFriendship(Teman *graph, Word friend1, Word friend2)
+void addEdge(Graf *graph, Word vertex1, Word vertex2)
 {
     int index1 = -1, index2 = -1;
     int i;
-    // Check apakah nama sudah terdaftar
-    for (i = 0; i < JumlahTeman(*graph); i++)
+    // Check apakah sudah ada edge
+    for (i = 0; i < NeffGraf(*graph); i++)
     {
-        if (isEqualWord(NamaTeman(*graph, i), friend1))
+        if (isEqualWord(Vertex(*graph, i).nama, vertex1))
             index1 = i;
-        if (isEqualWord(NamaTeman(*graph, i), friend2))
+        if (isEqualWord(Vertex(*graph, i).nama, vertex2))
             index2 = i;
     }
     if (index1 != -1 && index2 != -1)
     {
-        // Jika mereka belum berteman
-        if (HubunganTeman(*graph, index1, index2) == 0 && HubunganTeman(*graph, index2, index1) == 0)
+        // Jika vertex blom terhubung
+        if (Edge(*graph, index1, index2) == 0 && Edge(*graph, index2, index1) == 0)
         {
-            HubunganTeman(*graph, index1, index2) = 1;
-            HubunganTeman(*graph, index2, index1) = 1;
+            Edge(*graph, index1, index2) = 1;
+            Edge(*graph, index2, index1) = 1;
         }
-        //Jika mereka sudah berteman
+        // Jika vertex sudah saling terhubung
         else
         {
-            printf("Mereka sudah berteman.\n");
+            printf("Vertex sudah terhubung.\n");
         }
     }
-    //Tidak ada salah satu nama dalam daftar
+    // Vertex tidak valid
     else
     {
-        printf("Salah satu nama tidak terdaftar.\n");
+        printf("Salah satu vertex tidak valid.\n");
     }
 }
 
-void addFriend(Teman *graph, Word friendName) {
-    if (JumlahTeman(*graph) < 20) {
-        NamaTeman(*graph, JumlahTeman(*graph)) = friendName;
-        JumlahTeman(*graph)++;
-    }
-}
-
-void showFriends(Teman *graph, Word friendName) {
-    int index = -1;
-    int j,i;
-    for (i = 0; i < JumlahTeman(*graph); i++) {
-        if (isEqualWord(NamaTeman(*graph, i), friendName))
-            index = i;
-    }
-    if (index != -1) {
-        printf("%s's friends:\n", friendName);
-        for (j = 0; j < JumlahTeman(*graph); j++) {
-            if (HubunganTeman(*graph, index, j) == 1)
-                printf("%s\n", NamaTeman(*graph, j));
-        }
-    } else {
-        printf("Salah satu nama tidak terdaftar.\n");
-    }
-}
-
-void removeFriendship(Teman *graph, Word friend1, Word friend2) {
+void removeEdge(Graf *graph, Word vertex1, Word vertex2)
+{
     int index1 = -1, index2 = -1;
-    for (int i = 0; i < JumlahTeman(*graph); i++) {
-        if (isEqualWord(NamaTeman(*graph, i), friend1))
+    for (int i = 0; i < NeffGraf(*graph); i++)
+    {
+        if (isEqualWord(Vertex(*graph, i).nama, vertex1))
             index1 = i;
-        if (isEqualWord(NamaTeman(*graph, i), friend2))
+        if (isEqualWord(Vertex(*graph, i).nama, vertex2))
             index2 = i;
     }
-    if (index1 != -1 && index2 != -1) {
-        if (HubunganTeman(*graph, index1, index2) == 1 && HubunganTeman(*graph, index2, index1) == 1) {
-            HubunganTeman(*graph, index1, index2) = 0;
-            HubunganTeman(*graph, index2, index1) = 0;
-        } else {
-            printf("Mereka memang bukan teman.\n");
+    if (index1 != -1 && index2 != -1)
+    {
+        if (Edge(*graph, index1, index2) == 1 && Edge(*graph, index2, index1) == 1)
+        {
+            Edge(*graph, index1, index2) = 0;
+            Edge(*graph, index2, index1) = 0;
+            printf("%s dan %s tidak lagi berteman.\n", vertex1.TabWord, vertex2.TabWord);
         }
-    } else {
-        printf("Salah satu nama tidak terdaftar.\n");
+        else
+        {
+            printf("%s dan %s tidak sedang berteman.\n", vertex1.TabWord, vertex2.TabWord);
+        }
+    }
+    else
+    {
+        printf("Vertex tidak valid.\n");
     }
 }
 
-int countFriends(Teman *graph, Word friendName) {
+int countEdges(Graf *graph, Word vertex)
+{
     int index = -1;
-    for (int i = 0; i < JumlahTeman(*graph); i++) {
-        if (isEqualWord(NamaTeman(*graph, i), friendName))
+    for (int i = 0; i < NeffGraf(*graph); i++)
+    {
+        if (isEqualWord(Vertex(*graph, i).nama, vertex))
             index = i;
     }
-    if (index != -1) {
+    if (index != -1)
+    {
         int count = 0;
-        for (int j = 0; j < JumlahTeman(*graph); j++) {
-            if (HubunganTeman(*graph, index, j) == 1)
+        for (int j = 0; j < NeffGraf(*graph); j++)
+        {
+            if (Edge(*graph, index, j) == 1)
                 count++;
         }
         return count;
-    } else {
+    }
+    else
+    {
         return -1; // Jika tidak ada namanya dalam daftar
     }
 }
-
-
