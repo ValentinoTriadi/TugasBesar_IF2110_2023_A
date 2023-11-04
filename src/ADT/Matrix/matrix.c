@@ -232,3 +232,20 @@ void pTranspose(Matrix *m){
     }
     *m = mtemp;
 }
+
+void shiftMatrix(Matrix *m) {
+    int nRows = ROW_EFFMTRX(*m);
+    int nCols = COL_EFFMTRX(*m);
+
+    Matrix shiftedMatrix;
+    createMatrix(nRows, nCols, &shiftedMatrix);
+
+    for (int i = 0; i < nRows; i++) {
+        for (int j = 0; j < nCols; j++) {
+            int newRow = (i + 1) % nRows; // Menggeser baris ke bawah
+            ELMTMTRX(shiftedMatrix, newRow, j) = ELMTMTRX(*m, i, j);
+        }
+    }
+
+    copyMatrix(shiftedMatrix, m);
+}

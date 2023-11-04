@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "teman.h"
+#include "teman.c"
 #include "..\..\ADT\PriorityQueue\prioqueueReq.c"
 #include "..\..\ADT\Graf\graf.c"
 #include "..\..\ADT\Matrix\matrix.c"
@@ -16,30 +17,41 @@ int main() {
     Word friend1 = {"ujang", 5};
     Word friend2 = {"marcelo", 7};
 
-    addVertex(&(teman.dataTeman), currentUser);
-    addVertex(&(teman.dataTeman), friend1);
-    addVertex(&(teman.dataTeman), friend2);
+    addVertex(&Graph(teman), currentUser);
+    addVertex(&Graph(teman), friend1);
+    addVertex(&Graph(teman), friend2);
 
-    addEdge(&(teman.dataTeman), currentUser, friend1);
-    addEdge(&(teman.dataTeman), currentUser, friend2);
+    addEdge(&Graph(teman), currentUser, friend1);
+    addEdge(&Graph(teman), currentUser, friend2);
 
     // Test daftarteman
     printf("Daftar Teman Awal:\n");
-    daftarTeman(teman.dataTeman, currentUser);
+    daftarTeman(teman,currentUser);
 
     // Test hapusTeman
-    hapusTeman(&(teman.dataTeman), currentUser);
-    printf("\nSetelah Menghapus Teman:\n");
-    daftarTeman(teman.dataTeman, currentUser);
+    hapusTeman(&teman ,currentUser);
+    daftarTeman(teman,currentUser);
 
     // Test tambahTeman
-    Word newFriend = {"joko", 4};
-    addVertex(&(teman.dataTeman),newFriend);
-    tambahTeman(&(teman.dataTeman), currentUser, &teman);
-    printf("\nSetelah Menambah Teman Baru:\n");
-    daftarTeman(teman.dataTeman, currentUser);
+    Word friend3 = {"joko", 4};
+    Word friend4 = {"zaki", 4};
+    printReqMatrix(matReq(teman));
+    addVertex(&Graph(teman), friend3);
+    addVertex(&Graph(teman), friend4);
+    printf("asep ngirim teman\n");
+    sentReq(currentUser,&teman);
+    printf("zaki ngirim teman\n");
+    sentReq(friend3,&teman);
+    printReqMatrix(matReq(teman));
+    printf("joko accept teman\n");
+    acceptRequest(&teman,friend3);
+    printf("Daftar teman joko.\n");
+    daftarTeman(teman,currentUser);
+    printReqMatrix(matReq(teman));
 
    
 
+
+    
     return 0;
 }   

@@ -134,4 +134,5 @@ void pTranspose(Matrix *m);
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
 
+void shiftMatrix(Matrix *m);
 #endif

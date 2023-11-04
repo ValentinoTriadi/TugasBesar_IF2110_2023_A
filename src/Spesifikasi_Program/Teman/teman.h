@@ -3,6 +3,8 @@
 #include "..\..\ADT\Matrix\matrix.h"
 #include "..\..\ADT\WordMachine\wordmachine.h"
 
+#ifndef TEMAN_H
+#define TEMAN_H
 
 typedef struct Teman
 {
@@ -10,18 +12,21 @@ typedef struct Teman
     Matrix saveReq;
 } Teman;
 
-#define matReq(T) ((T).saveReq);
+#define matReq(T) ((T).saveReq)
+#define Graph(T)  ((T).dataTeman)
 
 void createTeman(Teman *teman);
 
-void daftarTeman(Graf graph,Word currentUser);
+void daftarTeman(Teman teman,Word currentUser);
 
-void hapusTeman(Graf *graph,Word currentUser);
+void hapusTeman(Teman *teman,Word currentUser);
 
-void sentTeman(Word currentUser, Teman *teman);
+void sentReq(Word currentUser, Teman *teman);
 
 void printReqMatrix(Matrix saveReq);
 
 void printRequest(PrioQueueReq Q, Word currentUser);
 
 void acceptRequest(Teman *teman,Word currentUser);
+
+#endif

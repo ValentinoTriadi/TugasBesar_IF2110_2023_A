@@ -33,7 +33,6 @@ void addVertex(Graf *graph, Word vertex)
                 break;
             }
         }
-        printf("%d",idx);
         MakeEmptyPrio(&Vertex(*graph,idx).friendReq,20);
     }
     else
