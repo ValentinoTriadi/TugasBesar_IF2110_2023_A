@@ -1,7 +1,5 @@
-#include "stack.h"
-
+#include "draft.h"
 #include <stdio.h>
-
 int main()
 {
     Stack S;
