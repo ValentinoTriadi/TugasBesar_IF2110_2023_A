@@ -1,34 +1,43 @@
 #include "../boolean.h"
-#include "../WordMachine/wordmachine.h"
+#include "../Mesin-Kata/wordmachine.h"
+#include "../PrioQueue/prioqueueReq.h"
 
 #ifndef GRAF_H
 #define GRAF_H
 
-typedef struct{
-    Word nama[20]; //Vertex 
-    int adjacencyMatrix[20][20]; //adjacencyMatrix
-    int jumlahTeman;
-} Teman;
+typedef struct
+{
+   Word nama;
+   PrioQueueReq friendReq;
+} Vertex;
 
-#define JumlahTeman(graph) ((graph).jumlahTeman)
-#define NamaTeman(graph, index) ((graph).nama[(index)])
-#define HubunganTeman(graph, i, j) ((graph).adjacencyMatrix[(i)][(j)])
+typedef struct{
+    Vertex vertex[20]; 
+    int adjacencyMatrix[20][20]; //adjacencyMatrix
+    int NeffGraf;
+} Graf;
+
+#define NeffGraf(graph) ((graph).NeffGraf)
+#define Vertex(graph, index) (((graph).vertex[(index)]))
+#define Edge(graph, i, j) ((graph).adjacencyMatrix[(i)][(j)])
 
 // Inisialisasi graf
-void CreateGraph(Teman *graph);
+void CreateGraph(Graf *graph);
 
 // Menambahkan teman ke graf
-void addName(Teman *graph,Word friendName);
+void addVertex(Graf *graph,Word vertex);
 
 // Menambahkan hubungan pertemanan antara dua teman
-void addFriendship(Teman *graph,Word friend1,Word friend2);
-
-// Menampilkan daftar teman-teman seorang teman
-void showFriends(Teman *graph,Word friendName);
+void addEdge(Graf *graph,Word vertex1,Word vertex2);
 
 //Remove pertemenan
-void removeFriendship(Teman *graph, Word friend1, Word friend2);
+void removeEdge(Graf *graph, Word vertex1, Word vertex2);
 
-int countFriends(Teman *graph, Word friendName);
+int countEdges(Graf *graph, Word vertex);
+
+/*(STILL NOT WORKING)*/
+//Word getNamebyId(Graf graph,int idx);
+
+//int getIdbyName(Graf graph,Word Vertex);
 
 #endif
