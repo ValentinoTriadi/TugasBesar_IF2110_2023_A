@@ -46,7 +46,3 @@ int charToInt(char x){
     return (x-48);
 }
 
-// int main(){
-//        printf("Hello World!\n");
-//        return 0;
-// }
