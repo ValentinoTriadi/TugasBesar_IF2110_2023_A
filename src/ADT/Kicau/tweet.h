@@ -1,29 +1,33 @@
-/* File : listlinier.h */
-/* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
-/* ElType adalah integer */
+/* File : tweet.h */
 
 
 #ifndef tweet_H
 #define tweet_H
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include "../Mesin-Kata/wordmachine.h"
+#include "../Time/datetime.h"
 
 
 typedef struct {
     int id;
-    char text[280];
+    Word text;
     int like;
-    char author[50];
-    time_t datetime;
+    Word author;
+    DATETIME datetime;
 } Kicauan;
 
+typedef struct
+{
+    Kicauan* kicau;
+    int nEff;
+    int capacity;
+} ListKicau;
 
-Kicauan createKicauan(char* text, char* author);
-void kicau(Kicauan kicauan);
+boolean IsKicauValid(Word textKicauan);
+void kicau(ListKicau *listKicau, Word currentUser);
+void kicauan(ListKicau listKicau, Word currentUser);
+void ubah_kicauan(ListKicau *listKicau, Word currentUser, int id);
+void suka_kicauan(ListKicau *listKicau, Word currentUser, int id);
 
 #endif
