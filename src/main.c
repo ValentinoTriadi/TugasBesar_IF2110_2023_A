@@ -1,7 +1,9 @@
-#include "Spesifikasi_Program/Perintah/perintah.c"
-#include "Spesifikasi_Program/Inisialisasi/inisialisasi.c"
+#include "./ADT/Perintah/perintah.h"
+#include "./ADT/Inisialisasi/inisialisasi.h"
 #include <stdio.h>
+
 extern Word currentWord;
+extern Word currentSentence;
 extern boolean EndWord;
 boolean endProgram;
 
@@ -41,16 +43,9 @@ int main(){
         }
         bacaPerintah(listPerintah);
         if (!endProgram){
-            filename = "Spesifikasi_Program/Inisialisasi/img1.txt";
-            fascii = NULL;
-            fascii = fopen(filename,"r");
-            if(fascii == NULL){
-                printf("error opening %s\n",filename);
-            } else {
-                system("cls || clear");
-                print_image(fascii);
-                fclose(fascii);
-            }
+            filename = "./ADT/Inisialisasi/img1.txt";
+            system("cls || clear");
+            print_image(filename);
         }
 
     }
