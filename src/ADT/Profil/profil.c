@@ -1,11 +1,39 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "profil.h"
+#include "boolean.h"
+#include "matrix.h"
+#include "wordmachine.h"
+#include "pcolor.h"
 
 #define DEFAULT_COLOR 'R'
 #define DEFAULT_SYMBOL '*'
 
+typedef struct
+{
+    Word bio;
+    Word no_hp;
+    Word weton;
+    Word jenis_akun;     // "publik" atau "privat"
+    Matrix foto_profil;  // Matriks 5x5
+    Matrix warna_profil; // Warna matriks 5x5
+} Profil;
+
+boolean isEqualWord(Word w1, Word w2)
+{
+    return strEqualsIgnoreCase(w1, w2);
+}
+
+Word MakeWord(char *str)
+{
+    Word w;
+    w.Length = strlen(str);
+    for (int i = 0; i < w.Length; i++)
+    {
+        w.TabWord[i] = str[i];
+    }
+    return w;
+}
 
 boolean strEqualsIgnoreCase(Word w1, Word w2)
 {
@@ -122,9 +150,9 @@ void ubahProfil(Profil *profil)
 void ubahJenisAkun(Profil *profil)
 {
     Word pilihan;
-    Word publik = StrToWord("publik");
-    Word privat = StrToWord("privat");
-    Word ya = StrToWord("YA");
+    Word publik = MakeWord("publik");
+    Word privat = MakeWord("privat");
+    Word ya = MakeWord("YA");
 
     printf("Saat ini, akun Anda adalah akun ");
     for (int i = 0; i < profil->jenis_akun.Length; i++)
