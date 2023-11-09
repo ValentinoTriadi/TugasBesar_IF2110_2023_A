@@ -9,6 +9,15 @@ boolean EOP;
 
 static FILE *pita;
 static int retval;
+static char* pitastr;
+
+void STARTFILE(char* filename){
+       pita = fopen(filename, "r");
+       ADV();
+}
+void CLOSEFILE(){
+       fclose(pita);
+}
 
 void START()
 {
@@ -34,7 +43,7 @@ void ADV()
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOP = (currentChar == MARK);
+       // EOP = (currentChar == MARK);
        // if (EOP)
        // {
        //        fclose(pita);
@@ -46,3 +55,10 @@ int charToInt(char x){
     return (x-48);
 }
 
+int countChar(char* l, int len, char x){
+	int count = 0;
+	for (int i = 0; i < len; i++){
+		if (l[i] == x) count++;
+	}
+    return count;
+}
