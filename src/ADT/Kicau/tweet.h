@@ -1,13 +1,12 @@
-/* File : tweet.h */
+/* File: tweet.h */
+#ifndef TWEET_H
+#define TWEET_H
 
-
-#ifndef tweet_H
-#define tweet_H
-
-#include <stdio.h>
+#include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
 #include "../Time/datetime.h"
 
+#define MAX_TWEETS 1000
 
 typedef struct {
     int id;
@@ -17,17 +16,18 @@ typedef struct {
     DATETIME datetime;
 } Kicauan;
 
-typedef struct
-{
+typedef struct {
     Kicauan* kicau;
     int nEff;
     int capacity;
 } ListKicau;
 
-boolean IsKicauValid(Word textKicauan);
-void kicau(ListKicau *listKicau, Word currentUser);
-void kicauan(ListKicau listKicau, Word currentUser);
-void ubah_kicauan(ListKicau *listKicau, Word currentUser, int id);
-void suka_kicauan(ListKicau *listKicau, Word currentUser, int id);
+void CreateTweet(Kicauan *k);
+void ShowTweets(ListKicau lk);
+void LikeTweet(ListKicau *lk, int id);
+void UpdateTweet(ListKicau *lk, int id, Word newText);
+void PrintTweet(Kicauan k);
+
+int GenerateID(ListKicau *lk);
 
 #endif

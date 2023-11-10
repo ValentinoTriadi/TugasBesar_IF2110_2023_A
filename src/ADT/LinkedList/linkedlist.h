@@ -27,10 +27,6 @@ typedef Address List;
 #define IDX_UNDEF (-1)
 #define FIRST(l) (l)
 
-Kicauan createKicauan(char* text, char* author);
-
-void printKicauan(Kicauan kicauan);
-
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
 void CreateList(List *l);
