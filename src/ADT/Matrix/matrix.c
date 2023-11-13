@@ -16,16 +16,16 @@ void createMatrix(int nRows, int nCols, Matrix *m){
 boolean isMatrixIdxValid(int i, int j){
     return (i<ROW_CAPMTRX && i>=0 && j>=0 && j<COL_CAPMTRX);
 }
-IdxType getLastIdxRow(Matrix m){
+IdxTypeMTRX getLastIdxRow(Matrix m){
     return (ROW_EFFMTRX(m)-1);
 }
-IdxType getLastIdxCol(Matrix m){
+IdxTypeMTRX getLastIdxCol(Matrix m){
     return (COL_EFFMTRX(m)-1);
 }
-boolean isIdxEff(Matrix m, IdxType i, IdxType j){
+boolean isIdxEff(Matrix m, IdxTypeMTRX i, IdxTypeMTRX j){
     return (i<ROW_EFFMTRX(m) && i>=0 && j>=0 && j<COL_EFFMTRX(m));
 }
-ElType getElmtDiagonal(Matrix m, IdxType i){
+ElTypeMTRX getElmtDiagonal(Matrix m, IdxTypeMTRX i){
     return (ELMTMTRX(m,i,i));
 }
 void copyMatrix(Matrix mIn, Matrix *mOut){
@@ -105,7 +105,7 @@ Matrix multiplyMatrixWithMod(Matrix m1,Matrix m2,int mod){
 
     return m;
 }
-Matrix multiplyByConst(Matrix m, ElType x){
+Matrix multiplyByConst(Matrix m, ElTypeMTRX x){
     int i,j;
     for(i=0; i<ROW_EFFMTRX(m); i++){
         for(j=0; j<COL_EFFMTRX(m); j++){
@@ -114,7 +114,7 @@ Matrix multiplyByConst(Matrix m, ElType x){
     }
     return m;
 }
-void pMultiplyByConst(Matrix *m, ElType k){
+void pMultiplyByConst(Matrix *m, ElTypeMTRX k){
     int i,j;
     for(i=0; i<ROW_EFFMTRX(*m); i++){
         for(j=0; j<COL_EFFMTRX(*m); j++){

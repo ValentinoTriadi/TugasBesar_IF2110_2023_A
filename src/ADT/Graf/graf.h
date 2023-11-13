@@ -1,6 +1,6 @@
 #include "../boolean.h"
-#include "../WordMachine/wordmachine.h"
-#include "../PriorityQueue/prioqueueReq.h"
+#include "../Mesin-Kata/wordmachine.h"
+#include "../PrioQueue/prioqueueReq.h"
 
 #ifndef GRAF_H
 #define GRAF_H
