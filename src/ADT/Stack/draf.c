@@ -1,5 +1,8 @@
 #include "draft.h"
 #include <stdio.h>
+#include "../Kicau/tweet.h"
+
+
 int main()
 {
     Stack S;
@@ -77,16 +80,21 @@ void DeleteDraft(Stack *S)
     }
 }
 
-void PublishDraft(Stack *S)
+void PublishDraft()
 {
     Draft D;
-    if (!IsEmpty(*S))
+    if (!IsEmpty(Draf))
     {
-        Pop(S, &D); // Mengambil draf dari stack
+        Pop(&Draf, &D); // Mengambil draf dari stack
         // Logika untuk menerbitkan draf
-        printf("Selamat! Draf kicauan telah diterbitkan!\nDetil kicauan:\n| ID = 11\n| John Doe\n| %02d/%02d/%02d %02d:%02d:%02d\n| ",
-               D.timestamp.HH, D.timestamp.MM, D.timestamp.SS, Hour(D.timestamp),
-               Minute(D.timestamp), Second(D.timestamp));
+        Kicauan k;
+        CreateTweet(&k);
+        k.author = currentUser;
+        k.datetime = D.timestamp;
+        k.text = D.text;
+        printf("Selamat! Draf kicauan telah diterbitkan!\nDetil kicauan:\n| ID = 11\n| John Doe\n| %02d/%02d/%04d %02d:%02d:%02d\n| ",
+               D.timestamp.DD, D.timestamp.MM, D.timestamp.YYYY, Hour(D.timestamp.T),
+               Minute(D.timestamp.T), Second(D.timestamp.T));
         printWord(D.text);
         printf("\n| Disukai: 0\n");
     }
@@ -95,3 +103,21 @@ void PublishDraft(Stack *S)
         printf("Tidak ada draf yang dapat diterbitkan.\n");
     }
 }
+// void PublishDraft(Stack *S)
+// {
+//     Draft D;
+//     if (!IsEmpty(*S))
+//     {
+//         Pop(S, &D); // Mengambil draf dari stack
+//         // Logika untuk menerbitkan draf
+//         printf("Selamat! Draf kicauan telah diterbitkan!\nDetil kicauan:\n| ID = 11\n| John Doe\n| %02d/%02d/%02d %02d:%02d:%02d\n| ",
+//                D.timestamp.HH, D.timestamp.MM, D.timestamp.SS, Hour(D.timestamp),
+//                Minute(D.timestamp), Second(D.timestamp));
+//         printWord(D.text);
+//         printf("\n| Disukai: 0\n");
+//     }
+//     else
+//     {
+//         printf("Tidak ada draf yang dapat diterbitkan.\n");
+//     }
+// }

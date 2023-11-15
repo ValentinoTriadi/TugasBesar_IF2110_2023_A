@@ -6,7 +6,6 @@
 #define DEFAULT_COLOR 'R'
 #define DEFAULT_SYMBOL '*'
 
-
 boolean strEqualsIgnoreCase(Word w1, Word w2)
 {
     if (w1.Length != w2.Length)
@@ -161,16 +160,24 @@ void ubahJenisAkun(Profil *profil)
 void ubahFotoProfil(Profil *profil)
 {
     printf("Masukkan foto profil yang baru\n");
+
     for (int i = 0; i < 5; i++)
     {
+        STARTWORD();
         for (int j = 0; j < 5; j++)
         {
-            char color, symbol;
-            scanf(" %c %c", &color, &symbol);
-            profil->warna_profil.mem[i][j] = color; // Mengganti .elmt dengan .Mem
-            profil->foto_profil.mem[i][j] = symbol; // Mengganti .elmt dengan .Mem
+
+            char color = currentWord.TabWord[0];
+            ADVWORD();
+
+            char symbol = currentWord.TabWord[0];
+            ADVWORD();
+
+            profil->warna_profil.mem[i][j] = color;
+            profil->foto_profil.mem[i][j] = symbol;
         }
     }
+
     printf("Foto profil Anda sudah berhasil diganti!\n");
 }
 
