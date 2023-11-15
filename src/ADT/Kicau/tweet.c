@@ -1,14 +1,11 @@
 /* File: tweet.c */
 #include "tweet.h"
-#include "../Mesin-Kata/wordmachine.h"
-#include "../Time/datetime.h"
+#include "../Database/db.h"
 #include <stdio.h>
 #include <string.h>
 
-extern Word currentUser;
+extern Profil currentUser;
 extern Word currentSentence;
-
-
 
 int GenerateID(ListKicau *lk) {
     if (lk->nEff == 0) {
@@ -18,16 +15,24 @@ int GenerateID(ListKicau *lk) {
     }
 }
 
+void AddTweetToList(ListKicau *lk, Kicauan k) {
+    if (lk->nEff < MAX_TWEETS) {
+        lk->kicau[lk->nEff] = k;
+        lk->nEff++;
+    } else {
+        printf("List kicauan penuh, tidak dapat menambahkan kicauan baru.\n");
+    }
+}
 
 void CreateTweet(Kicauan *k) {
-    k->id = GenerateID(); 
+    k->id = GenerateID(k); 
     k->text = currentSentence;
     k->like = 0;
     k->author = currentUser;
     k->datetime = getLocalTime();
     PrintTweet(*k);
+    AddTweetToList(lk, *k);
 }
-
 
 void PrintTweet(Kicauan k) {
     printf("| ID = %d\n", k.id);
@@ -43,7 +48,7 @@ void PrintTweet(Kicauan k) {
 
 void ShowTweets(ListKicau lk) {
     for (int i = lk.nEff - 1; i >= 0; i--) {
-        if (isEqualWordWord(lk.kicau[i].author, currentUser)) {
+        if (isEqualWordWord(lk.kicau[i].author.nama, currentUser.nama)) {
             PrintTweet(lk.kicau[i]);
         }
     }
@@ -64,7 +69,7 @@ void LikeTweet(ListKicau *lk, int id) {
 
 void UpdateTweet(ListKicau *lk, int id, Word newText) {
     for (int i = 0; i < lk->nEff; i++) {
-        if (lk->kicau[i].id == id && isEqualWordWord(lk->kicau[i].author, currentUser)) {
+        if (lk->kicau[i].id == id && isEqualWordWord(lk->kicau[i].author.nama, currentUser.nama)) {
             lk->kicau[i].text = newText;
             PrintTweet(lk->kicau[i]);
             return;
