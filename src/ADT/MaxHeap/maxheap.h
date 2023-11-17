@@ -16,7 +16,7 @@ typedef struct maxheap
 #define LChild(i)           (2*(i)+1)
 #define RChild(i)           (2*(i)+2)
 #define Parent(i)           floor(((i)-1)/2)
-#define ELMTHeap(h,i)    (h).ID[i]
+#define ELMTHeap(h,i)       (h).ID[i]
 
 
 boolean isLeaf(MAXHEAP h, int idx);

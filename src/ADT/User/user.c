@@ -1,17 +1,18 @@
 #include "user.h"
 
-extern Profil currentUser;
-extern userlist daftarUser;
+
+extern Profil CurrentUser;
+extern userlist DaftarUser;
 
 
 void signUp(){
     Word username, password;
     printf("Masukkan nama:\n");
     STARTWORD();
-    currentUser.nama = currentWord;
+    CurrentUser.nama = currentWord;
     printf("Masukkan kata sandi:\n");
     STARTWORD();
-    currentUser.sandi = currentWord;
+    CurrentUser.sandi = currentWord;
 
     
     printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
@@ -43,9 +44,9 @@ void signIn() {
             STARTWORD();
             password = currentWord;
 
-            if (isEqualWord(username, inputNama)) {
+            if (isEqualWordWord(username, inputNama)) {
                 userFound = true;
-                if (isEqualWord(password, inputSandi)) {
+                if (isEqualWordWord(password, inputSandi)) {
                     sandiTrue = true;
                     break;
                 }
@@ -69,12 +70,12 @@ void signIn() {
 }
 
 void signOut(){
-    boolean isLogin = (currentUser.nama.Length != 0);
+    boolean isLogin = (CurrentUser.nama.Length != 0);
     if(!isLogin){
         printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
     } else {
-        currentUser.nama.Length = 0;
-        currentUser.sandi.Length = 0;
+        CurrentUser.nama.Length = 0;
+        CurrentUser.sandi.Length = 0;
         printf("Anda sudah keluar. Terima kasih untuk menggunakan layanan BurBir!\n");
     }
 }
@@ -82,9 +83,4 @@ void signOut(){
 void exitProgram(){
     printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
     exit(0);
-}
-
-int main(){
-       printf("Hello World!\n");
-       return 0;
 }

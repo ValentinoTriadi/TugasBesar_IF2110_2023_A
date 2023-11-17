@@ -1,29 +1,35 @@
-/* File : listlinier.h */
-/* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
-/* ElType adalah integer */
+/* File: tweet.h */
+#ifndef TWEET_H
+#define TWEET_H
 
-
-#ifndef tweet_H
-#define tweet_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
+#include "../Time/datetime.h"
+#include "../Profil/profil.h"
 
+
+#define MAX_TWEETS 1000
 
 typedef struct {
     int id;
-    char text[280];
+    Word text;
     int like;
-    char author[50];
-    time_t datetime;
+    Profil author;
+    DATETIME datetime;
 } Kicauan;
 
+typedef struct {
+    Kicauan* kicau;
+    int nEff;
+    int capacity;
+} ListKicau;
 
-Kicauan createKicauan(char* text, char* author);
-void kicau(Kicauan kicauan);
+int GenerateID(ListKicau *lk);
+void CreateTweet(Kicauan *k);
+void ShowTweets(ListKicau lk);
+void LikeTweet(ListKicau *lk, int id);
+void UpdateTweet(ListKicau *lk, int id, Word newText);
+void PrintTweet(Kicauan k);
+
 
 #endif

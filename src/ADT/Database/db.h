@@ -1,4 +1,8 @@
+#ifndef DB_H
+#define DB_H
+
 #include "../Graf/graf.h"
+#include "../Draf/draf.h"
 // #include "../Inisialisasi/inisialisasi.h"
 #include "../Kicau/tweet.h"
 #include "../ListStatik/liststatik.h"
@@ -9,19 +13,18 @@
 #include "../pcolor/pcolor.h"
 // #include "../Perintah/perintah.h" 
 #include "../PrioQueue/prioqueueReq.h"
-#include "../Profil/profil.h"
 #include "../Teman/teman.h"
 #include "../Time/adttime.h"
 #include "../Time/datetime.h"
 #include "../User/user.h"
 #include "../Utas/utas.h"
-#include "../boolean.h"
-
+#include "../Profil/profil.h"
 
 extern Profil CurrentUser;
 extern userlist DaftarPengguna;
-extern LISTKICAU DaftarKicau;
+extern ListKicau DaftarKicau;
 extern Teman DataTeman;
+extern Stack Draf;
 
 // DB Pengguna dengan list statik
 
@@ -40,3 +43,4 @@ typedef Addresskicau LISTKICAU;
 // #define IDX_UNDEF (-1)
 #define FIRSTKICAU(l) (l)
 
+#endif

@@ -8,6 +8,7 @@
 
 #include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
+// #include "../Database/db.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */

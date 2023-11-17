@@ -2,9 +2,9 @@
 #define __USER_H__
 #include <stdio.h>
 #include <stdlib.h>
-#include "..\boolean.h"
-#include "..\ListStatik\liststatik.h"
-#include "..\Profil\profil.h"
+// #include "../Database/db.h"
+#include "../Profil/profil.h"
+#include "../boolean.h"
 
 #define MAX_USER_LIST 20
 

@@ -26,6 +26,9 @@ typedef struct {
 /* ***************************************************************** */
 /* KELOMPOK VALIDASI TERHADAP TYPE                                   */
 /* ***************************************************************** */
+
+void delay(int number_of_half_seconds);
+
 boolean IsTIMEValid (int H, int M, int S);
 /* Mengirim true jika H,M,S dapat membentuk T yang valid */
 /* dipakai untuk mentest SEBELUM membentuk sebuah Jam */

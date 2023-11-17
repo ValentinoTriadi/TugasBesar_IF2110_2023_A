@@ -33,7 +33,7 @@ void IgnoreNL();
 /* Mengabaikan satu atau beberapa NewLine
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ NewLine atau currentChar = MARK */
-
+void Ignore1NL();
 // baca per kata
 void STARTWORD();
 /* I.S. : currentChar sembarang

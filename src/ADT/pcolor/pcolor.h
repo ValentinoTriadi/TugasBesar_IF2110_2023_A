@@ -12,7 +12,8 @@ Details
 print_xxx(c) will print c with xxx color. Import this header to use the declared functions.
 We only provide 8 colors. Feel free to modify/add colors if you want to.
 **/
-
+#ifndef PCOLOR_H
+#define PCOLOR_H
 #define NORMAL "\x1B[0m"
 #define BLACK "\x1B[30m"
 #define RED "\x1B[31m"
@@ -26,3 +27,4 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 void print_red(char c);
 void print_green(char c);
 void print_blue(char c);
+#endif
