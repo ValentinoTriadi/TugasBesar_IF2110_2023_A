@@ -108,7 +108,7 @@ void EnqueuePrio(PrioQueueReq *Q, infotype X)
             j = i - 1;
         }
 
-        while (i != Head(*Q) && X.jumlahTeman < Elmt(*Q, j).jumlahTeman)
+        while (i != Head(*Q) && X.jumlahTeman > Elmt(*Q, j).jumlahTeman)
         {
             temp = Elmt(*Q, i);
             Elmt(*Q, i) = Elmt(*Q, j);

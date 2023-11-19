@@ -163,8 +163,8 @@ void sentReq(Word currentUser, Teman *teman)
             {
                 for (i = 0; i < teman->saveReq.rowEff; i++)
                 {
-                    if (charToInt((ELMTMTRX(teman->saveReq, i, 0)) == currentUserIndex && charToInt(ELMTMTRX(teman->saveReq, i, 1)) == newFriendIdx) ||
-                        (charToInt((ELMTMTRX(teman->saveReq, i, 0)) == newFriendIdx && charToInt(ELMTMTRX(teman->saveReq, i, 1)) == currentUserIndex)))
+                    if ((charToInt((ELMTMTRX(teman->saveReq, i, 0))) == currentUserIndex && charToInt(ELMTMTRX(teman->saveReq, i, 1)) == newFriendIdx) ||
+                        ((charToInt((ELMTMTRX(teman->saveReq, i, 0))) == newFriendIdx && charToInt(ELMTMTRX(teman->saveReq, i, 1)) == currentUserIndex)))
                     {
                         flag = false;
                         break;
@@ -203,7 +203,7 @@ void sentReq(Word currentUser, Teman *teman)
             }
             else
             {
-                printf("Anda sudah mengirimkan permintaan pertemanan kepada %s. Silakan tunggu hingga permintaan Anda disetujui.\n", currentWord);
+                printf("Anda sudah mengirimkan permintaan pertemanan kepada %s atau anda sudah berteman. Silakan tunggu hingga permintaan Anda disetujui.\n", currentWord);
             }
         }
         else
@@ -259,7 +259,7 @@ void printReqMatrix(Matrix saveReq)
     {
         for (j = 0; j < 3; j++)
         {
-            printf("%d ", charToInt(ELMTMTRX(saveReq, i, j)));
+            printf("%d", charToInt(ELMTMTRX(saveReq, i, j)));
         }
         printf("\n");
     }
@@ -311,7 +311,7 @@ void acceptRequest(Teman *teman, Word currentUser)
         //idx dari matrix
         for (i = 0; i < teman->saveReq.rowEff; i++)
         {
-            if (charToInt((ELMTMTRX(teman->saveReq, i, 0)) == idx) || charToInt((ELMTMTRX(teman->saveReq, i, 1)) == idx))
+            if (charToInt((ELMTMTRX(teman->saveReq, i, 0))) == idx || charToInt((ELMTMTRX(teman->saveReq, i, 1))) == idx)
             {
                 ELMTMTRX(teman->saveReq, i, 0) = '0';
                 ELMTMTRX(teman->saveReq, i, 1) = '0';
