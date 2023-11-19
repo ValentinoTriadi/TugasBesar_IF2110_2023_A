@@ -115,4 +115,6 @@ boolean isEqualWordStr(Word s, char * ss);
 boolean isEqualWordWord(Word s1, Word s2);
 
 Word StrToWord(char *str);
+
+void SalinWord(Word source, Word *destination);
 #endif
