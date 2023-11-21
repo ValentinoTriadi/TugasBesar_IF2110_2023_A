@@ -1,80 +1,77 @@
-#include "liststatik.c"
+#include "liststatik.h"
 #include <stdio.h>
 
 int main(){
-    ListStatik L1, L2;
+    ListStatik L1, L2, L3;
+    ListStatik_ElType val;
+    boolean isFull, isEmpty, isEqual, asc;
+    int idx, max, min;
+
+    // Inisialisasi List L1 dan L2
     CreateListStatik(&L1);
     CreateListStatik(&L2);
-    
-    //isi L1
-    insertFirst_ListStatik(&L1, 40);
-    insertAt_ListStatik(&L1, 50, 1);
-    insertAt_ListStatik(&L1, 60, 2);
-    insertLast_ListStatik(&L1, 70);
 
-    //print L1
-    printf("L1: ");
+    // Isi L1
+    insertLast_ListStatik(&L1, 10);
+    insertLast_ListStatik(&L1, 20);
+    insertLast_ListStatik(&L1, 30);
+    insertLast_ListStatik(&L1, 40);
+    insertLast_ListStatik(&L1, 50);
+
+    // Print L1
     printList_ListStatik(L1);
     printf("\n");
 
-    //isi L2
-    int a, b, c, d;
-    printf("Insert first L2: ");
-    scanf("%d", &a);
-    insertFirst_ListStatik(&L2, a);
-    printf("Insert element at L2: ");
-    scanf("%d %d", &b, &c);
-    insertAt_ListStatik(&L2, b, c);
-    printf("Insert last L2: ");
-    scanf("%d", &d);
-    insertLast_ListStatik(&L2, d);
+    // Isi L2 dengan membaca dari input
+    readList_ListStatik(&L2);
 
-    //print L2
-    printf("L2: ");
+    // Print L2
     printList_ListStatik(L2);
+    printf("\n");
 
-    //panjang L1 dan L2
-    printf("\n Panjang L1: %d", listLength_ListStatik(L1));
-    printf("\n Panjang L2: %d", listLength_ListStatik(L2));
+    // Cek apakah L1 penuh
+    isFull = isFull_ListStatik(L1);
 
-    //delete L1
-    int e, f;
-    printf("\n Delete element at L1: ");
-    scanf("%d %d", &e, &f);
-    deleteAt_ListStatik(&L1, &e, f);
+    // Cek apakah L2 kosong
+    isEmpty = isEmpty_ListStatik(L2);
 
-    //print L1
-    printf("L1: ");
+    // Cari elemen dengan index 30 di L1
+    idx = indexOf_ListStatik(L1, 30);
+
+    // Bandingkan L1 dan L2
+    isEqual = isListEqual_ListStatik(L1, L2);
+
+    // Gabungkan L1 dan L2 menjadi L3
+    L3 = concat_ListStatik(L1, L2);
+    printList_ListStatik(L3);
+    printf("\n");
+
+    // Hapus elemen yang sama di L3
+    removeDuplicates(&L3);
+    printList_ListStatik(L3);
+    printf("\n");
+
+    // Urutkan L3 secara ascending
+    asc = true;
+    sortList_ListStatik(&L3, asc);
+    printList_ListStatik(L3);
+    printf("\n");
+
+    // Urutkan L3 secara descending
+    asc = false;
+    sortList_ListStatik(&L3, asc);
+    printList_ListStatik(L3);
+    printf("\n");
+
+    // Dapatkan nilai ekstrem dari L3
+    extremeValues_ListStatik(L3, &max, &min);
+
+    // Hapus elemen pertama dan terakhir dari L1
+    deleteFirst_ListStatik(&L1, &val);
     printList_ListStatik(L1);
 
-    //panjang L1 baru
-    printf("\n Panjang L1: %d", listLength_ListStatik(L1));
+    deleteLast_ListStatik(&L1, &val);
+    printList_ListStatik(L1);
 
-    //delete L2
-    deleteFirst_ListStatik(&L2, &a);
-    deleteLast_ListStatik(&L2, &d);
-
-    //print L2
-    printf("\nL2: ");
-    printList_ListStatik(L2);
-
-    //panjang L2 baru
-    printf("\n Panjang L2: %d", listLength_ListStatik(L2));
-
-    //concat L1 dan L2
-    ListStatik L3;
-    CreateListStatik(&L3);
-    L3 = concat_ListStatik(L1, L2);
-    printf("\nL3: ");
-    printList_ListStatik(L3);
-
-    //remove duplicate L3
-    removeDuplicate_ListStatik(&L3);
-    printf("\nL3: ");
-    printList_ListStatik(L3);
-
-    //sort L3
-    printf("\n Sorted L3: ");
-    sortList_ListStatik(&L3, true);
-    printList_ListStatik(L3);
+    return 0;
 }
