@@ -24,8 +24,8 @@ void AddTweetToList(ListKicau *lk, Kicauan k) {
     }
 }
 
-void CreateTweet(Kicauan *k) {
-    k->id = GenerateID(k); 
+void CreateTweet(ListKicau *lk, Kicauan *k) {
+    k->id = GenerateID(lk); 
     k->text = currentSentence;
     k->like = 0;
     k->author = currentUser;
@@ -58,13 +58,19 @@ void ShowTweets(ListKicau lk) {
 void LikeTweet(ListKicau *lk, int id) {
     for (int i = 0; i < lk->nEff; i++) {
         if (lk->kicau[i].id == id) {
-            lk->kicau[i].like++;
-            PrintTweet(lk->kicau[i]);
+            if (lk->kicau[i].author.isPublic) {
+                lk->kicau[i].like++;
+                printf("Selamat! kicauan telah disukai!\n");
+                PrintTweet(lk->kicau[i]);
+            } else {
+                printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya\n");
+            }
             return;
         }
     }
     printf("Tidak ditemukan kicauan dengan ID = %d;\n", id);
 }
+
 
 
 void UpdateTweet(ListKicau *lk, int id, Word newText) {

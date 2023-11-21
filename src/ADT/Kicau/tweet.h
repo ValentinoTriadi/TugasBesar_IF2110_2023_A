@@ -24,12 +24,12 @@ typedef struct {
 } ListKicau;
 
 int GenerateID(ListKicau *lk);
-void CreateTweet(Kicauan *k);
+void CreateTweet(ListKicau *lk, Kicauan *k);
 void ShowTweets(ListKicau lk);
 void LikeTweet(ListKicau *lk, int id);
 void UpdateTweet(ListKicau *lk, int id, Word newText);
 void PrintTweet(Kicauan k);
-AddTweetToList(ListKicau *lk, Kicauan k);
+void AddTweetToList(ListKicau *lk, Kicauan k);
 
 
 #endif
