@@ -6,7 +6,7 @@ void signUp() {
     Listuser l;
     int i, idx;
     boolean found;
-    CreateListStatik(&l);
+    // CreateListStatik(&l);
 
 
     Word * current;
@@ -108,6 +108,11 @@ void signOut() {
 void exitProgram() {
         printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.\n");
     exit(0);
+}
+
+int main(){
+    printf("hello");
+    return 0;
 }
 
 

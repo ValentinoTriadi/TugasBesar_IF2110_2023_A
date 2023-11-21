@@ -3,19 +3,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../boolean.h"
-#include "../Mesin-Kata/wordmachine.h"
-#include "../ListStatik/liststatik.h"
-#include "../Profil/profil.h"
+#include "../Mesin-Kata/wordmachine.c"
+#include "../ListStatik/liststatik.c"
+#include "../Profil/profil.c"
 
-#define CAPACITY 20
+extern Profil user;
 
-typedef Profil ElType;  /* type elemen List */
+#define CAP 20
+
+// typedef Profil ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
-   ElType Users[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   Profil Users[CAP]; /* memori tempat penyimpan elemen (container) */
 } Listuser;
 
-#define ELMT(l, i) (l).users[(i)]
+#define User(l, i) (l).users[(i)]
 
 void signUp() ;
 
