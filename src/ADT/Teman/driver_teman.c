@@ -59,7 +59,6 @@ int main() {
             case 3:
                 printf("\nKondisi asep tidak punya pending req:\n");
                 sentReq(currentUser, &teman);
-                printf("Friend request sent.\n");
                 break;
             case 4:
                 printf("\nzaki mencoba sent req ke Asep:\n");

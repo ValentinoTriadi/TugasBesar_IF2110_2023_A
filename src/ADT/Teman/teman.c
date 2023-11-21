@@ -35,13 +35,18 @@ void daftarTeman(Teman teman,Word currentUser)
         if (count > 0)
         {
             printf("memiliki %d teman\n", count);
-            printf("Daftar teman %s\n", currentUser.TabWord);
+            printf("Daftar teman ");
+            printWord(currentUser);
+            printf("\n");
 
             for (j = 0; j < NeffGraf(Graph(teman)); j++)
             {
                 if (Edge(Graph(teman), index, j) == 1)
                 {
-                    printf("| %s\n", Vertex(Graph(teman), j).nama.TabWord);
+                    printf(" | ");
+                    printWord(Vertex(Graph(teman), j).nama);
+                    printf("\n");
+                    //printf("| %s\n", Vertex(Graph(teman), j).nama.TabWord);
                 }
             }
         }
@@ -87,7 +92,10 @@ void hapusTeman(Teman *teman,Word currentUser)
     }
     if (idxToDelete != -1)
     {
-        printf("Apakah anda yakin ingin menghapus %s dari daftar teman anda? (YA/TIDAK) ", userToDelete.TabWord);
+        //printf("Apakah anda yakin ingin menghapus %s dari daftar teman anda? (YA/TIDAK) ", userToDelete.TabWord);
+        printf("Apakah anda yakin ingin menghapus ");
+        printWord(userToDelete);
+        printf("dari daftar teman anda? (YA/TIDAK) ");
 
         STARTWORD();
        
@@ -199,16 +207,24 @@ void sentReq(Word currentUser, Teman *teman)
                 ELMTMTRX(teman->saveReq, i, 1) = intToChar(newFriendIdx);
                 ELMTMTRX(teman->saveReq, i, 2) = intToChar(newFriend.jumlahTeman);
 
-                printf("Permintaan pertemanan kepada %s telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.\n", currentWord);
+                printf("Permintaan pertemanan kepada"); 
+                printWord(currentWord);
+                printf("dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.\n");
             }
             else
             {
-                printf("Anda sudah mengirimkan permintaan pertemanan kepada %s atau anda sudah berteman. Silakan tunggu hingga permintaan Anda disetujui.\n", currentWord);
+                printf("Anda sudah mengirimkan permintaan pertemanan kepada ");
+                printWord(currentWord);
+                printf("atau anda sudah berteman.\n");
+                
             }
         }
         else
         {
-            printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+            //printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+            printf("Pengguna bernama ");
+            printWord(currentWord);
+            printf("tidak ditemukan.\n");
         }
     }
     else
@@ -245,7 +261,11 @@ void printRequest(PrioQueueReq Q, Word user)
 
     do
     {
-        printf(" | %s\n", Nama(Elmt(Q, i)).TabWord);
+        //printf(" | %s\n", Nama(Elmt(Q, i)).TabWord);
+        printf(" | ");
+        printWord(Nama(Elmt(Q, i)));
+        printf("\n");
+
         printf(" | Jumlah teman: %d\n", JumlahTeman(Elmt(Q, i)));
         i = (i + 1) % MaxEl(Q);
     } while (i != (Tail(Q) + 1) % MaxEl(Q));
@@ -282,8 +302,16 @@ void acceptRequest(Teman *teman, Word currentUser)
     }
     if (!IsEmptyPrio(Vertex(teman->dataTeman, idx).friendReq))
     {
-        printf("Permintaan pertemanan teratas dari %s\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
-        printf(" | %s\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+        //printf("Permintaan pertemanan teratas dari %s\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+        printf("Permintaan pertemanan teratas dari ");
+        printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
+        printf("\n");
+
+        //printf(" | %s\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+        printf(" | ");
+        printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
+        printf("\n");
+
         printf(" | Jumlah teman: %d\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).jumlahTeman);
 
         printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) \n");
@@ -292,17 +320,24 @@ void acceptRequest(Teman *teman, Word currentUser)
         Word Ya = {"YA", 2};
         if (isEqualWordWord(currentWord, Ya))
         {
-            printf("Permintaan pertemanan dari %s telah disetujui. Selamat! Anda telah berteman dengan %s.\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+            //printf("Permintaan pertemanan dari %s telah disetujui. Selamat! Anda telah berteman dengan %s.\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+            printf("Permintaan pertemanan dari ");
+            printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
+            printf("telah disetujui. Selamat! Anda telah berteman dengan ");
+            printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
+            printf(".\n");
 
-            addEdge(&teman->dataTeman, currentUser, temp.nama);
 
-            
-
+            addEdge(&teman->dataTeman, currentUser, InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
         }
         else
         {
             // decline request
-            printf("Permintaan pertemanan dari %s telah ditolak.\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+            //printf("Permintaan pertemanan dari %s telah ditolak.\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
+            printf("Permintaan pertemanan dari ");
+            printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
+            printf("telah ditolak.\n");
+
 
             
         }
