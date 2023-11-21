@@ -70,8 +70,6 @@ void addEdge(Graf *graph, Word vertex1, Word vertex2)
     // Vertex tidak valid
     else
     {
-        printf("%d",index1);
-        printf("%d",index2);
         printf("Salah satu vertex tidak valid.\n");
     }
 }
