@@ -198,16 +198,22 @@ void sentReq(Word currentUser, Teman *teman)
                 ELMTMTRX(teman->saveReq, i, 1) = newFriendIdx;
                 ELMTMTRX(teman->saveReq, i, 2) = newFriend.jumlahTeman;
 
-                printf("Permintaan pertemanan kepada %s telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.", currentWord);
+                printf("Permintaan pertemanan kepada");
+                printWord(currentWord); 
+                printf("telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.");
             }
             else
             {
-                printf("Anda sudah mengirimkan permintaan pertemanan kepada %s. Silakan tunggu hingga permintaan Anda disetujui.", currentWord);
+                printf("Anda sudah mengirimkan permintaan pertemanan kepada");
+                printWord(currentWord);
+                printf(". Silakan tunggu hingga permintaan Anda disetujui.");
             }
         }
         else
         {
-            printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+            printf("Pengguna bernama");
+            printWord(currentWord); 
+            printf("tidak ditemukan.\n");
         }
     }
     else

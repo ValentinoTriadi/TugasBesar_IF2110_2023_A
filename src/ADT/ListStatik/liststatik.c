@@ -331,11 +331,11 @@ ListStatik concat_ListStatik(ListStatik l1, ListStatik l2){
     ListStatik l3;
     int i;
     CreateListStatik(&l3);
-    for (i = 0; i < listLength_ListStatik(l1); i++){
-        insertLast_ListStatik(&l3, ELMTLISTSTATIK(l1, i));
+    for (i = 0; i < listStatikLength(l1); i++){
+        insertLastLISTSTATIK(&l3, ELMTLISTSTATIK(l1, i));
     }
-    for (i = 0; i < listLength_ListStatik(l2); i++){
-        insertLast_ListStatik(&l3, ELMTLISTSTATIK(l2, i));
+    for (i = 0; i < listStatikLength(l2); i++){
+        insertLastLISTSTATIK(&l3, ELMTLISTSTATIK(l2, i));
     }
     return l3;
 }

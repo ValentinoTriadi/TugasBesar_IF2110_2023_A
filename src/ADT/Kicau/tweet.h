@@ -6,6 +6,7 @@
 #include "../Mesin-Kata/wordmachine.h"
 #include "../Time/datetime.h"
 #include "../Profil/profil.h"
+#include "../Database/db.h"
 
 
 #define MAX_TWEETS 1000

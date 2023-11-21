@@ -173,7 +173,9 @@ void PrintPrioQueueTeman(PrioQueueReq Q)
 
     do
     {
-        printf("Nama: %s, Jumlah Teman: %d\n", Nama(Elmt(Q, i)), JumlahTeman(Elmt(Q, i)));
+        printf("Nama:");
+        printWord(Nama(Elmt(Q,i)));
+        printf(", Jumlah Teman: %d\n", JumlahTeman(Elmt(Q, i)));
         i = (i + 1) % MaxEl(Q);
     } while (i != (Tail(Q) + 1) % MaxEl(Q));
 

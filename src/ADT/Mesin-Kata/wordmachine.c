@@ -183,20 +183,12 @@ void splitSentence(Word Sentence, Word * l, int len){
     l[idx] = temp;
 }
 
-Word toLowerCase(Word weton){
-    Word s;
-    s.Length = 0;
-    int idx = 0;
-    for (int i = 0; i < weton.Length; i++){
-        int p = (int) HURUF(weton, idx);
-        char c;
-        if (p <= 90){
-            p += 32;
-            c = p;
-        }
-        s.Length++;
-        HURUF(s,idx) = (char) p;
-        idx++;
+Word toLowerCase(Word kata){
+    Word s = kata;
+    for (int i = 0; i < s.Length; i++){
+        int p = (int) HURUF(s, i);
+        if (p <= 90) p += 32;
+        HURUF(s,i) = (char) p;
     }
     return s;
 }

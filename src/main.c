@@ -43,9 +43,10 @@ int main(){
             ADVWORD();
         }
         bacaPerintah(listPerintah);
+        delay(6);
         if (!endProgram){
-            filename = "./ADT/Inisialisasi/img1.txt";
-            system("cls || clear");
+            // filename = "./ADT/Inisialisasi/img1.txt";
+            // system("cls || clear");
         }
     }
 

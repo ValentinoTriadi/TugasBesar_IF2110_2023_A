@@ -20,23 +20,22 @@
 #include "../Utas/utas.h"
 #include "../Profil/profil.h"
 
-extern Profil CurrentUser;
-extern userlist DaftarPengguna;
-extern ListKicau DaftarKicau;
-extern Teman DataTeman;
-extern Stack Draf;
+// extern Profil CurrentUser;
+// extern userlist DaftarPengguna;
+// extern ListKicau DaftarKicau;
+// extern Teman DataTeman;
+// extern Stack Draf;
 
 // DB Pengguna dengan list statik
 
 // DB Kicau dengan linked list
-typedef Kicauan ELMTKICAU;
-typedef struct nodekicau* Addresskicau;
-typedef struct nodekicau {
-    ELMTKICAU info;
-    Addresskicau next;
-} NODEKICAU;
+// typedef struct nodekicau* Addresskicau;
+// typedef struct nodekicau {
+//     Kicauan info;
+//     Addresskicau next;
+// } NODEKICAU;
 
-typedef Addresskicau LISTKICAU;
+// typedef Addresskicau LISTKICAU;
 
 #define INFOKICAU(p) (p)->info
 #define NEXTKICAU(p) (p)->next

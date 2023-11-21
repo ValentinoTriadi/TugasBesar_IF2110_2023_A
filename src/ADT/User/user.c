@@ -1,86 +1,126 @@
 #include "user.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 
 extern Profil CurrentUser;
-extern userlist DaftarUser;
+extern userlist DaftarPengguna;
+extern Word currentSentence;
 
-
-void signUp(){
-    Word username, password;
-    printf("Masukkan nama:\n");
-    STARTWORD();
-    CurrentUser.nama = currentWord;
-    printf("Masukkan kata sandi:\n");
-    STARTWORD();
-    CurrentUser.sandi = currentWord;
-
-    
-    printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
-    printf("Wah, sayang sekali nama tersebut telah diambil.\n");
-    printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n");
-    
-}
-
-void signIn() {
-    printf("Masukkan nama:\n");
-    STARTWORD();
-    Word inputNama = currentWord;
-    printf("Masukkan kata sandi:\n");
-    STARTWORD();
-    Word inputSandi = currentWord;
-
-    boolean userFound = false;
-    boolean sandiTrue = false;
-    int userCount;
-
-    FILE *file = fopen("../../Konfigurasi_Program/pengguna.config", "r");
-    if (file) {
-        fscanf(file, "%d", &userCount); 
-        for (int i = 0; i < userCount; i++) {
-            Word username, password;
-            // Membaca informasi pengguna dari konfigurasi
-            STARTWORD();
-            username = currentWord;
-            STARTWORD();
-            password = currentWord;
-
-            if (isEqualWordWord(username, inputNama)) {
-                userFound = true;
-                if (isEqualWordWord(password, inputSandi)) {
-                    sandiTrue = true;
-                    break;
-                }
-            }
-            // Melompati bagian bio, nomor HP, dan lainnya untuk pengguna berikutnya
-            for (int j = 0; j < 7; j++) {
-                STARTWORD();
-            }
-        }
-        fclose(file);
-    } 
-
-    if (!userFound) {
-        printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
-    } else if (!sandiTrue) {
-        printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
-    } else {
-        printf("Anda telah berhasil masuk dengan nama pengguna %s. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n", inputNama.TabWord);
+boolean isExists(Word name){
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, name)) return true;
     }
-    printf("Wah Anda sudah masuk. Keluar dulu yuk!\n");
+    return false;
 }
 
-void signOut(){
-    boolean isLogin = (CurrentUser.nama.Length != 0);
-    if(!isLogin){
-        printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
+boolean checkPassword (Word nama, Word pass){
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)) {
+            return (isEqualWordWord(DaftarPengguna.pengguna[i].sandi, pass));
+        }
+    }
+    return false;
+}
+
+int findIndexUser(Word nama){
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)) {
+            return i;
+        }
+    }
+}
+
+void daftar(){
+    Word username, password;
+    boolean exists = true;
+    while (exists){
+        printf("\nMasukkan nama:\n");
+        STARTINPUT();
+        username = currentSentence;
+        exists = false;
+        if (isExists(username)){
+            exists = true;
+            printf("\nWah, sayang sekali nama tersebut telah diambil.\n");
+        }
+    }
+
+    printf("\nMasukkan kata sandi:\n");
+    STARTINPUT();
+    password = currentSentence;
+
+    if (username.Length > 20) username.Length = 20;
+    if (password.Length > 20) password.Length = 20;
+    Profil newUser;
+    newUser.nama = username;
+    newUser.sandi = password;
+
+    DaftarPengguna.pengguna[DaftarPengguna.total] = newUser;
+    DaftarPengguna.total++;
+    
+    printf("\nPengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
+    delay(10);
+}
+
+void masuk() {
+    if (CurrentUser.nama.Length != 0){
+        printf("\nWah Anda sudah masuk. Keluar dulu yuk!\n\n");
+        return;
+    }
+    boolean exists = false;
+    Word inputNama, inputSandi;
+    while (!exists){
+        printf("\nMasukkan nama:\n");
+        STARTINPUT();
+        inputNama = currentSentence;
+        exists = isExists(inputNama);
+        if (!exists){
+            printf("\nWah, nama yang Anda cari tidak ada.\nMasukkan nama lain!\n");
+        }
+    }
+
+    boolean isValid = false;
+    while (!isValid){
+        printf("Masukkan kata sandi:\n");
+        STARTINPUT();
+        inputSandi = currentSentence;
+        isValid = checkPassword(inputNama, inputSandi);
+        if (!isValid) printf("\nWah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
+    }
+
+    CurrentUser = DaftarPengguna.pengguna[findIndexUser(inputNama)];
+    printf("Anda telah berhasil masuk dengan nama pengguna ");
+    printWord(inputNama);
+    printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
+    delay(10);
+}
+
+void keluar(){
+    if(!CurrentUser.nama.Length != 0){
+        printf("\nAnda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
     } else {
         CurrentUser.nama.Length = 0;
-        CurrentUser.sandi.Length = 0;
-        printf("Anda sudah keluar. Terima kasih untuk menggunakan layanan BurBir!\n");
+        printf("\nAnda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n\n");
+        Profil newProfil;
+        initProfil(&newProfil);
+        newProfil.nama.Length = 0;
+        newProfil.sandi.Length = 0;
+        CurrentUser = newProfil;
     }
+    delay(10);
 }
 
-void exitProgram(){
-    printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
+void tutupProgram(){
+    printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.\n");
     exit(0);
+}
+
+void printUser(){
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        printf("User %d:\n", i+1);
+        printWord(DaftarPengguna.pengguna[i].nama);
+        printf("\n");
+        printWord(DaftarPengguna.pengguna[i].sandi);
+        printf("\n");
+    }
+    delay(10);
 }

@@ -85,7 +85,6 @@ void load(Word NamaFile){
         printf("3...\n");
         delay(2);
         printf("Pemuatan selesai!\n");
-        loadPengguna();
-        
+        loadPengguna();   
     }
 }
