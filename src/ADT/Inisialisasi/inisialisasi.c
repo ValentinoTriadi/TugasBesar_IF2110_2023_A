@@ -54,7 +54,7 @@ void inisialisasi(){
     BIO(CurrentUser).Length = 0;
     HP(CurrentUser).Length = 0;
     WETON(CurrentUser).Length = 0;
-    JENISAKUN(CurrentUser).Length = 0;
+    JENISAKUN(CurrentUser) = publik;
     // JENISAKUN(CurrentUser) = publik;
     // createMatrixFoto(5,5, &(FOTO(CurrentUser)));
     // createMatrixWarna(5,5, &(WARNAFOTO(CurrentUser)));

@@ -5,6 +5,8 @@
 
 extern Word currentSentence;
 extern Word currentWord;
+// extern Profil CurrentUser;
+// extern userlist DaftarPengguna;
 
 boolean isDigit(char x){
     return ((int) x >= 48 && (int) x <= 57);
@@ -52,14 +54,29 @@ boolean isValidNoHP(Word no_hp)
     return true;
 }
 
-void initProfil(Profil *p)
-{
-    Word publik = {.TabWord = "publik", .Length = 6};
+void printProfil(Profil p){
+// | Nama: TuanHak
+// | Bio Akun: 
+// | No HP:
+// | Weton:
+    printf("\n | Nama: ");
+    printWord(p.nama);
+    printf("\n | Bio: ");
+    printWord(p.bio);
+    printf("\n | No HP: ");
+    printWord(p.no_hp);
+    printf("\n | Weton: ");
+    printWord(p.weton);
+    printf("\n");
+}
+
+void initProfil(Profil *p) {
     p->bio.Length = 0;
     p->no_hp.Length = 0;
     p->weton.Length = 0;
     p->jenis_akun = publik;
-    // Inisialisasi Matrix foto_profil dan warna_profil dengan default
+    createMatrixFoto(5,5,&p->foto_profil);
+    createMatrixWarna(5,5,&p->warna_profil);
 }
 
 // Fungsi untuk menyalin Word
@@ -72,134 +89,133 @@ void SalinKata(Word *dest, Word src)
     }
 }
 
-void ubahProfil(Profil *p)
-{
+void ubahProfil(Profil *p) {
+    // printProfil(CurrentUser);
+    
+    // printf("\nMasukkan Bio Akun:\n");
+    // STARTINPUT(); // membaca kata
+    // Word temp = currentSentence;
 
-    printf("Masukkan Bio Akun:\n");
-    STARTINPUT(); // membaca kata
-    Word temp = currentSentence;
+    // if (temp.Length) {
+    //     temp.Length %= 135; // Cut jadi 135 char
+    //     CurrentUser.bio = temp;
+    //     DaftarPengguna.pengguna[findIndexUser(CurrentUser.nama)].bio = temp;
+    // }
 
-    if (temp.Length)
-    {
-        SalinKata(&p->bio, temp);
-    }
+    // do {
+    //     printf("Masukkan No HP:\n");
+    //     STARTINPUT();
+    //     temp = currentSentence;
 
-    do
-    {
-        printf("Masukkan No HP:\n");
-        STARTINPUT();
-        SalinKata(&temp, currentSentence);
+    //     if (isValidNoHP(temp)){
+    //         CurrentUser.no_hp = temp;
+    //         DaftarPengguna.pengguna[findIndexUser(CurrentUser.nama)].no_hp = temp;
+    //         break;
+    //     } else if (!temp.Length){
+    //         break;
+    //     } else {
+    //         printf("No HP tidak valid. Masukkan lagi yuk!\n");
+    //     }
+    // } while (true);
 
-        if (isValidNoHP(temp) || isEqualWordStr(temp, ";"))
-        {
-            SalinKata(&p->no_hp, temp);
-            break;
-        }
-        else
-        {
-            printf("No HP tidak valid. Masukkan lagi yuk!\n");
-        }
-    } while (true);
+    // do {
+    //     printf("Masukkan Weton:\n");
+    //     STARTINPUT();
+    //     temp = currentSentence;
 
-    do
-    {
-        printf("Masukkan Weton:\n");
-        STARTINPUT();
-        SalinKata(&temp, currentSentence);
+    //     if (isValidWeton(temp)) {
+    //         CurrentUser.weton = toLowerCase(temp);
+    //         DaftarPengguna.pengguna[findIndexUser(CurrentUser.nama)].weton = toLowerCase(temp);
+    //         break;
+    //     } else if (!temp.Length) {
+    //         break;
+    //     } else {
+    //         printf("Weton Anda tidak valid.\n");
+    //     }
+    // } while (true);
 
-        if (isValidWeton(temp) || isEqualWordStr(temp, ";"))
-        {
-            SalinKata(&p->weton, temp);
-            break;
-        }
-        else
-        {
-            printf("Weton Anda tidak valid.\n");
-        }
-    } while (true);
-
-    printf("Profil Anda sudah berhasil diperbarui!\n");
+    // printf("\nProfil Anda sudah berhasil diperbarui!\n");
 }
 
 void ubahJenisAkun(Profil *p)
 {
-    Word pilihan;
-    Word publik = StrToWord("publik");
-    Word privat = StrToWord("privat");
-    Word ya = StrToWord("YA");
+    // Word pilihan;
+    // Word publik = StrToWord("publik");
+    // Word privat = StrToWord("privat");
+    // Word ya = StrToWord("YA");
 
-    printf("Saat ini, akun Anda adalah akun ");
-    for (int i = 0; i < p->jenis_akun.Length; i++)
-    {
-        printf("%c", p->jenis_akun.TabWord[i]);
-    }
-    printf(".\n");
+    // printf("Saat ini, akun Anda adalah akun ");
+    // for (int i = 0; i < p->jenis_akun.Length; i++)
+    // {
+    //     printf("%c", p->jenis_akun.TabWord[i]);
+    // }
+    // printf(".\n");
 
-    printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", isEqualWordWord(p->jenis_akun, publik) ? "Privat" : "Publik");
+    // printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", isEqualWordWord(p->jenis_akun, publik) ? "Privat" : "Publik");
 
-    STARTINPUT();
-    SalinKata(&pilihan, currentSentence);
+    // STARTINPUT();
+    // SalinKata(&pilihan, currentSentence);
 
-    if (isEqualWordWord(pilihan, ya))
-    {
-        if (isEqualWordWord(p->jenis_akun, publik))
-        {
-            SalinKata(&p->jenis_akun, privat);
-        }
-        else
-        {
-            SalinKata(&p->jenis_akun, publik);
-        }
+    // if (isEqualWordWord(pilihan, ya))
+    // {
+    //     if (isEqualWordWord(p->jenis_akun, publik))
+    //     {
+    //         SalinKata(&p->jenis_akun, privat);
+    //     }
+    //     else
+    //     {
+    //         SalinKata(&p->jenis_akun, publik);
+    //     }
 
-        printf("Akun Anda sudah diubah menjadi akun ");
-        for (int i = 0; i < p->jenis_akun.Length; i++)
-        {
-            printf("%c", p->jenis_akun.TabWord[i]);
-        }
-        printf(".\n");
-    }
+    //     printf("Akun Anda sudah diubah menjadi akun ");
+    //     for (int i = 0; i < p->jenis_akun.Length; i++)
+    //     {
+    //         printf("%c", p->jenis_akun.TabWord[i]);
+    //     }
+    //     printf(".\n");
+    // }
 }
 
 void ubahFotoProfil(Profil *p)
 {
-    printf("Masukkan foto Profil yang baru\n");
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = 0; j < 5; j++)
-        {
-            char color, symbol;
-            scanf(" %c %c", &color, &symbol);
-            p->warna_profil.mem[i][j] = color; // Mengganti .elmt dengan .Mem
-            p->foto_profil.mem[i][j] = symbol; // Mengganti .elmt dengan .Mem
-        }
-    }
-    printf("Foto Profil Anda sudah berhasil diganti!\n");
+    // printf("Masukkan foto Profil yang baru\n");
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     for (int j = 0; j < 5; j++)
+    //     {
+    //         char color, symbol;
+    //         scanf(" %c %c", &color, &symbol);
+    //         p->warna_profil.mem[i][j] = color; // Mengganti .elmt dengan .Mem
+    //         p->foto_profil.mem[i][j] = symbol; // Mengganti .elmt dengan .Mem
+    //     }
+    // }
+    // printf("Foto Profil Anda sudah berhasil diganti!\n");
 }
 
 void tampilkanFotoProfil(Profil *p)
 {
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = 0; j < 5; j++)
-        {
-            char color = p->warna_profil.mem[i][j];
-            switch (color)
-            {
-            case 'R':
-                print_red(p->foto_profil.mem[i][j]);
-                break;
-            case 'G':
-                print_green(p->foto_profil.mem[i][j]);
-                break;
-            case 'B':
-                print_blue(p->foto_profil.mem[i][j]);
-                break;
-            // Anda bisa menambahkan lebih banyak warna jika dibutuhkan
-            default:
-                printf("%c", p->foto_profil.mem[i][j]);
-                break;
-            }
-        }
-        printf("\n");
-    }
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     for (int j = 0; j < 5; j++)
+    //     {
+    //         char color = p->warna_profil.mem[i][j];
+    //         switch (color)
+    //         {
+    //         case 'R':
+    //             print_red(p->foto_profil.mem[i][j]);
+    //             break;
+    //         case 'G':
+    //             print_green(p->foto_profil.mem[i][j]);
+    //             break;
+    //         case 'B':
+    //             print_blue(p->foto_profil.mem[i][j]);
+    //             break;
+    //         // Anda bisa menambahkan lebih banyak warna jika dibutuhkan
+    //         default:
+    //             printf("%c", p->foto_profil.mem[i][j]);
+    //             break;
+    //         }
+    //     }
+    //     printf("\n");
+    // }
 }

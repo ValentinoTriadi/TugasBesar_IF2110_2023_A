@@ -24,7 +24,19 @@ void loadPengguna(){
         ADVSENTENCE();
         WETON(DaftarPengguna.pengguna[i]) = currentSentence;
         ADVSENTENCE();
-        JENISAKUN(DaftarPengguna.pengguna[i]) = currentSentence;
+        Word pub;
+        pub.Length = 6;
+        pub.TabWord[0] = 'P';
+        pub.TabWord[1] = 'u';
+        pub.TabWord[2] = 'b';
+        pub.TabWord[3] = 'l';
+        pub.TabWord[4] = 'i';
+        pub.TabWord[5] = 'k';
+        if (isEqualWordStr(currentSentence, "Publik")){
+            JENISAKUN(DaftarPengguna.pengguna[i]) = publik;
+        } else {
+            JENISAKUN(DaftarPengguna.pengguna[i]) = private;
+        }
         for (int j = 0; j<5;j++){
             ADVSENTENCE();
             for (int k = 0; k<5; k++){
