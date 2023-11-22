@@ -40,7 +40,7 @@ void displayMatrixChar(Matrix m){
     for(i=0; i<ROW_EFFMTRX(m); i++){
         for(j=0; j<COL_EFFMTRX(m); j++){
             printf("%c", ELMTMTRX(m,i,j));
-            if (j<getLastIdxCol(m)) printf(" ");
+            if (j<(COL_EFFMTRX(m)-1)) printf(" ");
         }
         printf("\n");
     }
@@ -51,7 +51,7 @@ void displayMatrixInt(Matrix m){
     for(i=0; i<ROW_EFFMTRX(m); i++){
         for(j=0; j<COL_EFFMTRX(m); j++){
             printf("%d", ELMTMTRX(m,i,j));
-            if (j<getLastIdxCol(m)) printf(" ");
+            if (j<(COL_EFFMTRX(m)-1)) printf(" ");
         }
         printf("\n");
     }

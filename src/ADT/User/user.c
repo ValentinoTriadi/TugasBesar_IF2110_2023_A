@@ -6,48 +6,28 @@ extern Profil CurrentUser;
 extern userlist DaftarPengguna;
 extern Word currentSentence;
 
-boolean isExists(Word name){\
-    boolean found = false;
-    int i = 0;
-    while(!found && i < DaftarPengguna.total){
-        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, name)) found = true;
-        i++;
+boolean isExists(Word name){
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, name)) return true;
     }
-    return found;
+    return false;
 }
 
 boolean checkPassword (Word nama, Word pass){
-    boolean found = false;
-    int i = 0;
-    while(!found && i < DaftarPengguna.total){
-        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)){
-            found = true;
-        } 
-        i++;
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)) {
+            return (isEqualWordWord(DaftarPengguna.pengguna[i].sandi, pass));
+        }
     }
-    if(found==true){
-        return isEqualWordWord(DaftarPengguna.pengguna[i-1].sandi, pass);
-    }
-
-    return found;
+    return false;
 }
 
 int findIndexUser(Word nama){
-    boolean found = false;
-    int i = 0;
-    while(!found && i < DaftarPengguna.total){
-        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)){
-            found = true;
-            
-        } 
-        i++;
+    for (int i = 0; i < DaftarPengguna.total; i++){
+        if (isEqualWordWord(DaftarPengguna.pengguna[i].nama, nama)) {
+            return i;
+        }
     }
-    if (found==true){
-        return i;
-    } else {
-        return 9999;
-    }
-    
 }
 
 void daftar(){
