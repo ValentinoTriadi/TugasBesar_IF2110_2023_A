@@ -1,4 +1,5 @@
 #include "perintah.h"
+#include "../Database/db.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -53,15 +54,15 @@ void bacaPerintah(Word* cmd){
     }
     if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
         printf("%s\n",cmd[0].TabWord);
-        // daftarTeman();
+        daftarTeman(DataTeman, CurrentUser.nama);
     }
     if (isEqualWordStr(cmd[0], "HAPUS_TEMAN")){
         printf("%s\n",cmd[0].TabWord);
-        // hapusTeman();
+        hapusTeman(&DataTeman, CurrentUser.nama);
     }
     if (isEqualWordStr(cmd[0], "TAMBAH_TEMAN")){
         printf("%s\n",cmd[0].TabWord);
-        // tambahTeman();
+        sentReq(CurrentUser.nama, &DataTeman);
     }
     if (isEqualWordStr(cmd[0], "BATAL_TAMBAH_TEMAN")){
         printf("%s\n",cmd[0].TabWord);
@@ -69,11 +70,11 @@ void bacaPerintah(Word* cmd){
     }
     if (isEqualWordStr(cmd[0], "DAFTAR_PERMINTAAN_PERTEMANAN")){
         printf("%s\n",cmd[0].TabWord);
-        // daftarPermintaanTeman();
+        printRequest(DataTeman.dataTeman.vertex[0].friendReq, CurrentUser.nama);
     }
     if (isEqualWordStr(cmd[0], "SETUJUI_PERMINTAAN")){
         printf("%s\n",cmd[0].TabWord);
-        // setujuiPermintaan();
+        acceptRequest(&DataTeman, CurrentUser.nama);
     }
     if (isEqualWordStr(cmd[0], "KICAU")){
         printf("%s\n",cmd[0].TabWord);

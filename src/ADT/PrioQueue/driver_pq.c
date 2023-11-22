@@ -13,7 +13,7 @@ int main() {
     Word friend1 = {"ujang", 5};
     Word friend2 = {"marcelo", 7};
     Word friend3 = {"joko", 4};
-    Word friend4 = {"zaki", 4};
+    Word friend4 = {"Kil", 3};
     PrioQueueReq Q;
     MakeEmptyPrio(&Q, 5);
 
@@ -57,7 +57,7 @@ int main() {
                 printf("Friends added.\n");
                 break;
             case 2:
-                printf("Removing friends from the priority queue...\n");
+                printf("Removing friends from the priority queue\n");
                 if (!IsEmptyPrio(Q)) {
                     DequeuePrio(&Q, &removedFriend);
                     PrintPrioQueueTeman(Q);
@@ -78,7 +78,7 @@ int main() {
         }
     } while (choice != 4);
 
-    // Deallocate memory for the priority queue before exiting
+
     DeAlokasiPrio(&Q);
 
     return 0;

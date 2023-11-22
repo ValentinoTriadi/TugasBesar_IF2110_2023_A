@@ -1,8 +1,10 @@
 #include "teman.h"
+#include "../Database/db.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 extern Word currentWord;
+extern Teman DataTeman;
 
 void createTeman(Teman *teman)
 {
@@ -112,7 +114,9 @@ void hapusTeman(Teman *teman,Word currentUser)
     }
     else
     {
-        printf("%s bukan teman Anda.\n", userToDelete.TabWord);
+        //printf("%s bukan teman Anda.\n", userToDelete.TabWord);
+        printWord(userToDelete);
+        printf("bukan teman Anda.\n");
     }
 }
 
@@ -358,4 +362,15 @@ void acceptRequest(Teman *teman, Word currentUser)
         //update matrix
         shiftMatrix(&teman->saveReq);
     }
+}
+
+boolean isFollowing(int idCurrent, int idCheck)
+{
+    if (Edge(DataTeman.dataTeman, idCurrent, idCheck) == 0)
+        {
+            return false;
+        }
+        else{
+            return true;
+        }
 }

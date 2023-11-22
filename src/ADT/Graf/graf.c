@@ -90,11 +90,20 @@ void removeEdge(Graf *graph, Word vertex1, Word vertex2)
         {
             Edge(*graph, index1, index2) = 0;
             Edge(*graph, index2, index1) = 0;
-            printf("%s dan %s tidak lagi berteman.\n", vertex1.TabWord, vertex2.TabWord);
+
+            //printf("%s dan %s tidak lagi berteman.\n", vertex1.TabWord, vertex2.TabWord);
+            printWord(vertex1);
+            printf(" dan ");
+            printWord(vertex2);
+            printf(" tidak lagi berteman.\n");
         }
         else
         {
-            printf("%s dan %s tidak sedang berteman.\n", vertex1.TabWord, vertex2.TabWord);
+            //printf("%s dan %s tidak sedang berteman.\n", vertex1.TabWord, vertex2.TabWord);
+            printWord(vertex1);
+            printf(" dan ");
+            printWord(vertex2);
+            printf(" tidak sedang berteman.\n");
         }
     }
     else
