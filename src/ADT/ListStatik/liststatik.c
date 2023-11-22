@@ -16,7 +16,7 @@ void CreateListStatik(ListStatik *l){
     int i;
     for (i = IDX_MIN; i < CAPACITY; i++)
     {
-        ELMT(*l, i) = MARKLISTSTATIK;
+        ELMTLISTSTATIK(*l, i) = MARKLISTSTATIK;
     }
 }
 
@@ -27,7 +27,7 @@ int listStatikLength(ListStatik l){
     /* Mengirimkan nol jika List kosong */
     int i = 0;
 
-    while ((i < CAPACITY) && (ELMT(l, i) != MARKLISTSTATIK))
+    while ((i < CAPACITY) && (ELMTLISTSTATIK(l, i) != MARKLISTSTATIK))
     {
         i++;
     }
@@ -91,7 +91,7 @@ void readListStatik(ListStatik *l){
     /*    Jika n = 0; hanya terbentuk List kosong */
     int n, i;
     boolean valid = false;
-    ElTypeLISTSTATIK elmt;
+    ElTypeLISTSTATIK ELMTLISTSTATIK;
     /*ALGORITMA*/
     while (valid != true){
         scanf("%d", &n);
@@ -104,8 +104,8 @@ void readListStatik(ListStatik *l){
 
     CreateListStatik(l);
     for (i = 0; i < n ; i++){
-        scanf("%d", &elmt);
-        ELMT(*l, i) = elmt;
+        scanf("%d", &ELMTLISTSTATIK);
+        ELMTLISTSTATIK(*l, i) = ELMTLISTSTATIK;
     }
 }
 
@@ -121,7 +121,7 @@ void printListStatik(ListStatik l){
     printf("[");
     for (i = 0; i < listStatikLength(l); i++)
     {
-        printf("%d", ELMT(l, i));
+        printf("%d", ELMTLISTSTATIK(l, i));
         if (i != listStatikLength(l) - 1)
         {
             printf(",");
@@ -143,10 +143,10 @@ ListStatik plusMinusListStatik(ListStatik l1, ListStatik l2, boolean plus){
     CreateListStatik(&l3);
     for (i = 0; i < listStatikLength(l1); i++){
         if (plus == true){
-            ELMT(l3, i) = ELMT(l1, i) + ELMT(l2, i);
+            ELMTLISTSTATIK(l3, i) = ELMTLISTSTATIK(l1, i) + ELMTLISTSTATIK(l2, i);
         }
         else{
-            ELMT(l3, i) = ELMT(l1, i) - ELMT(l2, i);
+            ELMTLISTSTATIK(l3, i) = ELMTLISTSTATIK(l1, i) - ELMTLISTSTATIK(l2, i);
         }
     }
     return l3;
@@ -163,7 +163,7 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2){
     /*ALGORITMA*/
     if (listStatikLength(l1) == listStatikLength(l2)){
         for (i = 0; i < listStatikLength(l1) ; i++){
-            if (ELMT(l1, i) != ELMT(l2, i)){
+            if (ELMTLISTSTATIK(l1, i) != ELMTLISTSTATIK(l2, i)){
                 eq = false;
             }
         }
@@ -178,7 +178,7 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2){
 // /* ***  Perhatian : List boleh kosong!! *** */
 // int indexOfLISTSTATIK(ListStatik l, ElTypeLISTSTATIK val){
 //     /* Search apakah ada elemen List l yang bernilai val */
-//     /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
+//     /* Jika ada, menghasilkan indeks i terkecil, dengan ELMTLISTSTATIK(l,i) = val */
 //     /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 //     /* Skema Searching yang digunakan bebas */
 //     /*KAMUS LOKAL*/
@@ -186,7 +186,7 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2){
 //     boolean found = false;
 //     while ((i < CAPACITY) && (found != true))
 //     {
-//         if (ELMT(l, i) == val){
+//         if (ELMTLISTSTATIK(l, i) == val){
 //             found = true;
 //         }
 //         else{
@@ -210,14 +210,14 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2){
 //     //  ElTypeLISTSTATIK maxval, minval;
 //     // int i;
 //     /*ALGORITMA*/
-//     // emax = ELMT(l, 0);
-//     // emin = ELMT(l, 0);
+//     // emax = ELMTLISTSTATIK(l, 0);
+//     // emin = ELMTLISTSTATIK(l, 0);
 //     // for (i = 0; i < listStatikLength(l); i++){
-//     //     if (ELMT(l, i) > emax){
-//     //         maxval = ELMT(l, i);
+//     //     if (ELMTLISTSTATIK(l, i) > emax){
+//     //         maxval = ELMTLISTSTATIK(l, i);
 //     //     }
-//     //     if (ELMT(l, i) < emin){
-//     //         minval = ELMT(l, i);
+//     //     if (ELMTLISTSTATIK(l, i) < emin){
+//     //         minval = ELMTLISTSTATIK(l, i);
 //     //     }
 //     // }
 //     // *max = emax;
@@ -225,14 +225,14 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2){
 //     // ElTypeLISTSTATIK maxval, minval;
 //     int i;
 //     /*ALGORITMA*/
-//     *max = ELMT(l, 0);
-//     *min = ELMT(l, 0);
+//     *max = ELMTLISTSTATIK(l, 0);
+//     *min = ELMTLISTSTATIK(l, 0);
 //     for (i = 0; i < listStatikLength(l); i++){
-//         if (ELMT(l, i) > *max){
-//             *max = ELMT(l, i);
+//         if (ELMTLISTSTATIK(l, i) > *max){
+//             *max = ELMTLISTSTATIK(l, i);
 //         }
-//         if (ELMT(l, i) < *min){
-//             *min = ELMT(l, i);
+//         if (ELMTLISTSTATIK(l, i) < *min){
+//             *min = ELMTLISTSTATIK(l, i);
 //         }
 //     }
 // }
@@ -246,9 +246,9 @@ void insertFirstLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val){
     int i;
     if (isFullLISTSTATIK(*l) != true){
         for (i = listStatikLength(*l); i > 0; i--){
-            ELMT(*l, i) = ELMT(*l, i - 1);
+            ELMTLISTSTATIK(*l, i) = ELMTLISTSTATIK(*l, i - 1);
         }
-        ELMT(*l, 0) = val;
+        ELMTLISTSTATIK(*l, 0) = val;
     }
 }
 /* *** Menambahkan elemen pada index tertentu *** */
@@ -261,9 +261,9 @@ void insertAtLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val, IdxType idx){
     {
         for (i = listStatikLength(*l); i > idx; i--)
         {
-            ELMT(*l, i) = ELMT(*l, i - 1);
+            ELMTLISTSTATIK(*l, i) = ELMTLISTSTATIK(*l, i - 1);
         }
-        ELMT(*l, idx) = val;
+        ELMTLISTSTATIK(*l, idx) = val;
     }
 }
 /* *** Menambahkan elemen terakhir *** */
@@ -272,7 +272,7 @@ void insertLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK val){
     /* I.S. List l boleh kosong, tetapi tidak penuh */
     /* F.S. val adalah elemen terakhir l yang baru */
     if (isFullLISTSTATIK(*l) != true){
-        ELMT(*l, listStatikLength(*l)) = val;
+        ELMTLISTSTATIK(*l, listStatikLength(*l)) = val;
     }
 }
 
@@ -286,12 +286,12 @@ void deleteFirstLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val){
     /*      List l mungkin menjadi kosong */
     int i;
     if (isEmptyLISTSTATIK(*l) != true){
-        *val = ELMT(*l, getFirstIdxLISTSTATIK(*l));
+        *val = ELMTLISTSTATIK(*l, getFirstIdxLISTSTATIK(*l));
 
         for (i = 0; i < getLastIdxLISTSTATIK(*l); i++){
-            ELMT(*l, i) = ELMT(*l, i + 1);
+            ELMTLISTSTATIK(*l, i) = ELMTLISTSTATIK(*l, i + 1);
         }
-        ELMT(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
+        ELMTLISTSTATIK(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
     }
 }
 /* *** Menghapus elemen pada index tertentu *** */
@@ -304,12 +304,12 @@ void deleteAtLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val, IdxType idx){
 
     int i;
     if (isEmptyLISTSTATIK(*l) != true){
-        *val = ELMT(*l, idx);
+        *val = ELMTLISTSTATIK(*l, idx);
 
         for (i = idx; i < getLastIdxLISTSTATIK(*l); i++){
-            ELMT(*l, i) = ELMT(*l, i + 1);
+            ELMTLISTSTATIK(*l, i) = ELMTLISTSTATIK(*l, i + 1);
         }
-        ELMT(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
+        ELMTLISTSTATIK(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
     }
 }
 /* *** Menghapus elemen terakhir *** */
@@ -322,9 +322,22 @@ void deleteLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val){
     /*KAMUS LOKAL*/
     /*ALGORITMA*/
     if (isEmptyLISTSTATIK(*l) != true){
-        *val = ELMT(*l, getLastIdxLISTSTATIK(*l));
-        ELMT(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
+        *val = ELMTLISTSTATIK(*l, getLastIdxLISTSTATIK(*l));
+        ELMTLISTSTATIK(*l, getLastIdxLISTSTATIK(*l)) = MARKLISTSTATIK;
     }
+}
+
+ListStatik concat_ListStatik(ListStatik l1, ListStatik l2){
+    ListStatik l3;
+    int i;
+    CreateListStatik(&l3);
+    for (i = 0; i < listLength_ListStatik(l1); i++){
+        insertLast_ListStatik(&l3, ELMTLISTSTATIK(l1, i));
+    }
+    for (i = 0; i < listLength_ListStatik(l2); i++){
+        insertLast_ListStatik(&l3, ELMTLISTSTATIK(l2, i));
+    }
+    return l3;
 }
 
 /* ********** SORTING ********** */
@@ -342,35 +355,35 @@ void deleteLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val){
 //     /*ALGORITMA*/
 //     if (asc == true){
 //         for (i = 1; i < listStatikLength(*l); i++){
-//             temp = ELMT(*l, i);
+//             temp = ELMTLISTSTATIK(*l, i);
 //             idx = i - 1;
-//             while ((temp < ELMT(*l, idx)) && (idx > 0)){
-//                 ELMT(*l, idx + 1) = ELMT(*l, idx);
+//             while ((temp < ELMTLISTSTATIK(*l, idx)) && (idx > 0)){
+//                 ELMTLISTSTATIK(*l, idx + 1) = ELMTLISTSTATIK(*l, idx);
 //                 idx--;
 //             }
-//             if (temp >= ELMT(*l, idx)){
-//                 ELMT(*l, idx + 1) = temp;
+//             if (temp >= ELMTLISTSTATIK(*l, idx)){
+//                 ELMTLISTSTATIK(*l, idx + 1) = temp;
 //             }
 //             else{
-//                 ELMT(*l, idx + 1) = ELMT(*l, idx);
-//                 ELMT(*l, idx) = temp;
+//                 ELMTLISTSTATIK(*l, idx + 1) = ELMTLISTSTATIK(*l, idx);
+//                 ELMTLISTSTATIK(*l, idx) = temp;
 //             }
 //         }
 //     }
 //     else{
 //         for (i = 1; i < listStatikLength(*l); i++){
-//             temp = ELMT(*l, i);
+//             temp = ELMTLISTSTATIK(*l, i);
 //             idx = i - 1;
-//             while ((temp > ELMT(*l, idx)) && (idx > 0)){
-//                 ELMT(*l, idx + 1) = ELMT(*l, idx);
+//             while ((temp > ELMTLISTSTATIK(*l, idx)) && (idx > 0)){
+//                 ELMTLISTSTATIK(*l, idx + 1) = ELMTLISTSTATIK(*l, idx);
 //                 idx--;
 //             }
-//             if (temp <= ELMT(*l, idx)){
-//                 ELMT(*l, idx + 1) = temp;
+//             if (temp <= ELMTLISTSTATIK(*l, idx)){
+//                 ELMTLISTSTATIK(*l, idx + 1) = temp;
 //             }
 //             else{
-//                 ELMT(*l, idx + 1) = ELMT(*l, idx);
-//                 ELMT(*l, idx) = temp;
+//                 ELMTLISTSTATIK(*l, idx + 1) = ELMTLISTSTATIK(*l, idx);
+//                 ELMTLISTSTATIK(*l, idx) = temp;
 //             }
 //         }
 //     }

@@ -19,7 +19,7 @@ void daftarTeman(Graf graph, Word currentUser)
     // check index dari currentuser
     for (i = 0; i < NeffGraf(graph); i++)
     {
-        if (isEqualWord(Vertex(graph, i).nama, currentUser))
+        if (isEqualWordWord(Vertex(graph, i).nama, currentUser))
         {
             index = i;
             break;
@@ -67,7 +67,7 @@ void hapusTeman(Graf *graph, Word currentUser)
     // check index dari currentuser
     for (i = 0; i < NeffGraf(*graph); i++)
     {
-        if (isEqualWord(Vertex(*graph, i).nama, currentUser))
+        if (isEqualWordWord(Vertex(*graph, i).nama, currentUser))
         {
             currentUserIndex = i;
             break;
@@ -78,7 +78,7 @@ void hapusTeman(Graf *graph, Word currentUser)
     {
         for (int i = 0; i < NeffGraf(*graph); i++)
         {
-            if (Edge(*graph, currentUserIndex, i) == 1 && isEqualWord(Vertex(*graph, i).nama, userToDelete))
+            if (Edge(*graph, currentUserIndex, i) == 1 && isEqualWordWord(Vertex(*graph, i).nama, userToDelete))
             {
                 idxToDelete = i;
                 break;
@@ -93,7 +93,7 @@ void hapusTeman(Graf *graph, Word currentUser)
         ADVWORD();
 
         Word Ya = {"YA", 2};
-        if (isEqualWord(currentWord, Ya))
+        if (isEqualWordWord(currentWord, Ya))
         {
             removeEdge(graph, currentUser, userToDelete);
         }
@@ -125,7 +125,7 @@ void sentReq(Word currentUser, Teman *teman)
     // check index dari currentuser
     for (i = 0; i < NeffGraf(teman->dataTeman); i++)
     {
-        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
+        if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentUser))
         {
             currentUserIndex = i;
             break;
@@ -138,7 +138,7 @@ void sentReq(Word currentUser, Teman *teman)
         // check index dari currentWord (teman yang akan ditambah)
         for (i = 0; i < NeffGraf(teman->dataTeman); i++)
         {
-            if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentWord))
+            if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentWord))
             {
                 newFriendIdx = i;
                 break;
@@ -177,7 +177,7 @@ void sentReq(Word currentUser, Teman *teman)
                 infotype newFriend;
                 newFriend.jumlahTeman = countEdges(&teman->dataTeman, currentWord);
                 newFriend.nama.Length = currentWord.Length;
-                SalinWord(currentWord, &newFriend.nama);
+                newFriend.nama = currentWord;
 
                 EnqueuePrio(&Vertex(teman->dataTeman, newFriendIdx).friendReq, newFriend);
 
@@ -222,7 +222,7 @@ void tambahTeman(Teman *teman, Word currentUser)
     // check index dari currentuser
     for (i = 0; i < NeffGraf(teman->dataTeman); i++)
     {
-        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
+        if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentUser))
         {
             idx = i;
             break;
@@ -275,7 +275,7 @@ void acceptRequest(Teman *teman, Word currentUser)
     // check index dari currentuser
     for (i = 0; i < NeffGraf(teman->dataTeman); i++)
     {
-        if (isEqualWord(Vertex(teman->dataTeman, i).nama, currentUser))
+        if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentUser))
         {
             idx = i;
             break;
@@ -291,7 +291,7 @@ void acceptRequest(Teman *teman, Word currentUser)
         STARTWORD();
 
         Word Ya = {"YA", 2};
-        if (isEqualWord(currentWord, Ya))
+        if (isEqualWordWord(currentWord, Ya))
         {
             DequeuePrio(&teman->dataTeman.vertex[idx].friendReq, &temp);
             addEdge(&teman->dataTeman, currentUser, temp.nama);

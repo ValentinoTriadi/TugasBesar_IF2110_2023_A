@@ -1,10 +1,14 @@
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+// #include <string.h>
+// #include <ctype.h>
 #include "profil.h"
 
-#define DEFAULT_COLOR 'R'
-#define DEFAULT_SYMBOL '*'
+extern Word currentSentence;
+extern Word currentWord;
+
+boolean isDigit(char x){
+    return ((int) x >= 48 && (int) x <= 57);
+}
 
 boolean strEqualsIgnoreCase(Word w1, Word w2)
 {
@@ -42,24 +46,24 @@ boolean isValidNoHP(Word no_hp)
 {
     for (int i = 0; i < no_hp.Length; i++)
     {
-        if (!isdigit(no_hp.TabWord[i]))
+        if (!isDigit(no_hp.TabWord[i]))
             return false;
     }
     return true;
 }
 
-void initProfil(Profil *profil)
+void initProfil(Profil *p)
 {
     Word publik = {.TabWord = "publik", .Length = 6};
-    profil->bio.Length = 0;
-    profil->no_hp.Length = 0;
-    profil->weton.Length = 0;
-    profil->jenis_akun = publik;
+    p->bio.Length = 0;
+    p->no_hp.Length = 0;
+    p->weton.Length = 0;
+    p->jenis_akun = publik;
     // Inisialisasi Matrix foto_profil dan warna_profil dengan default
 }
 
 // Fungsi untuk menyalin Word
-void CopyWord(Word *dest, Word src)
+void SalinKata(Word *dest, Word src)
 {
     dest->Length = src.Length;
     for (int i = 0; i < src.Length; i++)
@@ -68,28 +72,27 @@ void CopyWord(Word *dest, Word src)
     }
 }
 
-void ubahProfil(Profil *profil)
+void ubahProfil(Profil *p)
 {
-    Word temp;
 
     printf("Masukkan Bio Akun:\n");
-    STARTWORD(); // membaca kata
-    CopyWord(&temp, currentWord);
+    STARTINPUT(); // membaca kata
+    Word temp = currentSentence;
 
-    if (!isEqualWord(temp, MakeWord(";")))
+    if (temp.Length)
     {
-        CopyWord(&profil->bio, temp);
+        SalinKata(&p->bio, temp);
     }
 
     do
     {
         printf("Masukkan No HP:\n");
-        STARTWORD();
-        CopyWord(&temp, currentWord);
+        STARTINPUT();
+        SalinKata(&temp, currentSentence);
 
-        if (isValidNoHP(temp) || isEqualWord(temp, MakeWord(";")))
+        if (isValidNoHP(temp) || isEqualWordStr(temp, ";"))
         {
-            CopyWord(&profil->no_hp, temp);
+            SalinKata(&p->no_hp, temp);
             break;
         }
         else
@@ -101,12 +104,12 @@ void ubahProfil(Profil *profil)
     do
     {
         printf("Masukkan Weton:\n");
-        STARTWORD();
-        CopyWord(&temp, currentWord);
+        STARTINPUT();
+        SalinKata(&temp, currentSentence);
 
-        if (isValidWeton(temp) || isEqualWord(temp, MakeWord(";")))
+        if (isValidWeton(temp) || isEqualWordStr(temp, ";"))
         {
-            CopyWord(&profil->weton, temp);
+            SalinKata(&p->weton, temp);
             break;
         }
         else
@@ -118,7 +121,7 @@ void ubahProfil(Profil *profil)
     printf("Profil Anda sudah berhasil diperbarui!\n");
 }
 
-void ubahJenisAkun(Profil *profil)
+void ubahJenisAkun(Profil *p)
 {
     Word pilihan;
     Word publik = StrToWord("publik");
@@ -126,98 +129,78 @@ void ubahJenisAkun(Profil *profil)
     Word ya = StrToWord("YA");
 
     printf("Saat ini, akun Anda adalah akun ");
-    for (int i = 0; i < profil->jenis_akun.Length; i++)
+    for (int i = 0; i < p->jenis_akun.Length; i++)
     {
-        printf("%c", profil->jenis_akun.TabWord[i]);
+        printf("%c", p->jenis_akun.TabWord[i]);
     }
     printf(".\n");
 
-    printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", isEqualWord(profil->jenis_akun, publik) ? "Privat" : "Publik");
+    printf("Ingin mengubah ke akun %s? (YA/TIDAK) ", isEqualWordWord(p->jenis_akun, publik) ? "Privat" : "Publik");
 
-    STARTWORD();
-    CopyWord(&pilihan, currentWord);
+    STARTINPUT();
+    SalinKata(&pilihan, currentSentence);
 
-    if (isEqualWord(pilihan, ya))
+    if (isEqualWordWord(pilihan, ya))
     {
-        if (isEqualWord(profil->jenis_akun, publik))
+        if (isEqualWordWord(p->jenis_akun, publik))
         {
-            CopyWord(&profil->jenis_akun, privat);
+            SalinKata(&p->jenis_akun, privat);
         }
         else
         {
-            CopyWord(&profil->jenis_akun, publik);
+            SalinKata(&p->jenis_akun, publik);
         }
 
         printf("Akun Anda sudah diubah menjadi akun ");
-        for (int i = 0; i < profil->jenis_akun.Length; i++)
+        for (int i = 0; i < p->jenis_akun.Length; i++)
         {
-            printf("%c", profil->jenis_akun.TabWord[i]);
+            printf("%c", p->jenis_akun.TabWord[i]);
         }
         printf(".\n");
     }
 }
 
-void ubahFotoProfil(Profil *profil)
+void ubahFotoProfil(Profil *p)
 {
-    printf("Masukkan foto profil yang baru\n");
-
+    printf("Masukkan foto Profil yang baru\n");
     for (int i = 0; i < 5; i++)
     {
         STARTWORD();
         for (int j = 0; j < 5; j++)
         {
-
-            char color = currentWord.TabWord[0];
-            ADVWORD();
-
-            char symbol = currentWord.TabWord[0];
-            ADVWORD();
-
-            profil->warna_profil.mem[i][j] = color;
-            profil->foto_profil.mem[i][j] = symbol;
+            char color, symbol;
+            scanf(" %c %c", &color, &symbol);
+            p->warna_profil.mem[i][j] = color; // Mengganti .elmt dengan .Mem
+            p->foto_profil.mem[i][j] = symbol; // Mengganti .elmt dengan .Mem
         }
     }
-
-    printf("Foto profil Anda sudah berhasil diganti!\n");
+    printf("Foto Profil Anda sudah berhasil diganti!\n");
 }
 
-void tampilkanFotoProfil(const Profil *profil)
+void tampilkanFotoProfil(Profil *p)
 {
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
         {
-            char color = profil->warna_profil.mem[i][j];
+            char color = p->warna_profil.mem[i][j];
             switch (color)
             {
             case 'R':
-                print_red(profil->foto_profil.mem[i][j]);
+                print_red(p->foto_profil.mem[i][j]);
                 break;
             case 'G':
-                print_green(profil->foto_profil.mem[i][j]);
+                print_green(p->foto_profil.mem[i][j]);
                 break;
             case 'B':
-                print_blue(profil->foto_profil.mem[i][j]);
+                print_blue(p->foto_profil.mem[i][j]);
                 break;
             // Anda bisa menambahkan lebih banyak warna jika dibutuhkan
             default:
-                printf("%c", profil->foto_profil.mem[i][j]);
+                printf("%c", p->foto_profil.mem[i][j]);
                 break;
             }
         }
         printf("\n");
     }
-}
-
-int main()
-{
-    Profil user;
-    initProfil(&user);
-
-    ubahProfil(&user);
-    ubahJenisAkun(&user);
-    ubahFotoProfil(&user);
-    tampilkanFotoProfil(&user);
-
-    return 0;
 }

@@ -17,6 +17,11 @@ void IgnoreNL(){
         ADV();
     }
 }
+void Ignore1NL(){
+    if (currentChar == NEWLINE){
+        ADV();
+    }
+}
 void STARTWORD(){
     START();
     IgnoreBlanks();
@@ -61,7 +66,7 @@ void READFILE(char* filename){
 }
 void STARTSENTENCE(){
     START();
-    IgnoreNL();
+    Ignore1NL();
     if (currentChar == MARKFILE){
         EndSentence = true;
     } else {
@@ -70,17 +75,17 @@ void STARTSENTENCE(){
     }
 }
 void ADVSENTENCE(){
-    IgnoreNL();
+    Ignore1NL();
     if(currentChar == MARKFILE){
         EndSentence = true;
     } else{
         CopySentence();
-        IgnoreNL();
+        Ignore1NL();
     }
 }
 void CopySentence(){
     currentSentence.Length = 0;
-    while (currentChar != MARKLINE && currentChar != MARKFILE){
+    while (currentChar != MARKLINE && (currentChar != MARKFILE && currentChar != MARK)){
         if (currentSentence.Length < NMax){
             currentSentence.TabWord[currentSentence.Length] = currentChar;
             currentSentence.Length++;
@@ -200,7 +205,6 @@ void printWord(Word s){
     for(int i = 0; i < s.Length; i++){
         printf("%c", HURUF(s,i));
     }
-    printf("\n");
 }
 
 int Strlen(char * ss){

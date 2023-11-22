@@ -5,6 +5,7 @@
 extern Word currentWord;
 extern Word currentSentence;
 extern boolean EndWord;
+extern boolean EndSentence;
 boolean endProgram;
 
 int main(){
@@ -45,9 +46,7 @@ int main(){
         if (!endProgram){
             filename = "./ADT/Inisialisasi/img1.txt";
             system("cls || clear");
-            print_image(filename);
         }
-
     }
 
     return 0;

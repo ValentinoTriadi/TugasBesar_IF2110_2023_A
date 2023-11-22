@@ -1,16 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "inisialisasi.h"
 
 extern Word currentWord;
 extern Word currentSentence;
+extern Profil CurrentUser;
+extern userlist DaftarPengguna;
+extern ListKicau DaftarKicau;
+extern Teman DataTeman;
 
-void delay(int number_of_half_seconds){
-    int milli_seconds = 500 * number_of_half_seconds;
-    clock_t start_time = clock();
-    while (clock() < start_time + milli_seconds);
-}
 
 void print_image(char* filename){
     system("cls || clear");
@@ -50,8 +48,18 @@ void inisialisasi(){
         // }
         delay(1);
     }
+    NAMA(CurrentUser).Length = 0;
+    SANDI(CurrentUser).Length = 0;
+    BIO(CurrentUser).Length = 0;
+    HP(CurrentUser).Length = 0;
+    WETON(CurrentUser).Length = 0;
+    JENISAKUN(CurrentUser).Length = 0;
+    createMatrix(5,5, &(FOTO(CurrentUser)));
+    createMatrix(5,5, &(WARNAFOTO(CurrentUser)));
+
+
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);
     STARTINPUT();
-    // load(currentWord);
-    printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
+    load(currentSentence);
+    // printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }

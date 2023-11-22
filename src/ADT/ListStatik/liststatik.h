@@ -10,12 +10,12 @@
 
 /*  Kamus Umum */
 #define CAPACITY 100
-/* Kapasitas penyimpanan */
 #define IDX_MIN 0
+#define MARKLISTSTATIK -9999
+/* Kapasitas penyimpanan */
 /* Indeks minimum list */
 // #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
-#define MARKLISTSTATIK -9999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
@@ -28,13 +28,13 @@ typedef struct {
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
 /* Deklarasi : l : ListStatik */
 /* Maka cara akses: 
-   ELMT(l,i) untuk mengakses elemen ke-i */
+   ELMTLISTSTATIK(l,i) untuk mengakses elemen ke-i */
 /* Definisi : 
    List kosong: semua elemen bernilai MARKLISTSTATIK
-   Definisi elemen pertama: ELMT(l,i) dengan i=0 */
+   Definisi elemen pertama: ELMTLISTSTATIK(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).contents[(i)]
+#define ELMTLISTSTATIK(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
@@ -113,7 +113,7 @@ boolean isListStatikEqual(ListStatik l1, ListStatik l2);
 // /* ***  Perhatian : List boleh kosong!! *** */
 // int indexOfLISTSTATIK(ListStatik l, ElTypeLISTSTATIK val){
 //     /* Search apakah ada elemen List l yang bernilai val */
-//     /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
+//     /* Jika ada, menghasilkan indeks i terkecil, dengan ELMTLISTSTATIK(l,i) = val */
 //     /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 //     /* Skema Searching yang digunakan bebas */
 
@@ -171,5 +171,5 @@ void deleteLastLISTSTATIK(ListStatik *l, ElTypeLISTSTATIK *val);
 /*      Jika asc = false, l terurut mengecil */
 /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
    algoritma bebas */
-
+ListStatik concat_ListStatik(ListStatik l1, ListStatik l2);
 #endif

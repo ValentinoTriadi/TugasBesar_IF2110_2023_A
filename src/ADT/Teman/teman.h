@@ -1,7 +1,11 @@
+#ifndef TEMAN_H
+#define TEMAN_H
+
 #include "../PrioQueue/prioqueueReq.h"
 #include "../Graf/graf.h"
 #include "../Matrix/matrix.h"
 #include "../Mesin-Kata/wordmachine.h"
+// #include "../Database/db.h"
 
 
 typedef struct Teman
@@ -25,3 +29,5 @@ void printReqMatrix(Matrix saveReq);
 void printRequest(PrioQueueReq Q, Word currentUser);
 
 void acceptRequest(Teman *teman,Word currentUser);
+
+#endif

@@ -1,6 +1,13 @@
 #include "adttime.h"
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
+
+void delay(int number_of_half_seconds){
+    int milli_seconds = 500 * number_of_half_seconds;
+    clock_t start_time = clock();
+    while (clock() < start_time + milli_seconds);
+}
 
 boolean IsTIMEValid (int H, int M, int S){
     return ((H >= 0 && H<=23) && (M>=0 && M<= 59) && (S>=0 && S<= 59));
