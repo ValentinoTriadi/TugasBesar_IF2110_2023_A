@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include "muat.h"
+#include "../Database/db.h"
 
-extern boolean EndSentence;
-extern Word currentSentence;
-extern Profil CurrentUser;
-extern userlist DaftarPengguna;
-extern ListKicau DaftarKicau;
-extern Teman DataTeman;
 
 void loadPengguna(){
     READFILE("pengguna.config");
@@ -59,7 +54,7 @@ void loadPengguna(){
 }
 
 void muat(){
-    if (NAMA(CurrentUser).Length != 0){
+    if (CurrentUser != 0){
         printf("Anda harus keluar terlebih dahulu untuk melakukan pemuatan.\n");
     } else {
         printf("Masukkan nama folder yang hendak dimuat: ");

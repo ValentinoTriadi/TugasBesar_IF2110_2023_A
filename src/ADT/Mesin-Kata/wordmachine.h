@@ -6,7 +6,6 @@
 
 #include "../Mesin-Char/charmachine.h"
 
-
 #define NMax 4999
 #define BLANK ' '
 #define NEWLINE '\n'
@@ -18,11 +17,12 @@ typedef struct
    int Length;
 } Word;
 
-/* State Mesin Word */
-extern boolean EndWord;
-extern boolean EndSentence;
-extern Word currentWord;
 extern Word currentSentence;
+extern Word currentWord;
+extern boolean EndWord;
+
+/* State Mesin Word */
+
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK

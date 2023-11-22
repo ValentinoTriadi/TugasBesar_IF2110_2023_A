@@ -4,7 +4,7 @@
 #include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
 #include "../Time/datetime.h"
-#include "../Profil/profil.h"
+// #include "../Profil/profil.h" 
 #include "tree.h"
 
 typedef struct {
@@ -22,3 +22,5 @@ void ShowReplies(Tree tweetReplies, int tweetId);
 void DeleteReply(Tree *tweetReplies, int replyId);
 void PrintReply(Balasan reply);
 void CascadeDelete(Tree *tweetReplies, int parentId);
+
+#endif

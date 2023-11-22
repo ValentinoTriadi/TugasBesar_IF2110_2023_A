@@ -1,12 +1,9 @@
 /* File: tweet.c */
 #include "tweet.h"
-#include "../Database/db.h"
 #include <stdio.h>
 #include <string.h>
+#include "../Database/db.h"
 
-extern Profil CurrentUser;
-extern Word currentSentence;
-extern ListKicau DaftarKicau;
 
 int GenerateID(ListKicau *lk) {
     if (lk->nEff == 0) {
@@ -29,7 +26,8 @@ void CreateTweet(Kicauan *k) {
 void PrintTweet(Kicauan k) {
     printf("| ID = %d\n", k.id);
     printf("| ");
-    printWord(k.author.nama);
+    // ! Benerin ngab
+    // printWord();
     printf("\n| ");
     TulisDATETIME(k.datetime);
     printf("\n| ");
@@ -40,7 +38,7 @@ void PrintTweet(Kicauan k) {
 
 void ShowTweets(ListKicau lk) {
     for (int i = lk.nEff - 1; i >= 0; i--) {
-        if (isEqualWordWord(lk.kicau[i].author.nama, CurrentUser.nama)) {
+        if (lk.kicau[i].author == CurrentUser) {
             PrintTweet(lk.kicau[i]);
         }
     }
@@ -61,7 +59,7 @@ void LikeTweet(ListKicau *lk, int id) {
 
 void UpdateTweet(ListKicau *lk, int id, Word newText) {
     for (int i = 0; i < lk->nEff; i++) {
-        if (lk->kicau[i].id == id && isEqualWordWord(lk->kicau[i].author.nama, CurrentUser.nama)) {
+        if (lk->kicau[i].id == id && lk->kicau[i].author == CurrentUser) {
             lk->kicau[i].text = newText;
             PrintTweet(lk->kicau[i]);
             return;

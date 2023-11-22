@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../Database/db.h"
 #include "inisialisasi.h"
-
-extern Word currentWord;
-extern Word currentSentence;
-extern Profil CurrentUser;
-extern userlist DaftarPengguna;
-extern ListKicau DaftarKicau;
-extern Teman DataTeman;
-
 
 void print_image(char* filename){
     system("cls || clear");
@@ -49,15 +42,9 @@ void inisialisasi(){
         delay(1);
     }
     DaftarPengguna.total = 0;
-    NAMA(CurrentUser).Length = 0;
-    SANDI(CurrentUser).Length = 0;
-    BIO(CurrentUser).Length = 0;
-    HP(CurrentUser).Length = 0;
-    WETON(CurrentUser).Length = 0;
-    JENISAKUN(CurrentUser) = publik;
-    // JENISAKUN(CurrentUser) = publik;
-    // createMatrixFoto(5,5, &(FOTO(CurrentUser)));
-    // createMatrixWarna(5,5, &(WARNAFOTO(CurrentUser)));
+    CurrentUser = -1;
+
+
 
 
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);

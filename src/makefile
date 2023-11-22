@@ -1,3 +1,3 @@
 run:
-	gcc -o main main.c ADT/Inisialisasi/inisialisasi.c ADT/Mesin-Char/charmachine.c ADT/Mesin-Kata/wordmachine.c ADT/pcolor/pcolor.c ADT/Perintah/perintah.c ADT/boolean.h ADT/Database/db.c ADT/Graf/graf.c ADT/Kicau/tweet.c ADT/ListStatik/liststatik.c ADT/Matrix/matrix.c ADT/MaxHeap/maxheap.c ADT/PrioQueue/prioqueueReq.c ADT/Profil/profil.c ADT/Teman/teman.c ADT/Time/adttime.c ADT/Time/datetime.c ADT/User/user.c ADT/muat/muat.c
+	gcc -o main ADT/Mesin-Char/charmachine.c ADT/Time/datetime.c ADT/Time/adttime.c ADT/Mesin-Kata/wordmachine.c ADT/pcolor/pcolor.c ADT/boolean.h ADT/ListStatik/liststatik.c ADT/Matrix/matrix.c ADT/Profil/profil.c ADT/Perintah/perintah.c ADT/User/user.c ADT/Kicau/tweet.c ADT/PrioQueue/prioqueueReq.c ADT/Graf/graf.c ADT/Teman/teman.c ADT/MaxHeap/maxheap.c ADT/muat/muat.c ADT/Inisialisasi/inisialisasi.c ADT/Database/db.c main.c
 	./main

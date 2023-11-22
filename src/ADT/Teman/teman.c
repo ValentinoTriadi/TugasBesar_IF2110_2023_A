@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern Word currentWord;
-
 void createTeman(Teman *teman)
 {
     MakeEmptyPrio(&teman->dataTeman.vertex->friendReq, 20);

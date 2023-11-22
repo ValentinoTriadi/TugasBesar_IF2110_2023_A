@@ -1,11 +1,5 @@
-#include "./ADT/Perintah/perintah.h"
-#include "./ADT/Inisialisasi/inisialisasi.h"
+#include "ADT/Database/db.h"
 #include <stdio.h>
-
-extern Word currentWord;
-extern Word currentSentence;
-extern boolean EndWord;
-extern boolean EndSentence;
 boolean endProgram;
 
 int main(){

@@ -1,11 +1,7 @@
 #include "draf.h"
-#include "../Kicau/tweet.h"
 #include "../Database/db.h"
 #include <stdio.h>
 
-extern Word currentSentence;
-extern Profil currentUser;
-extern Stack Draf;
 
 void CreateDraft()
 {
@@ -76,7 +72,7 @@ void PublishDraft()
         // Logika untuk menerbitkan draf
         Kicauan k;
         CreateTweet(&k);
-        k.author = currentUser;
+        k.author = CurrentUser;
         k.datetime = D.timestamp;
         k.text = D.text;
         printf("Selamat! Draf kicauan telah diterbitkan!\nDetil kicauan:\n| ID = 11\n| John Doe\n| %02d/%02d/%04d %02d:%02d:%02d\n| ",

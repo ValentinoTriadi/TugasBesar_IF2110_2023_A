@@ -1,9 +1,8 @@
 #include "perintah.h"
 #include <stdio.h>
 #include <time.h>
+#include "../Database/db.h"
 
-extern boolean endProgram;
-extern Profil CurrentUser;
 
 void printPerintah(Word cmd){
     for (int i = 0; i < cmd.Length; i++){
@@ -12,17 +11,20 @@ void printPerintah(Word cmd){
     printf("\n");
 }
 void bacaPerintah(Word* cmd){
+    // TAMBAHAN
     if (isEqualWordStr(cmd[0], "LOAD")){
         // printf("%s\n",cmd[0].TabWord);
         // printf("%s\n",cmd[1].TabWord);
         // load();
     }
-    // TAMBAHAN
     if (isEqualWordStr(cmd[0], "CEKUSER")){
         // printf("%s\n",cmd[0].TabWord);
         // printf("%d\n",cmd[0].Length);
         printUser();
     }
+    // TAMBAHAN
+
+    
     if (isEqualWordStr(cmd[0], "DAFTAR")){
         // printf("%s\n",cmd[0].TabWord);
         // printf("%d\n",cmd[0].Length);
@@ -40,24 +42,24 @@ void bacaPerintah(Word* cmd){
         // printf("%s\n",cmd[0].TabWord);
         tutupProgram();
     }
-    if (CurrentUser.nama.Length != 0){
+    if (CurrentUser != -1){
         if (isEqualWordStr(cmd[0], "GANTI_PROFIL")){
             // printf("%s\n",cmd[0].TabWord);
-            // ubahProfil();
+            ubahProfil();
         }
-        if (isEqualWordStr(cmd[0], "LIHAT_PROFILE")){
-            // printf("%s\n",cmd[0].TabWord);
-            // printf("%s\n",cmd[1].TabWord);
+        if (isEqualWordStr(cmd[0], "LIHAT_PROFIL")){
+            // printWord(cmd[0]);
+            // printWord(cmd[1]);
             // note: cmd[1] adalah Word nama
-            // lihatProfile(cmd[1]);
+            lihatProfile(cmd[1]);
         }
         if (isEqualWordStr(cmd[0], "ATUR_JENIS_AKUN")){
-            printf("%s\n",cmd[0].TabWord);
-            // aturJenisAkun();
+            // printf("%s\n",cmd[0].TabWord);
+            ubahJenisAkun();
         }
         if (isEqualWordStr(cmd[0], "UBAH_FOTO_PROFIL")){
-            printf("%s\n",cmd[0].TabWord);
-            // ubahFotoProfil();
+            // printf("%s\n",cmd[0].TabWord);
+            ubahFotoProfil();
         }
         if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
             printf("%s\n",cmd[0].TabWord);

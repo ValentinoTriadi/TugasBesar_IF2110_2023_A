@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../Database/db.h"
 
 
-extern Profil currentUser;
-extern Word currentSentence;
 
 void CreateReply(Balasan *reply, Profil author) {
     static int nextID = 0; 
@@ -59,7 +58,7 @@ void DeleteReply(Tree *tweetReplies, int replyId) {
 void PrintReply(Balasan reply) {
     printf("| ID = %d\n", reply.id);
     printf("| ");
-    printWord(reply.author);
+    // printWord(reply.author);
     printf("\n| ");
     TulisDATETIME(reply.datetime);
     printf("\n| ");

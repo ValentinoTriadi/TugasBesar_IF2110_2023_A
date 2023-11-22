@@ -11,11 +11,11 @@
 #define MARKLINE '\n'
 #define MARKFILE EOF
 
-
-/* State Mesin */
 extern char currentChar;
 extern boolean EOP;
 
+
+/* State Mesin */
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.

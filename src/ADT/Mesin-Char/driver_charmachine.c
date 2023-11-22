@@ -1,5 +1,4 @@
 #include "charmachine.h"
-extern char currentChar;
 
 
 int main() {

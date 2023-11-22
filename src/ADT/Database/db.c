@@ -1,6 +1,6 @@
 #include "db.h"
 
-Profil CurrentUser;
+int CurrentUser;
 userlist DaftarPengguna;
 ListKicau DaftarKicau;
 Teman DataTeman;

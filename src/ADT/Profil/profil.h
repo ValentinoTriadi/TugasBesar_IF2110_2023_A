@@ -1,12 +1,9 @@
 #ifndef PROFILS_H
 #define PROFILS_H
 
-
-#include "../boolean.h"
-#include "../Matrix/matrix.h"
 #include "../Mesin-Kata/wordmachine.h"
-#include "../pcolor/pcolor.h"
-// #include "../User/user.h"
+#include "../Matrix/matrix.h"
+
 
 typedef struct {
     Word nama;
@@ -23,7 +20,7 @@ typedef struct {
 #define private false
 #define DEFAULT_COLOR 'R'
 #define DEFAULT_SYMBOL '*'
-#define NAMA(U) (U).nama 
+#define NAMA(U) (U).nama
 #define SANDI(U) (U).sandi 
 #define BIO(U) (U).bio
 #define HP(U) (U).no_hp 
@@ -33,15 +30,14 @@ typedef struct {
 #define WARNAFOTO(U) (U).warna_profil
 
 boolean isDigit(char x);
-boolean strEqualsIgnoreCase(Word w1, Word w2);
 boolean isValidWeton(Word weton);
 boolean isValidNoHP(Word no_hp);
 void printProfil(Profil p);
 void initProfil(Profil *p);
-void CopyWord(Word *dest, Word src);
-void ubahProfil(Profil *p);
-void ubahJenisAkun(Profil *p);
-void ubahFotoProfil(Profil *p);
-void tampilkanFotoProfil(Profil *p);
+void ubahProfil();
+void lihatProfile(Word nama);
+void ubahJenisAkun();
+void ubahFotoProfil();
+void tampilkanFotoProfil(Profil p);
 
 #endif

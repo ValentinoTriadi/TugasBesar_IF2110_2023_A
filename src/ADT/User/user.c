@@ -1,10 +1,8 @@
 #include "user.h"
+#include "../Database/db.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-extern Profil CurrentUser;
-extern userlist DaftarPengguna;
-extern Word currentSentence;
 
 boolean isExists(Word name){
     for (int i = 0; i < DaftarPengguna.total; i++){
@@ -28,9 +26,14 @@ int findIndexUser(Word nama){
             return i;
         }
     }
+    return -1;
 }
 
 void daftar(){
+    if (CurrentUser != -1){
+        printf("\nWah Anda sudah masuk. Keluar dulu yuk!\n\n");
+        return;
+    }
     Word username, password;
     boolean exists = true;
     while (exists){
@@ -48,11 +51,12 @@ void daftar(){
     STARTINPUT();
     password = currentSentence;
 
-    if (username.Length > 20) username.Length = 20;
-    if (password.Length > 20) password.Length = 20;
+    if (username.Length > MAX_LENGTH) username.Length = MAX_LENGTH;
+    if (password.Length > MAX_LENGTH) password.Length = MAX_LENGTH;
     Profil newUser;
     newUser.nama = username;
     newUser.sandi = password;
+    initProfil(&newUser);
 
     DaftarPengguna.pengguna[DaftarPengguna.total] = newUser;
     DaftarPengguna.total++;
@@ -62,7 +66,7 @@ void daftar(){
 }
 
 void masuk() {
-    if (CurrentUser.nama.Length != 0){
+    if (CurrentUser != -1){
         printf("\nWah Anda sudah masuk. Keluar dulu yuk!\n\n");
         return;
     }
@@ -87,7 +91,7 @@ void masuk() {
         if (!isValid) printf("\nWah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
     }
 
-    CurrentUser = DaftarPengguna.pengguna[findIndexUser(inputNama)];
+    CurrentUser = findIndexUser(inputNama);
     printf("Anda telah berhasil masuk dengan nama pengguna ");
     printWord(inputNama);
     printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
@@ -95,16 +99,11 @@ void masuk() {
 }
 
 void keluar(){
-    if(!CurrentUser.nama.Length != 0){
+    if(CurrentUser == -1){
         printf("\nAnda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
     } else {
-        CurrentUser.nama.Length = 0;
+        CurrentUser = -1;
         printf("\nAnda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n\n");
-        Profil newProfil;
-        initProfil(&newProfil);
-        newProfil.nama.Length = 0;
-        newProfil.sandi.Length = 0;
-        CurrentUser = newProfil;
     }
     delay(10);
 }

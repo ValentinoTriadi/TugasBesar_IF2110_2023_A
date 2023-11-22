@@ -5,8 +5,7 @@
 #include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
 #include "../Time/datetime.h"
-#include "../Profil/profil.h"
-#include "../Database/db.h"
+
 
 
 #define MAX_TWEETS 1000
@@ -15,7 +14,7 @@ typedef struct {
     int id;
     Word text;
     int like;
-    Profil author;
+    int author; //nama profil
     DATETIME datetime;
 } Kicauan;
 

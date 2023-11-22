@@ -3,7 +3,7 @@
 
 #include "../Graf/graf.h"
 #include "../Draf/draf.h"
-// #include "../Inisialisasi/inisialisasi.h"
+#include "../Inisialisasi/inisialisasi.h"
 #include "../Kicau/tweet.h"
 #include "../ListStatik/liststatik.h"
 #include "../Matrix/matrix.h"
@@ -11,7 +11,7 @@
 #include "../Mesin-Char/charmachine.h"
 #include "../Mesin-Kata/wordmachine.h"
 #include "../pcolor/pcolor.h"
-// #include "../Perintah/perintah.h" 
+#include "../Perintah/perintah.h" 
 #include "../PrioQueue/prioqueueReq.h"
 #include "../Teman/teman.h"
 #include "../Time/adttime.h"
@@ -20,11 +20,11 @@
 #include "../Utas/utas.h"
 #include "../Profil/profil.h"
 
-// extern Profil CurrentUser;
-// extern userlist DaftarPengguna;
-// extern ListKicau DaftarKicau;
-// extern Teman DataTeman;
-// extern Stack Draf;
+extern int CurrentUser;
+extern userlist DaftarPengguna;
+extern ListKicau DaftarKicau;
+extern Teman DataTeman;
+extern Stack Draf;
 
 // DB Pengguna dengan list statik
 
