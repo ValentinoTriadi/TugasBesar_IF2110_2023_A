@@ -43,7 +43,9 @@ void inisialisasi(){
     }
     DaftarPengguna.total = 0;
     CurrentUser = -1;
+    
 
+    createTeman(&DataTeman);
 
 
 

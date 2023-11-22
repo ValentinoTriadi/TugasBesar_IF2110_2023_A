@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+extern Teman DataTeman;
 
 boolean isExists(Word name){
     for (int i = 0; i < DaftarPengguna.total; i++){
@@ -60,7 +61,7 @@ void daftar(){
 
     DaftarPengguna.pengguna[DaftarPengguna.total] = newUser;
     DaftarPengguna.total++;
-    
+    addVertex(&DataTeman.dataTeman, username);
     printf("\nPengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
     delay(10);
 }

@@ -236,3 +236,13 @@ Word StrToWord(char *str)
     return w;
 }
 
+void SalinWord(Word source, Word *destination) {
+    int i;
+    for (i = 0; i < source.Length && i < NMax; i++) {
+        destination->TabWord[i] = source.TabWord[i];
+    }
+    destination->Length = i;
+
+    destination->TabWord[i] = '\0';
+}
+
