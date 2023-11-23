@@ -6,40 +6,32 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include "../Time/datetime.h"
 #include "../Mesin-Kata/wordmachine.h"
-#include "../Kicau/tweet.h"
 
-// Deklarasi fungsi
+typedef struct utas* AddressUtas;
 
-typedef struct nodeUtas* Address;
-
-typedef struct nodeUtas {
-    Kicauan tweet;
-    Address next;
-} NodeUtas;
-
-typedef struct {
-    Address first;
-    int IDUtas;          // ID dari Utas
-    Kicauan* mainTweet;  // Pointer ke kicauan utama
-    int tweetCount;      // Jumlah kicauan dalam Utas
+typedef struct utas{
+    Word isi;
+    DATETIME time;
+    AddressUtas next;
 } Utas;
 
-typedef struct {
-    Utas Utas[100];
-    int length;
-} ListUtas;
+typedef struct{
+    int idKicauUtama;
+    Utas pertama;
+}UtasUtama;
 
-#define IDUtas(U) ((U).IDUtas)
-#define IDKicau(L) ((L)->mainTweet.IDKicau)
-#define countTweet(U) ((U).tweetCount)
-#define INFO(P) ((P)->tweet)
-#define NEXT(P) ((P)->next)
+typedef struct{
+    UtasUtama utasUtama[100];
+    int neffUtas;
+}ListUtas;
 
-
-
-
-Utas createUtas(Word isi, Word nama);
-void utas(Utas thread);
+void UTAS(int idKicau);
+boolean isEmpty(ListUtas *l);
+void CreateList(ListUtas *l);
+void cetakUtas(int IDUtas);
+AddressUtas newNode(Word isi);
+int findIdxbyID(int ID);
 
 #endif

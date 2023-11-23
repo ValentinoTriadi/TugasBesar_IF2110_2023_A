@@ -47,7 +47,8 @@ void inisialisasi(){
     CreateEmptyDraf(&Draf);
     //CreateListTreeStatik(&dataBalasan);
     createTeman(&DataTeman);
-
+    CreateList(&DaftarUtas);
+    DaftarUtas.neffUtas = 0;
 
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);
     STARTINPUT();

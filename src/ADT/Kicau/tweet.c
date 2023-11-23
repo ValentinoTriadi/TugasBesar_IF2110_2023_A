@@ -89,6 +89,18 @@ void ShowTweets() {
     }
 }
 
+int findIdxbyID(int ID){
+    boolean found = false;
+    int i = 0;
+    while(i < DaftarKicau.nEff && !found){
+        if (DaftarKicau.kicau[i].id == ID){
+            found = true;
+        }
+        i++;
+    }
+    if (found) return i-1;
+    return -1;
+}
 
 void LikeTweet(int id) {
     for (int i = 0; i < DaftarKicau.nEff; i++) {

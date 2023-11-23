@@ -53,7 +53,7 @@ void bacaPerintah(Word* cmd){
             // printWord(cmd[1]);
             // note: cmd[1] adalah Word nama
             lihatProfile(cmd[1]);
-        
+        }
         if (isEqualWordStr(cmd[0], "ATUR_JENIS_AKUN")){
             // printf("%s\n",cmd[0].TabWord);
             ubahJenisAkun();
@@ -140,6 +140,7 @@ void bacaPerintah(Word* cmd){
         if (isEqualWordStr(cmd[0], "UTAS")){
             printf("%s\n",cmd[0].TabWord);
             printf("%s\n",cmd[1].TabWord);
+            UTAS(wordToInt(cmd[1]));
             // utas(wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "SAMBUNG_UTAS")){
@@ -157,7 +158,7 @@ void bacaPerintah(Word* cmd){
         if (isEqualWordStr(cmd[0], "CETAK_UTAS")){
             printf("%s\n",cmd[0].TabWord);
             printf("%s\n",cmd[1].TabWord);
-            // cetakUtas(wordToInt(cmd[1]));
+            cetakUtas(wordToInt(cmd[1]));
         }
     }
     if (isEqualWordStr(cmd[0], "SIMPAN")){
