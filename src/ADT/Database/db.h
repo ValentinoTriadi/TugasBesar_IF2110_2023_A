@@ -20,6 +20,7 @@
 #include "../Utas/utas.h"
 #include "../Profil/profil.h"
 #include "../Balasan/reply.h"
+#include "../muat/muat.h"
 
 extern int CurrentUser;
 extern userlist DaftarPengguna;

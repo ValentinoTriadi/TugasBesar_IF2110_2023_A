@@ -5,6 +5,7 @@
 #define __WORDMACHINE_H__
 
 #include "../Mesin-Char/charmachine.h"
+#include "../Time/datetime.h"
 
 #define NMax 4999
 #define BLANK ' '
@@ -58,6 +59,8 @@ void CopyWord();
 
 // buka file
 void READFILE(char* filename);
+void ADVSENTENCEFILE();
+void CopyFile();
 
 // baca kalimat
 void STARTSENTENCE();
@@ -117,4 +120,6 @@ boolean isEqualWordWord(Word s1, Word s2);
 Word StrToWord(char *str);
 
 void SalinWord(Word source, Word *destination);
+
+DATETIME wordToDatetime(Word w);
 #endif

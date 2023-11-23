@@ -79,7 +79,7 @@ void UTAS(int CurrentUser) {
 
             
         }else{
-            printf("Anda tidak dapat membuat utas dari kicauan orang lain!\n")
+            printf("Anda tidak dapat membuat utas dari kicauan orang lain!\n");
         }
 
 

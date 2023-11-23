@@ -51,6 +51,6 @@ void inisialisasi(){
 
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);
     STARTINPUT();
-    // load(currentSentence);
+    load(currentSentence);
     // printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n");
 }

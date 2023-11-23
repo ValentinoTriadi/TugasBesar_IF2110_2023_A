@@ -3,22 +3,87 @@
 #include "muat.h"
 #include "../Database/db.h"
 
-
-void loadPengguna(){
-    READFILE("pengguna.config");
+void loadDraf(char* NamaFile){
+    char name[(Strlen(NamaFile) + 13)];
+    int i;
+    for (i = 0; i<(Strlen(NamaFile)); i++){
+        name[i] = NamaFile[i];
+    }
+    char config[13] = "/draf.config";
+    for (i = 0; i<(12); i++){
+        name[Strlen(NamaFile) + i] = config[i];
+    }
+    name[(Strlen(NamaFile) + 12)] = '\0';
+    READFILE(name);
     int n = wordToInt(currentSentence);
+    for (int i = 0; i < n; i++){
+
+    }
+}
+
+void loadKicau(char* NamaFile){
+    char name[(Strlen(NamaFile) + 16)];
+    int i;
+    for (i = 0; i<(Strlen(NamaFile)); i++){
+        name[i] = NamaFile[i];
+    }
+    char config[16] = "/kicauan.config";
+    for (i = 0; i<(15); i++){
+        name[Strlen(NamaFile) + i] = config[i];
+    }
+    name[(Strlen(NamaFile) + 15)] = '\0';
+    READFILE(name);
+    int n = wordToInt(currentSentence);
+    Kicauan k;
     for (int i = 0; i<n; i++){
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
+        k.id = wordToInt(currentSentence); 
+        ADVSENTENCEFILE();
+        k.text = currentSentence; 
+        ADVSENTENCEFILE();
+        k.like = wordToInt(currentSentence);
+        ADVSENTENCEFILE();
+        k.author = findIndexUser(currentSentence);
+        ADVSENTENCEFILE();
+        k.datetime = wordToDatetime(currentSentence);
+        AddTweetToList(k);
+    }
+}
+
+void loadPengguna(char* NamaFile){
+    char name[(Strlen(NamaFile) + 17)];
+    int i;
+    for (i = 0; i<(Strlen(NamaFile)); i++){
+        name[i] = NamaFile[i];
+    }
+    char config[17] = "/pengguna.config";
+    for (i = 0; i<(16); i++){
+        name[Strlen(NamaFile) + i] = config[i];
+    }
+    name[(Strlen(NamaFile) + 16)] = '\0';
+    READFILE(name);
+    // printWord(currentSentence);
+    int n = wordToInt(currentSentence);
+    DaftarPengguna.total = n;
+    for (int i = 0; i<n; i++){
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
         NAMA(DaftarPengguna.pengguna[i]) = currentSentence;
-        ADVSENTENCE();
+        addVertex(&DataTeman.dataTeman, currentSentence);
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
         SANDI(DaftarPengguna.pengguna[i]) = currentSentence;
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
         BIO(DaftarPengguna.pengguna[i]) = currentSentence;
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
         HP(DaftarPengguna.pengguna[i]) = currentSentence;
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
         WETON(DaftarPengguna.pengguna[i]) = currentSentence;
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
+        // printWord(currentSentence);
 
         if (isEqualWordStr(currentSentence, "Publik")){
             JENISAKUN(DaftarPengguna.pengguna[i]) = publik;
@@ -26,7 +91,7 @@ void loadPengguna(){
             JENISAKUN(DaftarPengguna.pengguna[i]) = private;
         }
         for (int j = 0; j<5;j++){
-            ADVSENTENCE();
+            ADVSENTENCEFILE();
             for (int k = 0; k<5; k++){
                 DaftarPengguna.pengguna[i].warna_profil.mem[j][k] = currentSentence.TabWord[(k*4)];
                 DaftarPengguna.pengguna[i].foto_profil.mem[j][k] = currentSentence.TabWord[(k*4)+2];
@@ -34,16 +99,30 @@ void loadPengguna(){
         }
     }
     for(int i=0; i<n; i++){
-        ADVSENTENCE();
+        ADVSENTENCEFILE();
         for (int j = 0; j < n; j++){
             DataTeman.dataTeman.adjacencyMatrix[i][j] = charToInt(currentSentence.TabWord[(2*j)]);
         }
     }
-    ADVSENTENCE();
+    ADVSENTENCEFILE();
     n = wordToInt(currentSentence);
     for(int i=0; i<n; i++){
+        ADVSENTENCEFILE();
+        infotype x;
+        x.nama = DaftarPengguna.pengguna[charToInt(currentSentence.TabWord[0])].nama;
+        x.jumlahTeman = charToInt(currentSentence.TabWord[4]);
+        EnqueuePrio(&DataTeman.dataTeman.vertex[charToInt(currentSentence.TabWord[2])].friendReq, x);
+        ELMTMTRX(DataTeman.saveReq,i,0) = charToInt(currentSentence.TabWord[0]);
+        ELMTMTRX(DataTeman.saveReq,i,1) = charToInt(currentSentence.TabWord[2]);
+        ELMTMTRX(DataTeman.saveReq,i,2) = charToInt(currentSentence.TabWord[4]);
         
+         
     }
+    // 0 1 2
+ 
+
+    
+
 }
 
 void muat(){
@@ -62,10 +141,11 @@ void load(Word NamaFile){
     struct stat st = {0};
     char FullPath[100]= "./Config/";
     int len = Strlen(FullPath);
-    for (int i = 0; i <NamaFile.Length; i++){
+    int i;
+    for (i = 0; i <NamaFile.Length; i++){
         FullPath[len+i] = NamaFile.TabWord[i];
-
     }
+    FullPath[len+i] = '\0';
 
 
     if (stat(FullPath, &st) == -1) {
@@ -85,6 +165,8 @@ void load(Word NamaFile){
         printf("3...\n");
         delay(2);
         printf("Pemuatan selesai!\n");
-        loadPengguna();   
+        loadPengguna(FullPath);
+        loadKicau(FullPath);
+        loadDraf(FullPath);
     }
 }

@@ -13,12 +13,12 @@ void IgnoreBlanks(){
     }
 }
 void IgnoreNL(){
-    while (currentChar == NEWLINE){
+    while (currentChar == NEWLINE || currentChar == '\r'){
         ADV();
     }
 }
 void Ignore1NL(){
-    if (currentChar == NEWLINE){
+    if (currentChar == NEWLINE || currentChar == '\r'){
         ADV();
     }
 }
@@ -56,14 +56,37 @@ void CopyWord(){
 }
 void READFILE(char* filename){
     STARTFILE(filename);
-    IgnoreNL();
-    if (currentChar == MARKFILE){
+    if (currentChar == EOF){
         EndSentence = true;
     } else {
         EndSentence = false;
-        CopySentence();
+        CopyFile();
     }
 }
+void ADVSENTENCEFILE(){
+    Ignore1NL();
+    // printf("%c\n", currentChar);
+    if(currentChar == EOF){
+        EndSentence = true;
+        CLOSEFILE();
+    } else{
+        CopyFile();
+    }
+}
+void CopyFile(){
+    currentSentence.Length = 0;
+    while ((currentChar != NEWLINE) && (currentChar != EOF)){
+        if (currentSentence.Length < NMax){
+            currentSentence.TabWord[currentSentence.Length] = currentChar;
+            currentSentence.Length++;
+        }
+        ADVFILE();
+    }
+    currentSentence.TabWord[currentSentence.Length] = '\0';
+    currentSentence.Length--;
+}
+
+
 void STARTSENTENCE(){
     START();
     Ignore1NL();
@@ -85,7 +108,7 @@ void ADVSENTENCE(){
 }
 void CopySentence(){
     currentSentence.Length = 0;
-    while (currentChar != MARKLINE && (currentChar != MARKFILE && currentChar != MARK)){
+    while ((currentChar != MARKLINE && currentChar != '\r') && (currentChar != MARKFILE && currentChar != MARK)){
         if (currentSentence.Length < NMax){
             currentSentence.TabWord[currentSentence.Length] = currentChar;
             currentSentence.Length++;
@@ -98,7 +121,6 @@ void STARTSENTENCEWITHNL(char* filename){
     STARTFILE(filename);
     if (currentChar == MARK){
         EndSentence = true;
-        CLOSEFILE();       
     } else {
         EndSentence = false;
         CopySentenceWithNL();
@@ -246,3 +268,50 @@ void SalinWord(Word source, Word *destination) {
     destination->TabWord[i] = '\0';
 }
 
+DATETIME wordToDatetime(Word w){
+    DATETIME d;
+    int i;
+    int j = 0;
+    int temp = 0;
+    while(w.TabWord[j] != '/'){
+        temp = (charToInt(w.TabWord[j]) + temp*10);
+        j++;
+    }
+    j++;
+    d.DD = temp;
+    temp = 0;
+    while(w.TabWord[j] != '/'){
+        temp = charToInt(w.TabWord[j]) + temp*10;
+        j++;
+    }
+    j++;
+    d.MM = temp;
+    temp = 0;
+    while(w.TabWord[j] != ' '){
+        temp = charToInt(w.TabWord[j]) + temp*10;
+        j++;
+    }
+    j++;
+    d.YYYY = temp;
+    temp = 0;
+    while(w.TabWord[j] != ':'){
+        temp = charToInt(w.TabWord[j]) + temp*10;
+        j++;
+    }
+    j++;
+    d.T.HH = temp;
+    temp = 0;
+    while(w.TabWord[j] != ':'){
+        temp = charToInt(w.TabWord[j]) + temp*10;
+        j++;
+    }
+    j++;
+    d.T.MM = temp;
+    temp = 0;
+    while(j < w.Length){
+        temp = charToInt(w.TabWord[j]) + temp*10;
+        j++;
+    }
+    d.T.SS = temp;
+    return d;
+}

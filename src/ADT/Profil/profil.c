@@ -112,40 +112,7 @@ void lihatProfile(Word nama){
         printf(" tidak ditemukan!\n");
         return;
     }
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    // ISFOLLOWING NYA KURANG
-    if (!DaftarPengguna.pengguna[idx].jenis_akun){
+    if (!DaftarPengguna.pengguna[idx].jenis_akun & !isFollowing(CurrentUser, idx)){
         printf("\nWah, akun ");
         printWord(nama);
         printf(" diprivat nih. Ikuti dulu yuk untuk bisa melihat profil ");

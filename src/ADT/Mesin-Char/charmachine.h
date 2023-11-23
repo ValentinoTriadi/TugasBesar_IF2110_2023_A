@@ -25,8 +25,8 @@ void START();
           Jika currentChar = MARK maka EOP akan menyala (true) */
 void STARTFILE(char* filename);
 /* Membaca pita dari sebuah file */
-
 void CLOSEFILE();
+void ADVFILE();
 
 void ADV();
 /* Pita dimajukan satu karakter.

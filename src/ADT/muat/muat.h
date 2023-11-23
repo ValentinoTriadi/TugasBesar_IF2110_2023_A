@@ -3,8 +3,9 @@
 #include "../Mesin-Kata/wordmachine.h"
 #include "../Time/adttime.h"
 
-
-void loadpengguna();
+void loadDraf(char* NamaFile);
+void loadKicau(char* NamaFile);
+void loadPengguna(char* NamaFile);
 void muat();
 void load(Word NamaFile);
 

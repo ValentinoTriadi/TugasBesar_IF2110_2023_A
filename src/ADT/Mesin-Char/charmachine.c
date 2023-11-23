@@ -12,11 +12,20 @@ static int retval;
 static char* pitastr;
 
 void STARTFILE(char* filename){
-       pita = fopen(filename, "r");
-       ADV();
+	pita = fopen(filename, "r");
+    if (pita != NULL) {
+        ADV();
+    } else {
+        printf("File %s tidak ditemukan!", filename);
+    }
 }
 void CLOSEFILE(){
-       fclose(pita);
+	fclose(pita);
+}
+
+void ADVFILE(){
+	if (feof(pita)) fclose(pita);
+	retval = fscanf(pita, "%c", &currentChar);
 }
 
 void START()

@@ -14,7 +14,7 @@ typedef struct {
     int id;
     Word text;
     int like;
-    int author; //nama profil
+    int author; //id profil
     DATETIME datetime;
 } Kicauan;
 

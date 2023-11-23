@@ -58,7 +58,7 @@ void BacaDATETIME(DATETIME *D) {
 }
 
 void TulisDATETIME(DATETIME D) {
-    printf("%d/%d/%d %d:%d:%d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
+    printf("%02d/%02d/%04d %02d:%02d:%02d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
 }
 boolean DEQ(DATETIME D1, DATETIME D2) {
     return (Day(D1) == Day(D2) && Month(D1) == Month(D2) && Year(D1) == Year(D2) && Hour(Time(D1)) == Hour(Time(D2)) && Minute(Time(D1)) == Minute(Time(D2)) && Second(Time(D1)) == Second(Time(D2)));

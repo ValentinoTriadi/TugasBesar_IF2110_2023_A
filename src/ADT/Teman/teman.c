@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern Word currentWord;
+extern Word currentSentence;
 extern Teman DataTeman;
 
 void createTeman(Teman *teman)
@@ -36,14 +36,14 @@ void daftarTeman(Teman teman,Word currentUser)
         printf("%s ", currentUser.TabWord);
         if (count > 0)
         {
-            printf("memiliki %d teman\n", count);
+            printf("memiliki %d teman\n", count-1);
             printf("Daftar teman ");
             printWord(currentUser);
             printf("\n");
 
             for (j = 0; j < NeffGraf(Graph(teman)); j++)
             {
-                if (Edge(Graph(teman), index, j) == 1)
+                if (Edge(Graph(teman), index, j) == 1 && index != j)
                 {
                     printf(" | ");
                     printWord(Vertex(Graph(teman), j).nama);
@@ -66,10 +66,11 @@ void hapusTeman(Teman *teman,Word currentUser)
     int idxToDelete = -1;
 
     printf("Masukkan nama pengguna:\n");
-    STARTWORD();
+    STARTINPUT();
+
 
   
-    Word userToDelete = currentWord;
+    Word userToDelete = currentSentence;
 
     // check index dari currentuser
     for (i = 0; i < NeffGraf(Graph(*teman)); i++)
@@ -99,11 +100,12 @@ void hapusTeman(Teman *teman,Word currentUser)
         printWord(userToDelete);
         printf("dari daftar teman anda? (YA/TIDAK) ");
 
-        STARTWORD();
+    
+        STARTINPUT();
        
 
         Word Ya = {"YA", 2};
-        if (isEqualWordWord(currentWord, Ya))
+        if (isEqualWordWord(currentSentence, Ya))
         {
             removeEdge(&Graph(*teman), currentUser, userToDelete);
         }
@@ -130,7 +132,8 @@ void sentReq(Word currentUser, Teman *teman)
     boolean flag = false;
 
     printf("Masukkan nama pengguna:\n");
-    STARTWORD();
+    STARTINPUT();
+   
 
     // check index dari currentuser
     for (i = 0; i < NeffGraf(teman->dataTeman); i++)
@@ -145,10 +148,10 @@ void sentReq(Word currentUser, Teman *teman)
     // check apakah ada request pertemanan
     if (IsEmptyPrio(Vertex(teman->dataTeman, i).friendReq))
     {
-        // check index dari currentWord (teman yang akan ditambah)
+        // check index dari currentSentence (teman yang akan ditambah)
         for (i = 0; i < NeffGraf(teman->dataTeman); i++)
         {
-            if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentWord))
+            if (isEqualWordWord(Vertex(teman->dataTeman, i).nama, currentSentence))
             {
                 newFriendIdx = i;
                 break;
@@ -212,22 +215,22 @@ void sentReq(Word currentUser, Teman *teman)
                 ELMTMTRX(teman->saveReq, i, 2) = intToChar(newFriend.jumlahTeman);
 
                 printf("Permintaan pertemanan kepada "); 
-                printWord(currentWord);
+                printWord(currentSentence);
                 printf("dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.\n");
             }
             else
             {
                 printf("Anda sudah mengirimkan permintaan pertemanan kepada ");
-                printWord(currentWord);
+                printWord(currentSentence);
                 printf("atau anda sudah berteman.\n");
                 
             }
         }
         else
         {
-            //printf("Pengguna bernama %s tidak ditemukan.\n", currentWord.TabWord);
+            //printf("Pengguna bernama %s tidak ditemukan.\n", currentSentence.TabWord);
             printf("Pengguna bernama ");
-            printWord(currentWord);
+            printWord(currentSentence);
             printf(" tidak ditemukan.\n");
         }
     }
@@ -320,15 +323,16 @@ void acceptRequest(Teman *teman, Word currentUser)
         printf(" | Jumlah teman: %d\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).jumlahTeman);
 
         printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) \n");
-        STARTWORD();
+        STARTINPUT();
+      
 
         Word Ya = {"YA", 2};
-        if (isEqualWordWord(currentWord, Ya))
+        if (isEqualWordWord(currentSentence, Ya))
         {
             //printf("Permintaan pertemanan dari %s telah disetujui. Selamat! Anda telah berteman dengan %s.\n", InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama.TabWord);
             printf("Permintaan pertemanan dari ");
             printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
-            printf("telah disetujui. Selamat! Anda telah berteman dengan ");
+            printf(" telah disetujui. Selamat! Anda telah berteman dengan ");
             printWord(InfoHead(Vertex(teman->dataTeman, idx).friendReq).nama);
             printf(".\n");
 
