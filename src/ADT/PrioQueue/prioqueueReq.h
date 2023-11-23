@@ -1,4 +1,3 @@
-/* File : prioqueueTeman.h */
 /* Definisi ADT Priority Queue Time dengan representasi array secara eksplisit dan alokasi dinamik */
 /* Model Implementasi Versi III dengan circular buffer */
 /* Elemen queue terurut membesar berdasarkan elemen teman */
@@ -8,7 +7,6 @@
 
 #include "../boolean.h"
 #include "../Mesin-Kata/wordmachine.h"
-// #include "../Database/db.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */

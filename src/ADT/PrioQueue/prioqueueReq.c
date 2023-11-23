@@ -1,5 +1,3 @@
-/* File : prioqueueTeman.h */
-
 #include "prioqueueReq.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -108,7 +106,7 @@ void EnqueuePrio(PrioQueueReq *Q, infotype X)
             j = i - 1;
         }
 
-        while (i != Head(*Q) && X.jumlahTeman < Elmt(*Q, j).jumlahTeman)
+        while (i != Head(*Q) && X.jumlahTeman > Elmt(*Q, j).jumlahTeman)
         {
             temp = Elmt(*Q, i);
             Elmt(*Q, i) = Elmt(*Q, j);
@@ -173,9 +171,11 @@ void PrintPrioQueueTeman(PrioQueueReq Q)
 
     do
     {
-        printf("Nama:");
-        printWord(Nama(Elmt(Q,i)));
-        printf(", Jumlah Teman: %d\n", JumlahTeman(Elmt(Q, i)));
+       //printf("Nama: %s, Jumlah Teman: %d\n", Nama(Elmt(Q, i)), JumlahTeman(Elmt(Q, i)));
+       printf("Nama: ");
+       printWord(Nama(Elmt(Q, i)));
+       printf(", Jumlah Teman: %d\n", JumlahTeman(Elmt(Q, i)));
+
         i = (i + 1) % MaxEl(Q);
     } while (i != (Tail(Q) + 1) % MaxEl(Q));
 

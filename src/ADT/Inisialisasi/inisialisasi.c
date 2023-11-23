@@ -42,10 +42,11 @@ void inisialisasi(){
         delay(1);
     }
     DaftarPengguna.total = 0;
-    CurrentUser = 1;
+    CurrentUser = -1;
     CreateListKicau(10);
     CreateEmptyDraf(&Draf);
-    CreateListTreeStatik(&dataBalasan);
+    //CreateListTreeStatik(&dataBalasan);
+    createTeman(&DataTeman);
 
 
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);

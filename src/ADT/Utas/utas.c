@@ -1,151 +1,163 @@
+#include "charmachine.h"
+#include "wordmachine.h"
+#include "../Database/db.h"
+#include "utas.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "thread.h"
 
-//KAYAKNYA MASIH BANYAK SALAH2
+extern Word CurrentWord;
 
-int bandingKata()
-{
-    STARTINPUT();
-    char x = "YA";
-    char y = "Ya";
-    char z = "ya";
-    int j = 0; //COUNTER YANG MENINGKAT KALAU KARAKTER YANG DARI START INPUT = KARAKTER DI X, Y, ATAU Z
-    for(int i = 0; i <= currentWord.Length; i++){ //LOOPING UNTUK MENGECEK YANG DIINPUT YA, Ya, ATAU ya
-        if(currentWord.TabWord[i] != x[i] && currentWord.TabWord[i] != y[i] && currentWord.TabWord[i] != z[i]){
-            j++;
-        }
-        else{
-            j = 0;
-        }
+// Definisi struktur Utas
+
+
+Address newNode(Kicauan tweet) {
+    Address P = (Address)malloc(sizeof(NodeUtas));
+    if(P!=NULL){
+        INFO(P) = tweet;
+        NEXT(P) = NULL;
     }
-    if(j == 2){ //KALAU SEMUA KARAKTER INPUT DAN KARAKTER X, Y, Z SAMA
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return P;
 }
 
-void buatUtas(int idkicau) {
+boolean checkKicau(int IDKicau, ListUtas L){
+    //Check apakah kicauan ada atau tidak
     boolean found = false;
-    int id = 0;
-    FILE *file = fopen("db.c", "r"); //PLACEHOLDER. NIATANKU BACA DATABASE BUAT NYARI ID KICAU
-    while(fread(&kicau, sizeof(kicau), 1, file) == 1) {//PLACEHOLDER. CARI ID KICAU DAN FOUND = TRUE KALAU KETEMU
-        if(kicau.id == idkicau) {
+    int i = 0;
+    while (i < L.length && !found){
+        if (IDKicau == L.Utas[i].mainTweet->id){
             found = true;
         }
+        i++;
     }
-    while(fread(&Utas, sizeof(Utas), 1, file) == 1) { //PLACEHOLDER. CARI ID UTAS
-        if(Utas.id != NULL) { //PLACEHOLDER. KALAU KETEMU ID UTAS APAPUN, COUNTER ID BERTAMBAH
-            id++;
-        }
-    }
-    if(kicau.user != currentUser){  //PLACEHOLDER. CEK APAKAH USER YANG MENULIS KICAU SAMA DENGAN USER SEKARANG
-        printf("Utas ini bukan milik anda!");
-    }
-    else if(found == false){ //PLACEHOLDER. CEK APAKAH ID KICAU DITEMUKAN DI DATABASE ATAU TIDAK
-        printf("Kicauan tidak ditemukan");
-    }
-    else{
-        int idx = 0;
-        int Utas.id = id + 1; //ID UTAS YANG DITULIS MENGIKUTI AUTO INCREMENT DARI UTAS LAIN YANG MUNGKIN ADA DI DATABASE
-        do {
-            printf("Masukkan kicauan:\n");
-            STARTINPUT();
-            Word Utas.isi;
-            Utas.index = idx++;
-            List Utas.utasan[idx] = Word Utas.isi;
-            printf("Apakah anda ingin melanjutkan utas ini?\n");
-            bandingKata();
-        } while (bandingKata()); //LOOPING SELAMA KATA YANG DIINPUT YA, Ya, ATAU ya
-    }
+    return found;
 }
 
-void sambungUtas(int idutas, int idx)
-{
+void CreateUtas(Utas* Utas,int IDKicau){
+    Address p = newNode(DaftarKicau.kicau[IDKicau]);
+    if (p != NULL){
+        DaftarUtas.length += 1;
+        Utas->mainTweet = p;
+        Utas->tweetCount += 1;
+        Utas->IDUtas = DaftarUtas.length;
+    }    
+}
+
+boolean checkUtas(int IDUtas,int idx){
     boolean found = false;
-    Address p = Utas.utasan; //PLACEHOLDER. INISIALISASI UNTUK NGECEK BERAPA BANYAK KICAUAN SAMBUNGAN PADA UTASAN
-    int length = 0
-    while(INFO(p) != NULL){ //PLACEHOLDER. NGECEK BERAPA BANYAK KICAUAN SAMBUNGAN PADA UTASAN
-        p = NEXT(p);
-        length++;
-    }
-    FILE *file = fopen("db.c", "r"); //PLACEHOLDER. BACA DATABASE BUAT NYARI DAFTAR ID UTAS YANG ADA
-    while(fread(&Utas, sizeof(Utas), 1, file) == 1) {
-        if(Utas.id == idutas) {
-            found = true;
+    int i = 0;
+    while (i < DaftarUtas.length && !found){
+        if (IDUtas == DaftarUtas.Utas[i].IDUtas){
+            return true;
         }
+        i++;
     }
-    if(idx > length + 1){ //PLACEHOLDER. CEK APAKAH INDEX BISA DISAMBUNGKAN PADA UTAS
-        printf("Index terlalu tinggi!");
+    return false;
+}
+
+
+
+// Fungsi untuk membuat utas baru
+void UTAS(int CurrentUser) {
+    // static int currentID = 1;  // Variable statis untuk melacak ID berikutnya
+    // u->IDUtas = currentID++;
+    // u->mainTweet = mainTweet;
+    // u->tweetCount = 1;  // Memulai dengan satu kicauan (kicauan utama)
+    // printf("Utas berhasil dibuat!\\n");
+
+    int IDKicau;
+
+    STARTWORD();
+    printf("Masukkan ID Kicauan yang ingin dibuat utas: \n");
+    IDKicau = wordToInt(CurrentWord);
+
+
+    if(!checkKicau(IDKicau, DaftarUtas)){
+        //Check author dari kicauan
+        if(CurrentUser == DaftarKicau.kicau[IDKicau].author){
+            CreateUtas(&DaftarUtas,IDKicau);
+
+
+            
+        }else{
+            printf("Anda tidak dapat membuat utas dari kicauan orang lain!\n")
+        }
+
+
+
+
+
+
+
+
+
+
+
+        printf("Utas berhasil dibuat!\\n");
+    } else {
+        printf("Utas sudah ada!\\n");
     }
-    else if(found == false){
-        printf("Utas tidak ditemukan!");
+
+
+}
+
+// Fungsi untuk menambahkan kicauan ke dalam utas
+void SAMBUNG_UTAS(Utas u, Kicauan tweet, int index) {
+    if (index < 0 || index > u.tweetCount) {
+        printf("Index terlalu tinggi!\\n");
+        return;
     }
-    else if(Utas.nama != currentUser){ //PLACEHOLDER. CEK APAKAH ID UTAS DIMILIKI USER SEKARANG
-        printf("Anda tidak bisa menyambung utas ini");
+
+    Kicauan* current = u.mainTweet;
+    for (int i = 0; i < index - 1; i++) {
+        current = current->next;
     }
-    else{
-        printf("Masukkan kicauan:\n");
-        STARTWORD();
-        Utas.isi = Utas.utasan[idx]; //PLACEHOLDER. MEMASUKKAN INPUTAN WORD KE DALAM LIST DAFTAR KICAUAN PADA SUATU UTASAN
-        Utas.index = idx++;
+
+    tweet->next = current->next;
+    current->next = tweet;
+    u->tweetCount++;
+
+    printf("Kicauan berhasil ditambahkan.\\n");
+}
+
+// Fungsi untuk menghapus kicauan dari utas
+void HAPUS_UTAS(Utas *u, int index) {
+    if (index < 0 || index >= u->tweetCount) {
+        printf("Index tidak ditemukan pada utas!\\n");
+        return;
+    }
+    if (index == 0) {
+        printf("Anda tidak bisa menghapus kicauan utama!\\n");
+        return;
+    }
+
+    Kicauan* current = u->mainTweet;
+    Kicauan* toDelete = NULL;
+    for (int i = 0; i < index - 1; i++) {
+        current = current->next;
+    }
+
+    toDelete = current->next;
+    current->next = toDelete->next;
+    free(toDelete);
+    u->tweetCount--;
+
+    printf("Kicauan sambungan berhasil dihapus!\\n");
+}
+
+// Fungsi untuk mencetak utas
+void CETAK_UTAS(const Utas *u) {
+    printf("Utas ID: %d\\n", u->IDUtas);
+    Kicauan* current = u->mainTweet;
+    int index = 0;
+    while (current != NULL) {
+        printf("| INDEX = %d\\n| %s\\n", index, current->text); // Asumsi 'text' adalah bagian dari struktur Kicauan
+        current = current->next; // Asumsi 'next' adalah bagian dari struktur Kicauan
+        index++;
     }
 }
 
-void hapusUtas(int Utas.id, int idx)
-{
-    int cnt = 0;
-    Address loc = Utas.utasan;
-
-    boolean found = false;
-    Address p = Utas.id;
-    FILE *file = fopen("db.c", "r");
-    while (fread(&Utas, sizeof(Utas), 1, file) == 1) {
-        if(Utas.id == idutas) {
-            found = true;
-        }
-    }
-    if(idx == 0){ //PLACEHOLDER. CEK APAKAH INDEX BISA DISAMBUNGKAN PADA UTAS
-        printf("Anda tidak bisa menghapus kicauan utama!");
-    }
-    else if(found == false){
-        printf("Utas tidak ditemukan!");
-    }
-    else if(Utas.pengguna != currentUser){ //PLACEHOLDER. CEK APAKAH ID UTAS DIMILIKI USER SEKARANG
-        printf("Anda tidak bisa menghapus kicauan dalam utas ini!");
-    }
-    else if(Utas.utasan[idx] == NULL){
-        printf("Kicauan sambungan dengan index 3 tidak ditemukan pada utas!");
-    }
-    else{
-        //PLACEHOLDER. RENCANANYA PAKAI ALGORITMA DELETE AT DI LISTLINIER
-        while(cnt < idx-1){
-            cnt++;
-            loc = NEXT(loc);
-        }
-        p = NEXT(loc);
-        NEXT(loc) = NEXT(p);
-        free(p);
-    }
-}
-
-void cetakUtas(int Utas.id)
-{
-    int idx = 0
-    Address p = Utas.utasan;
-    printf("| ID = %d\n", Utas.id);
-    printf("| %s\n", Utas.nama);
-    printf("| %s\n", Utas.tanggal);
-//AKU BINGUNG INI PRINT TANGGAL GIMANA JADI INI PLACEHOLDER
-    printf("| %s\n", Utas.utasan[idx]);
-    while(INFO(p) != NULL){
-        idx++;
-        printf("    | INDEX = %d\n", Utas.index);
-        printf("    | %s\n", Utas.nama);
-        printf("    | %s\n", Utas.tanggal);
-    //AKU BINGUNG INI PRINT TANGGAL GIMANA JADI INI PLACEHOLDER
-        printf("    | %s\n", Utas.utasan[idx]);
-    }
+// Fungsi utama untuk menguji ADT Utas
+int main() {
+    // Implementasi uji coba fungsi Utas dengan charmachine dan wordmachine
+    return 0;
 }

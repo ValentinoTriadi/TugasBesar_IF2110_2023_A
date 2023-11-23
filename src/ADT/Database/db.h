@@ -24,6 +24,7 @@
 extern int CurrentUser;
 extern userlist DaftarPengguna;
 extern ListKicau DaftarKicau;
+extern ListUtas DaftarUtas;
 extern Teman DataTeman;
 extern Stack Draf;
 extern ListTreeStatik dataBalasan;

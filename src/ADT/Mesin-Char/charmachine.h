@@ -38,6 +38,9 @@ void ADV();
 int charToInt(char x);
 /* Mengembalikan Char angka dalam bentuk integer */
 
+char intToChar(int x);
+/* Mengembalikan Int angka dalam bentuk Char */
+
 int countChar(char* l, int len, char x);
 /* Mengembalikan jumlah char yang muncul dalam sebuah string */
 

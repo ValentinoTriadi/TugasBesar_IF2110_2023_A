@@ -10,12 +10,34 @@
 #include "../Kicau/tweet.h"
 
 // Deklarasi fungsi
+
+typedef struct nodeUtas* Address;
+
+typedef struct nodeUtas {
+    Kicauan tweet;
+    Address next;
+} NodeUtas;
+
 typedef struct {
-    int id;
-    Word nama;
-    time_t tanggal;
-    Word isi;
+    Address first;
+    int IDUtas;          // ID dari Utas
+    Kicauan* mainTweet;  // Pointer ke kicauan utama
+    int tweetCount;      // Jumlah kicauan dalam Utas
 } Utas;
+
+typedef struct {
+    Utas Utas[100];
+    int length;
+} ListUtas;
+
+#define IDUtas(U) ((U).IDUtas)
+#define IDKicau(L) ((L)->mainTweet.IDKicau)
+#define countTweet(U) ((U).tweetCount)
+#define INFO(P) ((P)->tweet)
+#define NEXT(P) ((P)->next)
+
+
+
 
 Utas createUtas(Word isi, Word nama);
 void utas(Utas thread);

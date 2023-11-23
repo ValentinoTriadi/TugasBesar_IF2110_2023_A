@@ -34,4 +34,7 @@ void createMatrixWarna(int nRows, int nCols, Matrix *m);
 void displayMatrixChar(Matrix m);
 void displayMatrixInt(Matrix m);
 
+void shiftMatrix(Matrix *m);
+void copyMatrix(Matrix mIn, Matrix *mOut);
+
 #endif

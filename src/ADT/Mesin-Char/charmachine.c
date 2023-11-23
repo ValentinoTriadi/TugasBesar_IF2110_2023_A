@@ -55,6 +55,10 @@ int charToInt(char x){
     return (x-48);
 }
 
+char intToChar(int x){
+    return (x+48);
+}
+
 int countChar(char* l, int len, char x){
 	int count = 0;
 	for (int i = 0; i < len; i++){

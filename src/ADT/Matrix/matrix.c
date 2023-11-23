@@ -56,3 +56,30 @@ void displayMatrixInt(Matrix m){
         printf("\n");
     }
 }
+
+void shiftMatrix(Matrix *m) {
+    int nRows = ROW_EFFMTRX(*m);
+    int nCols = COL_EFFMTRX(*m);
+
+    Matrix shiftedMatrix;
+    createMatrix(nRows, nCols, &shiftedMatrix);
+
+    for (int i = 0; i < nRows; i++) {
+        for (int j = 0; j < nCols; j++) {
+            int newRow = (i + 1) % nRows; // Menggeser baris ke bawah
+            ELMTMTRX(shiftedMatrix, newRow, j) = ELMTMTRX(*m, i, j);
+        }
+    }
+
+    copyMatrix(shiftedMatrix, m);
+}
+
+void copyMatrix(Matrix mIn, Matrix *mOut){
+    createMatrix(ROW_EFFMTRX(mIn),COL_EFFMTRX(mIn),mOut);
+    int i, j;
+    for(i=0; i<ROW_EFFMTRX(mIn); i++){
+        for(j=0; j<COL_EFFMTRX(mIn); j++){
+            ELMTMTRX(*mOut, i, j) = ELMTMTRX(mIn, i, j); 
+        }
+    }
+}

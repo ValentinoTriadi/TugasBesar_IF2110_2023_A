@@ -3,6 +3,7 @@
 #include <time.h>
 #include "../Database/db.h"
 
+Word temp;
 
 void printPerintah(Word cmd){
     for (int i = 0; i < cmd.Length; i++){
@@ -63,15 +64,18 @@ void bacaPerintah(Word* cmd){
         }
         if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
             printf("%s\n",cmd[0].TabWord);
-            // daftarTeman();
+            SalinWord(getWord(CurrentUser),&temp);
+            daftarTeman(DataTeman, temp);
         }
         if (isEqualWordStr(cmd[0], "HAPUS_TEMAN")){
             printf("%s\n",cmd[0].TabWord);
-            // hapusTeman();
+            SalinWord(getWord(CurrentUser),&temp);
+            hapusTeman(&DataTeman, temp);
         }
         if (isEqualWordStr(cmd[0], "TAMBAH_TEMAN")){
             printf("%s\n",cmd[0].TabWord);
-            // tambahTeman();
+            SalinWord(getWord(CurrentUser),&temp);
+            sentReq(temp, &DataTeman);
         }
         if (isEqualWordStr(cmd[0], "BATAL_TAMBAH_TEMAN")){
             printf("%s\n",cmd[0].TabWord);
@@ -79,11 +83,13 @@ void bacaPerintah(Word* cmd){
         }
         if (isEqualWordStr(cmd[0], "DAFTAR_PERMINTAAN_PERTEMANAN")){
             printf("%s\n",cmd[0].TabWord);
-            // daftarPermintaanTeman();
+            SalinWord(getWord(CurrentUser),&temp);
+            printRequest(temp);
         }
         if (isEqualWordStr(cmd[0], "SETUJUI_PERMINTAAN")){
             printf("%s\n",cmd[0].TabWord);
-            // setujuiPermintaan();
+            SalinWord(getWord(CurrentUser),&temp);
+            acceptRequest(&DataTeman, temp);
         }
         if (isEqualWordStr(cmd[0], "KICAU")){
             // printf("%s\n",cmd[0].TabWord);
@@ -114,11 +120,11 @@ void bacaPerintah(Word* cmd){
             printf("%s\n",cmd[1].TabWord);
             Balasan balasan;
             // CreateReply(&balasan,)
-            if (cmd[1].TabWord[0] - '0' == -1){
-                AddReplyToTweet(&dataBalasan,&balasan,cmd[0].TabWord);
-            } else {
-                AddReplyToReply(&dataBalasan, &balasan, cmd[1].TabWord);
-            }
+            // if (cmd[1].TabWord[0] - '0' == -1){
+            //     AddReplyToTweet(&dataBalasan,&balasan,cmd[0].TabWord);
+            // } else {
+            //     AddReplyToReply(&dataBalasan, &balasan,cmd[1].TabWord);
+            // }
         }
         if (isEqualWordStr(cmd[0], "HAPUS_BALASAN")){
             printf("%s\n",cmd[0].TabWord);
