@@ -67,7 +67,7 @@ void ubahProfil() {
     STARTINPUT(); // membaca kata
     Word temp = currentSentence;
     if (temp.Length) {  
-        temp.Length %= 135; // Cut jadi 135 char
+        temp.Length = (temp.Length > 135)? 135 : temp.Length; // Cut jadi 135 char
         DaftarPengguna.pengguna[CurrentUser].bio = temp;
     }
 
@@ -112,7 +112,40 @@ void lihatProfile(Word nama){
         printf(" tidak ditemukan!\n");
         return;
     }
-    if (!DaftarPengguna.pengguna[idx].jenis_akun && !isFollowing(CurrentUser,idx)){
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    // ISFOLLOWING NYA KURANG
+    if (!DaftarPengguna.pengguna[idx].jenis_akun){
         printf("\nWah, akun ");
         printWord(nama);
         printf(" diprivat nih. Ikuti dulu yuk untuk bisa melihat profil ");

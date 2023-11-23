@@ -1,33 +1,77 @@
 /* File: tweet.c */
 #include "tweet.h"
 #include <stdio.h>
-#include <string.h>
 #include "../Database/db.h"
 
 
-int GenerateID(ListKicau *lk) {
-    if (lk->nEff == 0) {
+void CreateListKicau(int cap){
+    DaftarKicau.nEff = 0;
+    DaftarKicau.capacity = cap;
+    DaftarKicau.kicau = (Kicauan*) malloc (cap*sizeof(Kicauan));
+}
+
+int GenerateID() {
+    if (DaftarKicau.nEff == 0) {
         return 1;
     } else {
-        return lk->kicau[lk->nEff - 1].id + 1;
+        return DaftarKicau.kicau[DaftarKicau.nEff - 1].id + 1;
     }
 }
 
-void CreateTweet(Kicauan *k) {
-    k->id = GenerateID(&DaftarKicau); 
-    k->text = currentSentence;
-    k->like = 0;
-    k->author = CurrentUser;
-    k->datetime = getLocalTime();
-    PrintTweet(*k);
+void AddTweetToList(Kicauan k) {
+    if (DaftarKicau.nEff < DaftarKicau.capacity) {
+        DaftarKicau.kicau[DaftarKicau.nEff] = k;
+        DaftarKicau.nEff++;
+    } else {
+        ListKicau new, temp;
+        new.kicau = (Kicauan*) malloc (DaftarKicau.capacity*2*sizeof(Kicauan));
+        new.capacity = DaftarKicau.capacity*2;
+        new.nEff = DaftarKicau.nEff + 1;
+        IdxType i;
+        for (i=0; i<DaftarKicau.nEff; i++) {
+            new.kicau[i] = DaftarKicau.kicau[i];
+        }
+        new.kicau[i] = k;
+        temp = DaftarKicau;
+        DaftarKicau = new;
+        free(temp.kicau);
+    }
+}
+
+boolean cekInputValid(){
+    Word temp = currentSentence;
+    for (int i = 0; i < temp.Length; i++){
+        if (temp.TabWord[i] != ' ') return true;
+    }
+    return false;
+}
+
+void CreateTweet() {
+    Kicauan k;
+    printf("\nMasukkan kicauan:\n");
+    STARTINPUT();
+    printf("%d\n",DaftarKicau.nEff);
+    if (cekInputValid()){
+        k.id = GenerateID(); 
+        Word temp = currentSentence;
+        temp.Length = (temp.Length > 280)? 280 : temp.Length;
+        k.text = temp;
+        k.like = 0;
+        k.author = CurrentUser;
+        k.datetime = getLocalTime();
+        printf("\nSelamat! kicauan telah diterbitkan!\nDetil kicauan:\n");
+        PrintTweet(k);
+        AddTweetToList(k);
+    } else {
+        printf("\nKicauan tidak boleh hanya berisi spasi!\n");
+    }
 }
 
 
 void PrintTweet(Kicauan k) {
     printf("| ID = %d\n", k.id);
     printf("| ");
-    // ! Benerin ngab
-    // printWord();
+    printWord(DaftarPengguna.pengguna[k.author].nama);
     printf("\n| ");
     TulisDATETIME(k.datetime);
     printf("\n| ");
@@ -36,34 +80,45 @@ void PrintTweet(Kicauan k) {
 }
 
 
-void ShowTweets(ListKicau lk) {
-    for (int i = lk.nEff - 1; i >= 0; i--) {
-        if (lk.kicau[i].author == CurrentUser) {
-            PrintTweet(lk.kicau[i]);
+void ShowTweets() {
+    printf("\n");
+    for (int i = DaftarKicau.nEff - 1; i >= 0; i--) {
+        if (DaftarKicau.kicau[i].author == CurrentUser) {
+            PrintTweet(DaftarKicau.kicau[i]);
         }
     }
 }
 
 
-void LikeTweet(ListKicau *lk, int id) {
-    for (int i = 0; i < lk->nEff; i++) {
-        if (lk->kicau[i].id == id) {
-            lk->kicau[i].like++;
-            PrintTweet(lk->kicau[i]);
+void LikeTweet(int id) {
+    for (int i = 0; i < DaftarKicau.nEff; i++) {
+        if (DaftarKicau.kicau[i].id == id) {
+            DaftarKicau.kicau[i].like++;
+            printf("\nSelamat! kicauan telah disukai!\nDetil kicauan:\n");
+            PrintTweet(DaftarKicau.kicau[i]);
             return;
         }
     }
-    printf("Tidak ditemukan kicauan dengan ID = %d;\n", id);
+    printf("\nTidak ditemukan kicauan dengan ID = %d;\n", id);
 }
 
 
-void UpdateTweet(ListKicau *lk, int id, Word newText) {
-    for (int i = 0; i < lk->nEff; i++) {
-        if (lk->kicau[i].id == id && lk->kicau[i].author == CurrentUser) {
-            lk->kicau[i].text = newText;
-            PrintTweet(lk->kicau[i]);
-            return;
+void UpdateTweet(int id) {
+    int i;  
+    for (i = 0; i < DaftarKicau.nEff; i++) {
+        if (DaftarKicau.kicau[i].id == id){
+            if (DaftarKicau.kicau[i].author == CurrentUser) {
+                printf("\nMasukkan kicauan baru:\n");
+                STARTINPUT();
+                Word newText = currentSentence;
+                newText.Length = (newText.Length > 280)? 280 : newText.Length;
+                DaftarKicau.kicau[i].text = newText;
+                PrintTweet(DaftarKicau.kicau[i]);
+                return;
+            }
+            printf("Kicauan dengan ID = %d bukan milikmu!\n",id);
+            break;
         }
     }
-    printf("Kicauan dengan ID = %d bukan milikmu atau tidak ditemukan!\n", id);
+    if (i == DaftarKicau.nEff) printf("Kicauan dengan ID = %d tidak ditemukan!\n", id);
 }

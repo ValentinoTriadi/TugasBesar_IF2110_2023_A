@@ -34,6 +34,10 @@ void daftar(){
         printf("\nWah Anda sudah masuk. Keluar dulu yuk!\n\n");
         return;
     }
+    if (DaftarPengguna.total == 20){
+        printf("\nWah Pengguna Sudah Penuh. Anda tidak dapat mendaftar lagi! :(\n\n");
+        return;
+    }
     Word username, password;
     boolean exists = true;
     while (exists){
@@ -92,7 +96,7 @@ void masuk() {
     }
 
     CurrentUser = findIndexUser(inputNama);
-    printf("Anda telah berhasil masuk dengan nama pengguna ");
+    printf("\nAnda telah berhasil masuk dengan nama pengguna ");
     printWord(inputNama);
     printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
     delay(10);

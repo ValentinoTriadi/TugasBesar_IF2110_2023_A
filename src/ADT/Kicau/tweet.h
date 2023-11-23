@@ -24,12 +24,15 @@ typedef struct {
     int capacity;
 } ListKicau;
 
-int GenerateID(ListKicau *lk);
-void CreateTweet(Kicauan *k);
-void ShowTweets(ListKicau lk);
-void LikeTweet(ListKicau *lk, int id);
-void UpdateTweet(ListKicau *lk, int id, Word newText);
+void CreateListKicau(int cap);
+int GenerateID();
+boolean cekInputValid();
+void CreateTweet();
+void ShowTweets();
+void LikeTweet(int id);
+void UpdateTweet(int id);
 void PrintTweet(Kicauan k);
+void AddTweetToList(Kicauan k);
 
 
 #endif

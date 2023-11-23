@@ -19,12 +19,14 @@
 #include "../User/user.h"
 #include "../Utas/utas.h"
 #include "../Profil/profil.h"
+#include "../Balasan/reply.h"
 
 extern int CurrentUser;
 extern userlist DaftarPengguna;
 extern ListKicau DaftarKicau;
 extern Teman DataTeman;
 extern Stack Draf;
+extern ListTreeStatik dataBalasan;
 
 // DB Pengguna dengan list statik
 

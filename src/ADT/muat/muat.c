@@ -19,14 +19,7 @@ void loadPengguna(){
         ADVSENTENCE();
         WETON(DaftarPengguna.pengguna[i]) = currentSentence;
         ADVSENTENCE();
-        Word pub;
-        pub.Length = 6;
-        pub.TabWord[0] = 'P';
-        pub.TabWord[1] = 'u';
-        pub.TabWord[2] = 'b';
-        pub.TabWord[3] = 'l';
-        pub.TabWord[4] = 'i';
-        pub.TabWord[5] = 'k';
+
         if (isEqualWordStr(currentSentence, "Publik")){
             JENISAKUN(DaftarPengguna.pengguna[i]) = publik;
         } else {

@@ -86,22 +86,22 @@ void bacaPerintah(Word* cmd){
             // setujuiPermintaan();
         }
         if (isEqualWordStr(cmd[0], "KICAU")){
-            printf("%s\n",cmd[0].TabWord);
-            // kicau();
+            // printf("%s\n",cmd[0].TabWord);
+            CreateTweet();
         }
         if (isEqualWordStr(cmd[0], "KICAUAN")){
-            printf("%s\n",cmd[0].TabWord);
-            // kicauan();
+            // printf("%s\n",cmd[0].TabWord);
+            ShowTweets();
         }
         if (isEqualWordStr(cmd[0], "SUKA_KICAUAN")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            // sukaKicauan(wordToInt(cmd[1]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            LikeTweet(wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "UBAH_KICAUAN")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            //  ubahKicauan(wordToInt(cmd[1]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            UpdateTweet(wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "BALAS")){
             printf("%s\n",cmd[0].TabWord);
@@ -112,7 +112,13 @@ void bacaPerintah(Word* cmd){
         if (isEqualWordStr(cmd[0], "BALASAN")){
             printf("%s\n",cmd[0].TabWord);
             printf("%s\n",cmd[1].TabWord);
-            //  balasan(wordToInt(cmd[1]));
+            Balasan balasan;
+            // CreateReply(&balasan,)
+            if (cmd[1].TabWord[0] - '0' == -1){
+                AddReplyToTweet(&dataBalasan,&balasan,cmd[0].TabWord);
+            } else {
+                AddReplyToReply(&dataBalasan, &balasan, cmd[1].TabWord);
+            }
         }
         if (isEqualWordStr(cmd[0], "HAPUS_BALASAN")){
             printf("%s\n",cmd[0].TabWord);
@@ -122,11 +128,12 @@ void bacaPerintah(Word* cmd){
         }
         if (isEqualWordStr(cmd[0], "BUAT_DRAF")){
             printf("%s\n",cmd[0].TabWord);
-            // buatDraf();
+            CreateDraft();
+            
         }
         if (isEqualWordStr(cmd[0], "LIHAT_DRAF")){
             printf("%s\n",cmd[0].TabWord);
-            // lihatDraf();
+            ViewLastDraft();
         }
         if (isEqualWordStr(cmd[0], "UTAS")){
             printf("%s\n",cmd[0].TabWord);

@@ -11,6 +11,7 @@ int main(){
     char * filename;
     int i;
 
+
     // Inisiasi status program
     endProgram = false;
 

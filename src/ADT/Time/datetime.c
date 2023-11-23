@@ -7,9 +7,10 @@
 
 DATETIME getLocalTime(){
     DATETIME D;
-    time_t t = time(NULL);
+    time_t t;
+    time(&t);
     struct tm* local = localtime(&t); 
-    CreateDATETIME(&D,local->tm_mday,local->tm_mon,local->tm_year,local->tm_hour,local->tm_min,local->tm_sec);
+    CreateDATETIME(&D,local->tm_mday,local->tm_mon + 1, local->tm_year + 1900,local->tm_hour,local->tm_min,local->tm_sec);
     return D;
 }
 
