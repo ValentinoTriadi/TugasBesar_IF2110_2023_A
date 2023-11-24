@@ -22,6 +22,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
+<img src="./IMG/burbir.png" style="width: 500px">
 
 <h3 align="center">BurBir</h3>
 
@@ -77,7 +78,7 @@ Welcome to BurBir, the innovative social platform that revolutionizes the way yo
 Our mission at BurBir is to enhance your social media experience by introducing groundbreaking features. We leverage the sophistication of abstract data types and structured programming to develop tools that are not only innovative but also highly practical. Our commitment is to continually evolve and provide you with an unparalleled digital interaction platform.
 
 <br/>
-<strong>Inovatonal Burbir</strong>
+<strong>Inovational Burbir</strong>
 
 Transforming the world through technology, we present a program that connects you globally with just a simple touch of your finger. At BurBir by Cintaku Bersemi di Burbir, we're elevating the social media experience to unprecedented heights. Your experience is our top priority, and we're dedicated to consistently delivering excellence. Join us in this journey as we redefine connectivity, ensuring that each interaction on our platform is not just a moment, but an unforgettable experience crafted just for you.
 
@@ -102,7 +103,7 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 
 ### Built With
 
-* [![C][logo-c]][github-url]
+[![C][logo-c]][github-url]
 
 <br/>
 
