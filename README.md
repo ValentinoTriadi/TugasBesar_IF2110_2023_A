@@ -52,13 +52,14 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#HOW TO USE">HOW TO USE</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#Project-Status">Project Status</a></li>
     <li><a href="#Room-for-Improvement">Room for Improvement</a></li>
     <li><a href="#Acknowledgments">Acknowledgments</a></li>
+    <li><a href="#Pembagian Tugas">Pembagian Tugas</a></li>
   </ol>
 </details>
 
@@ -101,7 +102,7 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 
 ### Built With
 
-* [![C][logo-c]](https://github.com/ValentinoTriadi/TugasBesar_IF2110_2023_A)
+* [![C][logo-c]][github-url]
 
 <br/>
 
@@ -140,7 +141,7 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 ```  
 
 
-### Installation
+### HOW TO USE
 1. Clone the repo
    
 ```sh
@@ -164,6 +165,11 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 ```sh
    make
 ```   
+
+5. Input User
+```sh
+    Masukkan nama folder yang akan di load sebelum menjalankan program
+```
 
 
 
@@ -205,30 +211,10 @@ Room for improvement:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+## Pembagian Tugas
+![Pembagian Tugas](./IMG/Tugas.jpg)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[C-url]: 
 [logo-c]:https://img.shields.io/badge/language-C-blue
-[home-screenshot]: img/Home.png
-[tools-screenshot]: img/Tools.png
-[about-screenshot]: img/About.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[TailwindCSS]: https://img.shields.io/badge/tailwind-000000?style=for-the-badge&logo=tailwindcss&logoColor=white
-[Tailwind-url]: https://tailwindcss.com/
-[Python-url]: https://www.python.org/
-[Python]: https://img.shields.io/badge/python-000000?style=for-the-badge&logo=python&logoColor=white
-[FastAPI-url]: https://fastapi.tiangolo.com/
-[FastAPI]: https://img.shields.io/badge/fastapi-000000?style=for-the-badge&logo=fastapi&logoColor=white
-[wkhtmltopdf]: https://img.shields.io/badge/wkhtmltopdf-000000?style=for-the-badge&logo=wkhtmltopdf&logoColor=white
-[wkhtmltopdf-url]: https://wkhtmltopdf.org/
-[linkedin-shield-valen]: https://img.shields.io/badge/Linkedin-Valentino%20Triadi-000000?style=for-the-badge&logo=linkedin&logoColor=white
-[linkedin-valen]: https://linkedin.com/in/valentino-triadi
-[linkedin-shield-qiya]: https://img.shields.io/badge/Linkedin-Atqiya%20Haydar-000000?style=for-the-badge&logo=linkedin&logoColor=white
-[linkedin-qiya]: https://linkedin.com/in/atqiyahaydar
-[linkedin-shield-maha]: https://img.shields.io/badge/Linkedin-Shabrina%20Maharani-000000?style=for-the-badge&logo=linkedin&logoColor=white
-[linkedin-maha]: https://www.linkedin.com/in/shabrina-maharani-671728161/
+[github-url]: https://github.com/ValentinoTriadi/TugasBesar_IF2110_2023_A
