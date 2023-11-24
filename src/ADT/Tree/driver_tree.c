@@ -3,70 +3,77 @@
 
 int main() {
     Tree myTree;
+    ListTreeStatik treeList;
+    addressTree node, child, sibling;
+    int data, childData, siblingData, nodeData;
+    int choice;
+    boolean running = true;
+
     CreateTree(&myTree);
+    CreateListTreeStatik(&treeList);
 
-    // Alokasi node root
-    addressTree root = Alokasi(1);
-    Root(myTree) = root;
+    while (running) {
+        printf("\nTree Operations\n");
+        printf("1. Create Root\n");
+        printf("2. Add Child\n");
+        printf("3. Add Sibling\n");
+        printf("4. Print Tree\n");
+        printf("5. Print All Trees in List\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    // Menambahkan child pada root
-    addressTree child1 = Alokasi(2);
-    addressTree child2 = Alokasi(3);
-    AddChild(&root, child1);
-    AddSibling(&child1, child2);
-
-    // Menambahkan child pada child1
-    addressTree child1_1 = Alokasi(4);
-    addressTree child1_2 = Alokasi(5);
-    AddChild(&child1, child1_1);
-    AddSibling(&child1_1, child1_2);
-
-    // Menambahkan child pada child2
-    addressTree child2_1 = Alokasi(6);
-    addressTree child2_2 = Alokasi(7);
-    AddChild(&child2, child2_1);
-    AddSibling(&child2_1, child2_2);
-
-    // Mencetak Tree
-    printf("Tree yang dibangun:\n");
-    printTree(Root(myTree), 0);
-
-    // Mencetak child dari root
-    printf("\nAnak-anak dari root:\n");
-    printChild(root);
-
-    // Mencetak siblings dari child1
-    printf("\nSaudara-saudara dari child1:\n");
-    printSiblings(NextSibling(child1));
-
-    // Mencari elemen dalam Tree
-    int searchElement = 5;
-    if(isTreeElmt(Root(myTree), searchElement)) {
-        printf("\nElemen %d ditemukan dalam Tree.\n", searchElement);
-    } else {
-        printf("\nElemen %d tidak ditemukan dalam Tree.\n", searchElement);
+        switch (choice) {
+            case 1:
+                printf("Enter data for root: ");
+                scanf("%d", &data);
+                myTree.root = Alokasi(data);
+                insertLast_ListTreeStatik(&treeList, myTree);
+                printf("Root created with data: %d\n", data);
+                break;
+            case 2:
+                printf("Enter data for the new child: ");
+                scanf("%d", &childData);
+                printf("Enter data of the parent node: ");
+                scanf("%d", &nodeData);
+                node = getAddress(myTree.root, nodeData);
+                if (node != NULL) {
+                    child = Alokasi(childData);
+                    AddChild(&node, child);
+                    printf("Child %d added to parent %d\n", childData, nodeData);
+                } else {
+                    printf("Parent not found.\n");
+                }
+                break;
+            case 3:
+                printf("Enter data for the new sibling: ");
+                scanf("%d", &siblingData);
+                printf("Enter data of the existing child node: ");
+                scanf("%d", &nodeData);
+                node = getAddress(myTree.root, nodeData);
+                if (node != NULL) {
+                    sibling = Alokasi(siblingData);
+                    AddSibling(&node, sibling);
+                    printf("Sibling %d added to node %d\n", siblingData, nodeData);
+                } else {
+                    printf("Node not found.\n");
+                }
+                break;
+            case 4:
+                printf("Current Tree:\n");
+                printTree(myTree.root, 0);
+                break;
+            case 5:
+                printf("All Trees in List:\n");
+                printList_ListTreeStatik(treeList);
+                break;
+            case 6:
+                printf("Exiting...\n");
+                running = false;
+                break;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 6.\n");
+        }
     }
-
-    // Mendapatkan alamat dari elemen
-    addressTree address = getAddress(Root(myTree), searchElement);
-    if(address != NULL) {
-        printf("Alamat dari elemen %d adalah %p.\n", searchElement, (void*)address);
-    }
-
-    // Mendapatkan parent dari sebuah node
-    addressTree parent = getParent(Root(myTree), child2_1);
-    if(parent != NULL) {
-        printf("Parent dari elemen %d adalah %d.\n", Data(child2_1), Data(parent));
-    }
-
-    // Deallocate semua node
-    Dealokasi(root);
-    Dealokasi(child1);
-    Dealokasi(child2);
-    Dealokasi(child1_1);
-    Dealokasi(child1_2);
-    Dealokasi(child2_1);
-    Dealokasi(child2_2);
-
     return 0;
 }

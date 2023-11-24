@@ -1,77 +1,110 @@
 #include "liststatik.h"
 #include <stdio.h>
 
-int main(){
-    ListStatik L1, L2, L3;
-    ListStatik_ElType val;
-    boolean isFull, isEmpty, isEqual, asc;
-    int idx, max, min;
+int main() {
+    ListStatik l, l2, lConcatenated;
+    int choice, val, index;
+    ElTypeLISTSTATIK el;
+    CreateListStatik(&l); 
 
-    // Inisialisasi List L1 dan L2
-    CreateListStatik(&L1);
-    CreateListStatik(&L2);
+    do {
+        printf("\n");
+        printf("List Statik Operation\n");
+        printf("1. Create New List\n");
+        printf("2. Read List\n");
+        printf("3. Print List\n");
+        printf("4. Add First Element\n");
+        printf("5. Add Last Element\n");
+        printf("6. Add Element at Index\n");
+        printf("7. Delete First Element\n");
+        printf("8. Delete Last Element\n");
+        printf("9. Delete Element at Index\n");
+        printf("10. Check if List is Empty\n");
+        printf("11. Check if List is Full\n");
+        printf("12. Concatenate Another List to Current List\n");
+        printf("13. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    // Isi L1
-    insertLast_ListStatik(&L1, 10);
-    insertLast_ListStatik(&L1, 20);
-    insertLast_ListStatik(&L1, 30);
-    insertLast_ListStatik(&L1, 40);
-    insertLast_ListStatik(&L1, 50);
+        switch (choice) {
+            case 1:
+                CreateListStatik(&l);
+                printf("A new empty list has been created.\n");
+                break;
+            case 2:
+                readListStatik(&l);
+                break;
+            case 3:
+                printListStatik(l);
+                printf("\n");
+                break;
+            case 4:
+                printf("Enter a value to add: ");
+                scanf("%d", &val);
+                insertFirstLISTSTATIK(&l, val);
+                break;
+            case 5:
+                printf("Enter a value to add: ");
+                scanf("%d", &val);
+                insertLastLISTSTATIK(&l, val);
+                break;
+            case 6:
+                printf("Enter the index and a value to add: ");
+                scanf("%d %d", &index, &val);
+                insertAtLISTSTATIK(&l, val, index);
+                break;
+            case 7:
+                deleteFirstLISTSTATIK(&l, &el);
+                printf("First element deleted: %d\n", el);
+                break;
+            case 8:
+                deleteLastLISTSTATIK(&l, &el);
+                printf("Last element deleted: %d\n", el);
+                break;
+            case 9:
+                printf("Enter the index to delete: ");
+                scanf("%d", &index);
+                deleteAtLISTSTATIK(&l, &el, index);
+                printf("Element at index %d deleted: %d\n", index, el);
+                break;
+            case 10:
+                if (isEmptyLISTSTATIK(l)) {
+                    printf("The list is empty.\n");
+                } else {
+                    printf("The list is not empty.\n");
+                }
+                break;
+            case 11:
+                if (isFullLISTSTATIK(l)) {
+                    printf("The list is full.\n");
+                } else {
+                    printf("The list is not full.\n");
+                }
+                break;
+            case 12:
+                CreateListStatik(&l2); 
 
-    // Print L1
-    printList_ListStatik(L1);
-    printf("\n");
+                printf("You will now enter another list to concatenate with the current list.\n");
+                readListStatik(&l2); 
 
-    // Isi L2 dengan membaca dari input
-    readList_ListStatik(&L2);
+                if ((listStatikLength(l) + listStatikLength(l2)) <= CAPACITY_LISTSTATIK) {
+                    lConcatenated = concat_ListStatik(l, l2); 
+                    l = lConcatenated; 
 
-    // Print L2
-    printList_ListStatik(L2);
-    printf("\n");
-
-    // Cek apakah L1 penuh
-    isFull = isFull_ListStatik(L1);
-
-    // Cek apakah L2 kosong
-    isEmpty = isEmpty_ListStatik(L2);
-
-    // Cari elemen dengan index 30 di L1
-    idx = indexOf_ListStatik(L1, 30);
-
-    // Bandingkan L1 dan L2
-    isEqual = isListEqual_ListStatik(L1, L2);
-
-    // Gabungkan L1 dan L2 menjadi L3
-    L3 = concat_ListStatik(L1, L2);
-    printList_ListStatik(L3);
-    printf("\n");
-
-    // Hapus elemen yang sama di L3
-    removeDuplicates(&L3);
-    printList_ListStatik(L3);
-    printf("\n");
-
-    // Urutkan L3 secara ascending
-    asc = true;
-    sortList_ListStatik(&L3, asc);
-    printList_ListStatik(L3);
-    printf("\n");
-
-    // Urutkan L3 secara descending
-    asc = false;
-    sortList_ListStatik(&L3, asc);
-    printList_ListStatik(L3);
-    printf("\n");
-
-    // Dapatkan nilai ekstrem dari L3
-    extremeValues_ListStatik(L3, &max, &min);
-
-    // Hapus elemen pertama dan terakhir dari L1
-    deleteFirst_ListStatik(&L1, &val);
-    printList_ListStatik(L1);
-
-    deleteLast_ListStatik(&L1, &val);
-    printList_ListStatik(L1);
+                    printf("The lists have been concatenated. The new list is:\n");
+                    printListStatik(l); 
+                    printf("\n");
+                } else {
+                    printf("Cannot concatenate the lists. The combined length exceeds the capacity.\n");
+                }
+                break;
+            case 13:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 13.\n");
+        }
+    } while (choice != 13);
 
     return 0;
 }
