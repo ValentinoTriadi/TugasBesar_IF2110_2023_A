@@ -18,16 +18,14 @@ void inisialisasi(){
     FILE *fascii;
     system("cls || clear");
     // printf("HALO\n");
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 4; i++){
         if (i == 0) {
-            filename = "./ADT/Inisialisasi/img5.txt";
-        } else if (i == 1){
             filename = "./ADT/Inisialisasi/img4.txt";
-        } else if (i == 2){
+        } else if (i == 1){
             filename = "./ADT/Inisialisasi/img3.txt";
-        } else if (i == 3){
+        } else if (i == 2){
             filename = "./ADT/Inisialisasi/img2.txt";
-        } else if (i == 4){
+        } else if (i == 3){
             filename = "./ADT/Inisialisasi/img1.txt";
         }
         // fascii = NULL;
