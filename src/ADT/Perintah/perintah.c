@@ -67,6 +67,11 @@ void bacaPerintah(Word* cmd){
             // printf("%s\n",cmd[0].TabWord);
             ubahFotoProfil();
         }
+        if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
+            // printf("%s\n",cmd[0].TabWord);
+            SalinWord(getWord(CurrentUser),&temp);
+            daftarTeman(DataTeman, temp);
+        }
         if (isEqualWordStr(cmd[0], "HAPUS_TEMAN")){
             // printf("%s\n",cmd[0].TabWord);
             SalinWord(getWord(CurrentUser),&temp);

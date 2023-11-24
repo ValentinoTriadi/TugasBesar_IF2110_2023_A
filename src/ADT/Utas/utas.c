@@ -18,7 +18,23 @@ AddressUtas newNode(Word isi)
         p->isi = isi;
         p->next = NULL;
         p->time = getLocalTime();
+extern int CurrentUser;
+extern ListUtas DaftarUtas;
+
+AddressUtas newNode(Word isi)
+/* Definisi List : */
+/* List kosong : FIRST(l) = NULL */
+/* Setiap elemen dengan AddressUtas p dapat diacu INFO(p), NEXT(p) */
+/* Elemen terakhir list: jika addressUtasnya Last, maka NEXT(Last)=NULL */
+{
+    AddressUtas p = (AddressUtas)malloc(sizeof(Utas));
+    if (p != NULL)
+    {
+        p->isi = isi;
+        p->next = NULL;
+        p->time = getLocalTime();
     }
+    return p;
     return p;
 }
 

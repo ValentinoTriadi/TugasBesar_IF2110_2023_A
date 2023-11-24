@@ -7,10 +7,17 @@
 #include <stdio.h>
 #include <time.h>
 #include "../Time/datetime.h"
+#include "../Time/datetime.h"
 #include "../Mesin-Kata/wordmachine.h"
 
 typedef struct utas* AddressUtas;
 
+typedef struct utas* AddressUtas;
+
+typedef struct utas{
+    Word isi;
+    DATETIME time;
+    AddressUtas next;
 typedef struct utas{
     Word isi;
     DATETIME time;
