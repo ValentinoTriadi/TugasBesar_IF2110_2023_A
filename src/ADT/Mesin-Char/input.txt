@@ -1,0 +1,8 @@
+Hello, this is a sample file.
+It contains several lines of text,
+and includes a variety of characters: #, $, %, ^, &, *.
+
+It also includes some digits: 1234567890.
+
+This file can be used to test the countChar and charToInt functions.
+Make sure to include the character ';' somewhere if you want to test the EOP condition.
