@@ -130,11 +130,49 @@ void loadPengguna(char* NamaFile){
         
          
     }
-    // 0 1 2
- 
+}
 
-    
+void loadUtas(char * NamaFile){
+    char name[(Strlen(NamaFile) + 13)];
+    int i;
+    for (i = 0; i<(Strlen(NamaFile)); i++){
+        name[i] = NamaFile[i];
+    }
+    char config[13] = "/utas.config";
+    for (i = 0; i<(12); i++){
+        name[Strlen(NamaFile) + i] = config[i];
+    }
+    name[(Strlen(NamaFile) + 12)] = '\0';
+    READFILE(name);
 
+    int n = wordToInt(currentSentence);
+    DaftarUtas.neffUtas = n;
+    for (int i = 0; i < n; i++){
+        ADVSENTENCEFILE();
+        int id = wordToInt(currentSentence);
+        ADVSENTENCEFILE();
+        int jml = wordToInt(currentSentence);
+        DaftarUtas.utasUtama[i].idKicauUtama = id;
+        AddressUtas p;
+        for (int j = 0; j <jml; j++){
+            if (j == 0){
+                ADVSENTENCEFILE();
+                p = newNode(currentSentence);
+                ADVSENTENCEFILE();
+                ADVSENTENCEFILE();
+                p->time = wordToDatetime(currentSentence);
+                DaftarUtas.utasUtama[i].pertama.next = p;
+            } else {
+                ADVSENTENCEFILE();
+                AddressUtas new = newNode(currentSentence);
+                ADVSENTENCEFILE();
+                ADVSENTENCEFILE();
+                new->time = wordToDatetime(currentSentence);
+                p->next = new;
+                p = new;
+            }
+        }
+    }
 }
 
 void muat(){
@@ -189,5 +227,6 @@ void load(Word NamaFile){
         loadPengguna(FullPath);
         loadKicau(FullPath);
         loadDraf(FullPath);
+        // loadUtas(FullPath);
     }
 }

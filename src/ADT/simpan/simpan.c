@@ -3,6 +3,41 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+void saveUtas(char * FilePath){
+    char name[(Strlen(FilePath) + 13)];
+    int i;
+    for (i = 0; i<(Strlen(FilePath)); i++){
+        name[i] = FilePath[i];
+    }
+    char config[13] = "/utas.config";
+    for (i = 0; i<(12); i++){
+        name[Strlen(FilePath) + i] = config[i];
+    }
+    name[(Strlen(FilePath) + 12)] = '\0';
+    FILE* f = fopen(name, "w");
+    fprintf(f, "%d\n", DaftarUtas.neffUtas);
+    for (int i = 1; i <=  DaftarUtas.neffUtas; i++){
+        fprintf(f, "%d\n", DaftarUtas.utasUtama[i].idKicauUtama);
+        int count = 0;
+        AddressUtas p = DaftarUtas.utasUtama[i].pertama.next;
+        while(p->next != NULL){
+            count++;
+        }
+        fprintf(f, "%d\n", count);
+        p = DaftarUtas.utasUtama[i].pertama.next;
+        while(p->next != NULL){
+            char *s = wordToStr(p->isi);
+            fprintf(f, "%s\n", s);
+            free(s);
+            s = wordToStr(DaftarPengguna.pengguna[DaftarKicau.kicau[findIdxbyID(DaftarUtas.utasUtama[i].idKicauUtama)].author].nama);
+            fprintf(f, "%s\n", s);
+            free(s);
+            fprintf(f, "%02d/%02d/%04d %02d:%02d:%02d\n", p->time.DD, p->time.MM, p->time.YYYY, p->time.T.HH, p->time.T.MM, p->time.T.SS);
+        }
+    }
+    fclose(f);
+}
+
 void savePengguna(char * FilePath){
     char name[(Strlen(FilePath) + 17)];
     int i;
@@ -199,5 +234,6 @@ void simpan(){
         savePengguna(FullPath);
         saveKicauan(FullPath);
         saveDraf(FullPath);
+        // saveUtas(FullPath);
     }
 }
