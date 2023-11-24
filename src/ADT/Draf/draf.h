@@ -25,6 +25,12 @@ typedef struct
     address TOP;               /* alamat TOP: elemen puncak */
 } Stack;
 
+typedef struct
+{
+    Stack Draf[20];
+}ListDraf;
+
+
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxElDraf-1] */
 /* Jika S adalah Stack maka akses elemen : */
@@ -64,5 +70,6 @@ void Pop(Stack *S, infotypeDraf *X);
 void CreateDraft();
 void ViewLastDraft();
 void DeleteDraft();
+void reverseStack(int idx);
 
 #endif

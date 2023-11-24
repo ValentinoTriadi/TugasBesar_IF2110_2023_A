@@ -33,6 +33,6 @@ void LikeTweet(int id);
 void UpdateTweet(int id);
 void PrintTweet(Kicauan k);
 void AddTweetToList(Kicauan k);
-
+int findIdxbyID(int ID);
 
 #endif

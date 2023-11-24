@@ -3,10 +3,9 @@
 #include <math.h>
 #include <time.h>
 
-void delay(int number_of_half_seconds){
-    int milli_seconds = 500 * number_of_half_seconds;
+void delay(int number_of_seconds){
     clock_t start_time = clock();
-    while (clock() < start_time + milli_seconds);
+    while (clock() < start_time + number_of_seconds*CLOCKS_PER_SEC/2);
 }
 
 boolean IsTIMEValid (int H, int M, int S){

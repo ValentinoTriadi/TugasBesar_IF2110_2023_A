@@ -17,7 +17,19 @@ void loadDraf(char* NamaFile){
     READFILE(name);
     int n = wordToInt(currentSentence);
     for (int i = 0; i < n; i++){
-
+        ADVSENTENCEFILE();
+        int idx_last_space = findIdxLastSpace(currentSentence);
+        int idxUser = findIndexUser(getWordBeforeIdx(currentSentence, idx_last_space));
+        int countDraf = wordToInt(getWordAfterIdx(currentSentence, idx_last_space));
+        for (int j = 0; j < countDraf; j++){
+            infotypeDraf x;
+            ADVSENTENCEFILE();
+            x.text = currentSentence;
+            ADVSENTENCEFILE();
+            x.timestamp = wordToDatetime(currentSentence);
+            Push(&Draf.Draf[idxUser], x);
+        }
+        reverseStack(idxUser);
     }
 }
 
@@ -126,12 +138,13 @@ void loadPengguna(char* NamaFile){
 }
 
 void muat(){
-    if (CurrentUser != 0){
+    if (CurrentUser != -1){
         printf("Anda harus keluar terlebih dahulu untuk melakukan pemuatan.\n");
     } else {
         printf("Masukkan nama folder yang hendak dimuat: ");
         STARTINPUT();
         Word NamaFile = currentSentence;
+        
         load (NamaFile);
     }
 }
@@ -153,16 +166,24 @@ void load(Word NamaFile){
         printf("Tidak ada folder yang dimaksud!\n");
     } else {
         isExists = true;
-        
+        DaftarPengguna.total = 0;
+        CurrentUser = -1;
+        CreateListKicau(10);
+        for (int i = 0; i < 20; i++){
+            CreateEmptyDraf(&Draf.Draf[i]);
+        }
+        createTeman(&DataTeman);
+        CreateList(&DaftarUtas);
+        DaftarUtas.neffUtas =1 ;
         printf("Anda akan melakukan pemuatan dari ");
         printWord(NamaFile);
         printf(".\n\nMohon tunggu...\n");
         delay(2);
-        printf("1...\n");
+        printf("%s1...\n", RED);
         delay(2);
-        printf("2...\n");
+        printf("%s2...\n", YELLOW);
         delay(2);
-        printf("3...\n");
+        printf("%s3...\n%s", GREEN, NORMAL);
         delay(2);
         printf("Pemuatan selesai!\n");
         loadPengguna(FullPath);

@@ -1,5 +1,6 @@
 #include "wordmachine.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /* State Mesin Word */
 boolean EndWord;
@@ -314,4 +315,37 @@ DATETIME wordToDatetime(Word w){
     }
     d.T.SS = temp;
     return d;
+}
+
+int findIdxLastSpace(Word w){
+    int found = 0;
+    for (int i = 0; i < w.Length; i++){
+        if (w.TabWord[i] == ' ') found = i;
+    }
+    return found;
+}
+
+Word getWordBeforeIdx (Word w, int idx){
+    Word new;
+    new.Length = idx;
+    for (int i = 0; i < idx; i++){
+        new.TabWord[i] = w.TabWord[i];
+    } 
+    return new;
+}
+Word getWordAfterIdx (Word w, int idx){
+    Word new;
+    new.Length = (w.Length - idx)-1;
+    for (int i = 0; i < w.Length; i++){
+        new.TabWord[i] = w.TabWord[i+idx+1];
+    } 
+    return new;
+}
+char* wordToStr (Word w){
+    char* str = malloc((w.Length + 1) * sizeof(char));
+    for(int i = 0; i < w.Length; i++){
+        str[i] = w.TabWord[i];
+    }
+    str[w.Length] = '\0';
+    return str;
 }

@@ -15,46 +15,49 @@ void createTeman(Teman *teman)
 
 void daftarTeman(Teman teman,Word currentUser)
 {
-    int index = -1;
-    int i, j;
+    if(CurrentUser == -1){
+        printf("\nAnda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
+    } else {
+        int index = -1;
+        int i, j;
 
-    // check index dari currentuser
-    for (i = 0; i < NeffGraf(Graph(teman)); i++)
-    {
-        if (isEqualWordWord(Vertex(Graph(teman), i).nama, currentUser))
+        // check index dari currentuser
+        for (i = 0; i < NeffGraf(Graph(teman)); i++)
         {
-            index = i;
-            break;
-        }
-    }
-    printf("index : %d\n", index);
-    if (index != -1)
-    {
-        // hitung berapa teman
-        int count = countEdges(&Graph(teman), currentUser);
-
-        printf("%s ", currentUser.TabWord);
-        if (count > 0)
-        {
-            printf("memiliki %d teman\n", count-1);
-            printf("Daftar teman ");
-            printWord(currentUser);
-            printf("\n");
-
-            for (j = 0; j < NeffGraf(Graph(teman)); j++)
+            if (isEqualWordWord(Vertex(Graph(teman), i).nama, currentUser))
             {
-                if (Edge(Graph(teman), index, j) == 1 && index != j)
-                {
-                    printf(" | ");
-                    printWord(Vertex(Graph(teman), j).nama);
-                    printf("\n");
-                    //printf("| %s\n", Vertex(Graph(teman), j).nama.TabWord);
-                }
+                index = i;
+                break;
             }
         }
-        else
+        if (index != -1)
         {
-            printf("belum mempunyai teman\n");
+            // hitung berapa teman
+            int count = countEdges(&Graph(teman), currentUser);
+
+            printf("%s ", currentUser.TabWord);
+            if (count > 1)
+            {
+                printf("memiliki %d teman\n", count-1);
+                printf("Daftar teman ");
+                printWord(currentUser);
+                printf("\n");
+
+                for (j = 0; j < NeffGraf(Graph(teman)); j++)
+                {
+                    if (Edge(Graph(teman), index, j) == 1 && index != j)
+                    {
+                        printf(" | ");
+                        printWord(Vertex(Graph(teman), j).nama);
+                        printf("\n");
+                        //printf("| %s\n", Vertex(Graph(teman), j).nama.TabWord);
+                    }
+                }
+            }
+            else
+            {
+                printf("belum mempunyai teman\n");
+            }
         }
     }
 }

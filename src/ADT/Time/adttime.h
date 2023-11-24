@@ -27,7 +27,7 @@ typedef struct {
 /* KELOMPOK VALIDASI TERHADAP TYPE                                   */
 /* ***************************************************************** */
 
-void delay(int number_of_half_seconds);
+void delay(int number_of_seconds);
 
 boolean IsTIMEValid (int H, int M, int S);
 /* Mengirim true jika H,M,S dapat membentuk T yang valid */

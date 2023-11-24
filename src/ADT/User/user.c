@@ -67,7 +67,7 @@ void daftar(){
     DaftarPengguna.total++;
     addVertex(&DataTeman.dataTeman, username);
     printf("\nPengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
-    delay(10);
+    delay(2);
 }
 
 void masuk() {
@@ -100,7 +100,7 @@ void masuk() {
     printf("\nAnda telah berhasil masuk dengan nama pengguna ");
     printWord(inputNama);
     printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
-    delay(10);
+    delay(2);
 }
 
 void keluar(){
@@ -110,7 +110,7 @@ void keluar(){
         CurrentUser = -1;
         printf("\nAnda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n\n");
     }
-    delay(10);
+    delay(2);
 }
 
 void tutupProgram(){
@@ -126,5 +126,5 @@ void printUser(){
         printWord(DaftarPengguna.pengguna[i].sandi);
         printf("\n");
     }
-    delay(10);
+    delay(2);
 }

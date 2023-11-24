@@ -5,5 +5,5 @@ userlist DaftarPengguna;
 ListKicau DaftarKicau;
 ListUtas DaftarUtas;
 Teman DataTeman;
-Stack Draf;
+ListDraf Draf;
 ListTreeStatik dataBalasan;

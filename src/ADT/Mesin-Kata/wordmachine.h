@@ -21,6 +21,7 @@ typedef struct
 extern Word currentSentence;
 extern Word currentWord;
 extern boolean EndWord;
+extern boolean EndSentence;
 
 /* State Mesin Word */
 
@@ -122,4 +123,11 @@ Word StrToWord(char *str);
 void SalinWord(Word source, Word *destination);
 
 DATETIME wordToDatetime(Word w);
+
+int findIdxLastSpace(Word w);
+
+Word getWordBeforeIdx (Word w, int idx);
+Word getWordAfterIdx (Word w, int idx);
+char* wordToStr (Word w);
+
 #endif

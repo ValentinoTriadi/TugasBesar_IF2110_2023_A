@@ -83,7 +83,7 @@ void PrintTweet(Kicauan k) {
 void ShowTweets() {
     printf("\n");
     for (int i = DaftarKicau.nEff - 1; i >= 0; i--) {
-        if (DaftarKicau.kicau[i].author == CurrentUser) {
+        if (DaftarKicau.kicau[i].author == CurrentUser || isFollowing(CurrentUser, DaftarKicau.kicau[i].author)) {
             PrintTweet(DaftarKicau.kicau[i]);
         }
     }
@@ -93,9 +93,17 @@ void ShowTweets() {
 void LikeTweet(int id) {
     for (int i = 0; i < DaftarKicau.nEff; i++) {
         if (DaftarKicau.kicau[i].id == id) {
-            DaftarKicau.kicau[i].like++;
-            printf("\nSelamat! kicauan telah disukai!\nDetil kicauan:\n");
-            PrintTweet(DaftarKicau.kicau[i]);
+            if (!DaftarPengguna.pengguna[DaftarKicau.kicau[i].author].jenis_akun && !isFollowing(CurrentUser, DaftarKicau.kicau[i].author)){
+                printf("\nWah, akun ");
+                printWord(DaftarPengguna.pengguna[DaftarKicau.kicau[i].author].nama);
+                printf(" diprivat nih. Ikuti dulu yuk untuk bisa menyukai kicauan ");
+                printWord(DaftarPengguna.pengguna[DaftarKicau.kicau[i].author].nama);
+                printf("!\n\n");
+            } else {
+                DaftarKicau.kicau[i].like++;
+                printf("\nSelamat! kicauan telah disukai!\nDetil kicauan:\n");
+                PrintTweet(DaftarKicau.kicau[i]);
+            }
             return;
         }
     }
@@ -117,8 +125,21 @@ void UpdateTweet(int id) {
                 return;
             }
             printf("Kicauan dengan ID = %d bukan milikmu!\n",id);
-            break;
+            return;
         }
     }
-    if (i == DaftarKicau.nEff) printf("Kicauan dengan ID = %d tidak ditemukan!\n", id);
+    printf("Kicauan dengan ID = %d tidak ditemukan!\n", id);
+}
+
+int findIdxbyID(int ID){
+    boolean found = false;
+    int i = 0;
+    while(i < DaftarKicau.nEff && !found){
+        if (DaftarKicau.kicau[i].id == ID){
+            found = true;
+        }
+        i++; 
+    }
+    if (found) return i-1;
+    return -1;
 }

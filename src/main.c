@@ -30,7 +30,9 @@ int main(){
         i = 0;
         listPerintah[1] = initial_word;
         listPerintah[2] = initial_word;
-        printf("%s>> ", NORMAL);
+        printf("%s>> ", YELLOW);
+        printf("%s", NORMAL);
+
         STARTWORD();
         while (!EndWord){
             listPerintah[i] = currentWord;
@@ -38,10 +40,11 @@ int main(){
             ADVWORD();
         }
         bacaPerintah(listPerintah);
-        delay(6);
+        delay(1);
         if (!endProgram){
             // filename = "./ADT/Inisialisasi/img1.txt";
             // system("cls || clear");
+            printf("%s\n=====================================================================================================================\n",BLUE);
         }
     }
 

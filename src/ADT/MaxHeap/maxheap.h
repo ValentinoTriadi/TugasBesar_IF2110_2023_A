@@ -1,34 +1,39 @@
-#ifndef MAXHEAP_H_
-#define MAXHEAP_H_
+//utas.h
 
-#include <math.h>
-#include "../boolean.h"
+#ifndef __UTAS_H__
+#define __UTAS_H__
 
-#define MAXSIZEHEAP 10
-#define HEAP_UNDEF -999
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include "../Time/datetime.h"
+#include "../Mesin-Kata/wordmachine.h"
 
-typedef struct maxheap
-{
-    int size;
-    int ID [MAXSIZEHEAP];
-} MAXHEAP;
+typedef struct utas* AddressUtas;
 
-#define LChild(i)           (2*(i)+1)
-#define RChild(i)           (2*(i)+2)
-#define Parent(i)           floor(((i)-1)/2)
-#define ELMTHeap(h,i)       (h).ID[i]
+typedef struct utas{
+    Word isi;
+    DATETIME time;
+    AddressUtas next;
+} Utas;
 
+typedef struct{
+    int idKicauUtama;
+    Utas pertama;
+}UtasUtama;
 
-boolean isLeaf(MAXHEAP h, int idx);
+typedef struct{
+    UtasUtama utasUtama[100];
+    int neffUtas;
+}ListUtas;
 
-void swap(MAXHEAP* h, int p, int c);
-
-void createHeap(MAXHEAP* h, int n);
-
-void insertHeap(MAXHEAP h, int id);
-
-void maxHeapify(MAXHEAP* h, int idx);
-
-void deleteMaxHeap(MAXHEAP* h, int* val);
+void UTAS(int idKicau);
+boolean isEmpty(ListUtas *l);
+void CreateList(ListUtas *l);
+void hapusUtas(int IDUtas, int idx);
+void cetakUtas(int IDUtas);
+AddressUtas newNode(Word isi);
+void sambungUtas(int IDUtas,int idx);
+int findIdxbyID(int ID);
 
 #endif

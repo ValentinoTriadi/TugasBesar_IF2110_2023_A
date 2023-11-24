@@ -21,13 +21,14 @@
 #include "../Profil/profil.h"
 #include "../Balasan/reply.h"
 #include "../muat/muat.h"
+#include "../simpan/simpan.h"
 
 extern int CurrentUser;
 extern userlist DaftarPengguna;
 extern ListKicau DaftarKicau;
 extern ListUtas DaftarUtas;
 extern Teman DataTeman;
-extern Stack Draf;
+extern ListDraf Draf;
 extern ListTreeStatik dataBalasan;
 
 // DB Pengguna dengan list statik

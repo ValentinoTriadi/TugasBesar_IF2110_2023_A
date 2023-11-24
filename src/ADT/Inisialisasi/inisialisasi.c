@@ -41,13 +41,15 @@ void inisialisasi(){
         // }
         delay(1);
     }
-    DaftarPengguna.total = 0;
-    CurrentUser = -1;
-    CreateListKicau(10);
-    CreateEmptyDraf(&Draf);
+    // DaftarPengguna.total = 0;
+    // CurrentUser = -1;
+    // CreateListKicau(10);
+    // for (int i = 0; i < 20; i++){
+    //     CreateEmptyDraf(&Draf.Draf[i]);
+    // }
+    // createTeman(&DataTeman);
     //CreateListTreeStatik(&dataBalasan);
-    createTeman(&DataTeman);
-
+    
 
     printf("%sSilahkan masukan folder konfigurasi untuk dimuat: ", NORMAL);
     STARTINPUT();

@@ -43,6 +43,11 @@ void bacaPerintah(Word* cmd){
         // printf("%s\n",cmd[0].TabWord);
         tutupProgram();
     }
+    if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
+        // printf("%s\n",cmd[0].TabWord);
+        SalinWord(getWord(CurrentUser),&temp);
+        daftarTeman(DataTeman, temp);
+    }
     if (CurrentUser != -1){
         if (isEqualWordStr(cmd[0], "GANTI_PROFIL")){
             // printf("%s\n",cmd[0].TabWord);
@@ -53,7 +58,7 @@ void bacaPerintah(Word* cmd){
             // printWord(cmd[1]);
             // note: cmd[1] adalah Word nama
             lihatProfile(cmd[1]);
-        
+        }
         if (isEqualWordStr(cmd[0], "ATUR_JENIS_AKUN")){
             // printf("%s\n",cmd[0].TabWord);
             ubahJenisAkun();
@@ -61,11 +66,6 @@ void bacaPerintah(Word* cmd){
         if (isEqualWordStr(cmd[0], "UBAH_FOTO_PROFIL")){
             // printf("%s\n",cmd[0].TabWord);
             ubahFotoProfil();
-        }
-        if (isEqualWordStr(cmd[0], "DAFTAR_TEMAN")){
-            // printf("%s\n",cmd[0].TabWord);
-            SalinWord(getWord(CurrentUser),&temp);
-            daftarTeman(DataTeman, temp);
         }
         if (isEqualWordStr(cmd[0], "HAPUS_TEMAN")){
             // printf("%s\n",cmd[0].TabWord);
@@ -138,35 +138,35 @@ void bacaPerintah(Word* cmd){
             ViewLastDraft();
         }
         if (isEqualWordStr(cmd[0], "UTAS")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            // utas(wordToInt(cmd[1]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            UTAS(wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "SAMBUNG_UTAS")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            printf("%s\n",cmd[2].TabWord);
-            // sambungUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            // printf("%s\n",cmd[2].TabWord);
+            sambungUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
         }
         if (isEqualWordStr(cmd[0], "HAPUS_UTAS")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            printf("%s\n",cmd[2].TabWord);
-            // hapusUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            // printf("%s\n",cmd[2].TabWord);
+            hapusUtas(wordToInt(cmd[1]), wordToInt(cmd[2]));
         }
         if (isEqualWordStr(cmd[0], "CETAK_UTAS")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            // cetakUtas(wordToInt(cmd[1]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            cetakUtas(wordToInt(cmd[1]));
         }
     }
     if (isEqualWordStr(cmd[0], "SIMPAN")){
         printf("%s\n",cmd[0].TabWord);
-        // simpan();
+        simpan();
     }
     if (isEqualWordStr(cmd[0], "MUAT")){
         // printf("%s\n",cmd[0].TabWord);
-        // muat();
+        muat();
     }
 }
 // void bacaPerintah(Word* cmd){
