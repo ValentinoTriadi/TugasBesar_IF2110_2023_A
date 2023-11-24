@@ -1,5 +1,3 @@
-//utas.h
-
 #ifndef __UTAS_H__
 #define __UTAS_H__
 
@@ -12,12 +10,6 @@
 
 typedef struct utas* AddressUtas;
 
-typedef struct utas* AddressUtas;
-
-typedef struct utas{
-    Word isi;
-    DATETIME time;
-    AddressUtas next;
 typedef struct utas{
     Word isi;
     DATETIME time;
