@@ -1,2 +1,0 @@
-void daftarTeman(){}
-void hapusTeman(){}
