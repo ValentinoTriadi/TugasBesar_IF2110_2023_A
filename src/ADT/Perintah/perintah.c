@@ -111,21 +111,15 @@ void bacaPerintah(Word* cmd){
             UpdateTweet(wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "BALAS")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            printf("%s\n",cmd[2].TabWord);
-            //  balas(wordToInt(cmd[1]), wordToInt(cmd[2]));
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            // printf("%s\n",cmd[2].TabWord);
+            Replies(wordToInt(cmd[1]),wordToInt(cmd[2]));
         }
         if (isEqualWordStr(cmd[0], "BALASAN")){
-            printf("%s\n",cmd[0].TabWord);
-            printf("%s\n",cmd[1].TabWord);
-            Balasan balasan;
-            // CreateReply(&balasan,)
-            // if (cmd[1].TabWord[0] - '0' == -1){
-            //     AddReplyToTweet(&dataBalasan,&balasan,cmd[0].TabWord);
-            // } else {
-            //     AddReplyToReply(&dataBalasan, &balasan,cmd[1].TabWord);
-            // }
+            // printf("%s\n",cmd[0].TabWord);
+            // printf("%s\n",cmd[1].TabWord);
+            ShowReplies(tweetReplies,wordToInt(cmd[1]));
         }
         if (isEqualWordStr(cmd[0], "HAPUS_BALASAN")){
             printf("%s\n",cmd[0].TabWord);

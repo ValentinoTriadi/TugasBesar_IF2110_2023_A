@@ -15,6 +15,7 @@
 #include "../PrioQueue/prioqueueReq.h"
 #include "../Teman/teman.h"
 #include "../Time/adttime.h"
+#include "../Balasan/tree.h"
 #include "../Time/datetime.h"
 #include "../User/user.h"
 #include "../Utas/utas.h"
@@ -28,6 +29,8 @@ extern userlist DaftarPengguna;
 extern ListKicau DaftarKicau;
 extern ListUtas DaftarUtas;
 extern Teman DataTeman;
+extern Tree tweetReplies;
+extern ListTreeStatik treeList;
 extern ListDraf Draf;
 extern ListTreeStatik dataBalasan;
 

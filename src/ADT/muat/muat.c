@@ -212,6 +212,8 @@ void load(Word NamaFile){
         }
         createTeman(&DataTeman);
         CreateList(&DaftarUtas);
+        CreateTree(&tweetReplies);
+        CreateListTreeStatik(&treeList);
         DaftarUtas.neffUtas =1 ;
         printf("Anda akan melakukan pemuatan dari ");
         printWord(NamaFile);

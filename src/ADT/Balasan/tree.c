@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "tree.h"
 
+extern Tree tweetReplies;
+
 /*KONSTRUKTOR*/
 void CreateTree(Tree *T){
     (*T).root = NULL;
@@ -112,14 +114,14 @@ int Treemachine(char string[], Matrix *m){
     int tempint = 1;
     int itemp = 0;
     int k = 0, j = 0;
-    STARTWORD_FILE(string);
-    tempint = WordToInt(currentWord);
+    STARTINPUT();
+    tempint = wordToInt(currentSentence);
     ADVWORD();
     while (count != tempint){
         if (count1 == 2){
-            itemp = WordToInt(currentWord) + 2;
+            itemp = wordToInt(currentSentence) + 2;
         }
-        ELMTMTRX(*m,k,j) = WordToInt(currentWord);
+        ELMTMTRX(*m,k,j) = wordToInt(currentSentence);
         j++;
         if (count1 == itemp){
             k++;
@@ -142,25 +144,25 @@ void matrixToTree (Matrix m, int N, Tree *T){
     addressTree PNow;
 
     for (i = 0 ; i < N ; i ++){
-        P[i] = Alokasi(MATRIXELMT(m,i,0));
+        P[i] = Alokasi(ELMTMTRX(m,i,0));
     }
 
     (*T).root = P[N-1];
 
     for (i = 0 ; i < N ; i++){
         temp = 0;
-        for (j = 0 ; j < MATRIXELMT(m,i,1) ; j++){
+        for (j = 0 ; j < ELMTMTRX(m,i,1) ; j++){
             // check if m[i][j+2] exists in P
             found = 0;
             k = 0;
             while (k < N && !found){
-                if (MATRIXELMT(m,i,j+2) == Data(P[k])){
+                if (ELMTMTRX(m,i,j+2) == Data(P[k])){
                     found = 1;
                 }
                 k++;
             }
             if (!found){
-                PNow = Alokasi(MATRIXELMT(m,i,j+2));
+                PNow = Alokasi(ELMTMTRX(m,i,j+2));
             } else {
                 PNow = P[k-1];
             }
@@ -205,11 +207,11 @@ ListStatik getChild(addressTree parent){
     CreateListStatik(&L);
     if(FirstChild(parent)!=NULL){
         parent=FirstChild(parent);
-        insertLast_ListStatik(&L,Data(parent));
+        insertLast_ListTreeStatik(&L,tweetReplies);
         while (NextSibling(parent)!=NULL)
         {
             parent=NextSibling(parent);
-            insertLast_ListStatik(&L,Data(parent));
+            insertLast_ListTreeStatik(&L,tweetReplies);
         }            
     }
     return L;
@@ -220,7 +222,7 @@ ListStatik getAllNodes(addressTree parent){
     ListStatik L;
     CreateListStatik(&L);
     if(parent!=NULL){
-        insertLast_ListStatik(&L,Data(parent));
+        insertLast_ListTreeStatik(&L,tweetReplies);
         if(FirstChild(parent)!=NULL){
             L=concat_ListStatik(L,getAllNodes(FirstChild(parent)));
         }

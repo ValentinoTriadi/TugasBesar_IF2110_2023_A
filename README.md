@@ -63,6 +63,7 @@
     <li><a href="#Room-for-Improvement">Room for Improvement</a></li>
     <li><a href="#Acknowledgments">Acknowledgments</a></li>
     <li><a href="#Pembagian Tugas">Pembagian Tugas</a></li>
+    <li><a href="#Fitur">Fitur</a></li>
   </ol>
 </details>
 
@@ -216,6 +217,12 @@ Room for improvement:
 
 ## Pembagian Tugas
 ![Pembagian Tugas](./IMG/Tugas.jpg)
+
+<br/>
+<br/>
+
+## Fitur
+![Fitur](./IMG/Fitur.jpg)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
