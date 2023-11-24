@@ -22,8 +22,8 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div style="display: flex; justify-contents: center">
-    <img src="./IMG/burbir.png" style="width: 500px">
+<div align="center">
+    <img src="./IMG/burbir.png" style="width: 300px">
 </div>
 
 <h3 align="center">BurBir</h3>
