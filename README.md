@@ -101,7 +101,7 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 
 ### Built With
 
-* [![C][logo-c]]()
+* [![C][logo-c]](https://github.com/ValentinoTriadi/TugasBesar_IF2110_2023_A)
 
 <br/>
 
@@ -123,47 +123,47 @@ Your greatest social media experienced starts at BurBir, where every Kicau is a 
 ### Prerequisites
 * wsl
   
-sh
+```sh
   wsl --install
-  
+```  
 
 * gcc
   
-sh
+```sh
   sudo apt install gcc
-  
+```  
 
 * make
   
-sh
+```sh
   sudo apt install make
-  
+```  
 
 
 ### Installation
 1. Clone the repo
    
-sh
+```sh
    git clone git@github.com:ValentinoTriadi/TugasBesar_IF2110_2023_A.git
-   
+```   
 
 2. Open WSL
    
-sh
+```sh
    wsl --set-default-version 2
-   
+```   
 
 3. cd src
    
-sh
+```sh
    cd src
-   
+```   
 
 4. Make
    
-sh
+```sh
    make
-   
+```   
 
 
 
