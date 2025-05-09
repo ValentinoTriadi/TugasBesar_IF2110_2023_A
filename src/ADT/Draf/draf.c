@@ -14,19 +14,19 @@ void CreateEmptyDraf(Stack *S)
     Top(*S) = Nil;
 }
 
-boolean IsEmpty(Stack S)
+boolean IsStackEmpty(Stack S)
 {
     return (Top(S) == Nil);
 }
 
-boolean IsFull(Stack S)
+boolean IsStackFull(Stack S)
 {
     return Top(S) == MaxElDraf - 1;
 }
 
-void Push(Stack *S, infotypeDraf X)
+void PushStack(Stack *S, infotypeDraf X)
 {
-    if (IsEmpty(*S)){
+    if (IsStackEmpty(*S)){
         Top(*S) = 0;
     } else {
         Top(*S)++;
@@ -35,7 +35,7 @@ void Push(Stack *S, infotypeDraf X)
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack *S, infotypeDraf *X) // Menghapus X dari Stack S.
+void PopStack(Stack *S, infotypeDraf *X) // Menghapus X dari Stack S.
 {
     *X = InfoTop(*S);
     if (Top(*S) == 0){
@@ -61,7 +61,7 @@ void CreateDraft() {
             printf("Draf telah berhasil dihapus!\n");
 
         } else if (isEqualWordStr(currentSentence, "SIMPAN")) {
-            Push(&Draf.Draf[CurrentUser], D);
+            PushStack(&Draf.Draf[CurrentUser], D);
             printf("Draf telah berhasil disimpan!\n");
 
         } else if (isEqualWordStr(currentSentence, "TERBIT")) {
@@ -82,7 +82,7 @@ void CreateDraft() {
 
 void ViewLastDraft() {
     Draft D;
-    if (IsEmpty(Draf.Draf[CurrentUser])) {
+    if (IsStackEmpty(Draf.Draf[CurrentUser])) {
         printf("Yah, anda belum memiliki draf apapun! Buat dulu ya :D\n");
         return;
     } else {
@@ -125,8 +125,8 @@ void ViewLastDraft() {
                 k.like = 0;
                 k.author = CurrentUser;
                 k.datetime = D.timestamp;
-                Draft DD;
-                Pop(&Draf.Draf[CurrentUser], &D);
+                // Draft DD;
+                PopStack(&Draf.Draf[CurrentUser], &D);
 
                 printf("\nSelamat! Draf kicauan telah diterbitkan!\nDetil kicauan:\n");
                 PrintTweet(k);
@@ -149,18 +149,18 @@ void ViewLastDraft() {
         PrintTweet(k);
         AddTweetToList(k);
         Draft DD;
-        Pop(&Draf.Draf[CurrentUser], &DD);
+        PopStack(&Draf.Draf[CurrentUser], &DD);
     }
 }
 
 void DeleteDraft()
 {
     Draft D;
-    if (!IsEmpty(Draf.Draf[CurrentUser]))
+    if (!IsStackEmpty(Draf.Draf[CurrentUser]))
     {
-        Pop(&Draf.Draf[CurrentUser], &D);
+        PopStack(&Draf.Draf[CurrentUser], &D);
         printf("top %d\n", Top(Draf.Draf[CurrentUser]));
-        if(IsEmpty(Draf.Draf[CurrentUser])) CreateEmptyDraf(&Draf.Draf[CurrentUser]);
+        if(IsStackEmpty(Draf.Draf[CurrentUser])) CreateEmptyDraf(&Draf.Draf[CurrentUser]);
         printf("Draf telah berhasil dihapus!\n");
     }
     else
@@ -173,9 +173,9 @@ void reverseStack (int idx){
     Stack rev;
     CreateEmptyDraf(&rev);
     infotypeDraf x;
-    while (!IsEmpty(Draf.Draf[idx])){
-        Pop(&Draf.Draf[idx],&x);
-        Push(&rev, x);
+    while (!IsStackEmpty(Draf.Draf[idx])){
+        PopStack(&Draf.Draf[idx],&x);
+        PushStack(&rev, x);
     }
     Draf.Draf[idx] = rev;
 }

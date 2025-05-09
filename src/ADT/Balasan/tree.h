@@ -4,7 +4,7 @@
 #include "../boolean.h"
 #include "../ListStatik/liststatik.h"
 #include "../Mesin-Kata/wordmachine.h"
-#include "../matrix/matrix.h"
+#include "../Matrix/matrix.h"
 
 /*  Kamus Umum */
 #define CAPACITY 100

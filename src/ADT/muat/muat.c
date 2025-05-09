@@ -27,7 +27,7 @@ void loadDraf(char* NamaFile){
             x.text = currentSentence;
             ADVSENTENCEFILE();
             x.timestamp = wordToDatetime(currentSentence);
-            Push(&Draf.Draf[idxUser], x);
+            PushStack(&Draf.Draf[idxUser], x);
         }
         reverseStack(idxUser);
     }

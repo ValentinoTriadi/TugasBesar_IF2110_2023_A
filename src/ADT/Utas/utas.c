@@ -66,7 +66,7 @@ void UTAS(int idKicau)
                 DaftarUtas.utasUtama[DaftarUtas.neffUtas].idKicauUtama = idKicau;
                 printf("Masukkan Kicauan : ");
                 STARTINPUT();
-                Utas utas;
+                // Utas utas;
                 AddressUtas p = newNode(currentSentence);
                 DaftarUtas.utasUtama[DaftarUtas.neffUtas].pertama.next = p;
                 printWord(DaftarUtas.utasUtama[DaftarUtas.neffUtas].pertama.isi);
@@ -142,7 +142,7 @@ void hapusUtas(int IDUtas, int idx)
         printf("Utas Tidak ditemukan\n");
         return;
     }
-    int idKicau = DaftarUtas.utasUtama[IDUtas].idKicauUtama;
+    // int idKicau = DaftarUtas.utasUtama[IDUtas].idKicauUtama;
     
     // Check Author Utas
     if (CurrentUser != (DaftarKicau.kicau[DaftarUtas.utasUtama[IDUtas].idKicauUtama].author))

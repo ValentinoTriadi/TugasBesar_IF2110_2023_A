@@ -15,7 +15,6 @@ void print_image(char* filename){
 
 void inisialisasi(){
     char *filename;
-    FILE *fascii;
     system("cls || clear");
     // printf("HALO\n");
     for (int i = 0; i < 4; i++){
